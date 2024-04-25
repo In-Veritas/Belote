@@ -45,7 +45,7 @@ VAR
   I,X,Y:integer;
 
 begin
-  T:=creertableau(); //on commence par initier le tableau
+  T:=creertableau(); //on commence par initier le tableau, peut être le faire qu'au début et après on le reremplit avec les plies fait, ça fera plus "vivant"
 
   for I:=1 to N do //dépend du nombre de mélange
     begin
