@@ -8,7 +8,7 @@ uses
 
 type
   typeentier=integer; //Type afin de facilité l'usage de la procedure permuter
-  typetableau= array [1..32] of integer; //Type permettant l'usage des foonctions 
+  typetableau= array [1..32] of typeentier; //Type permettant l'usage des foonctions 
 
 implementation
 
