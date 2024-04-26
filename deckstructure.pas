@@ -13,9 +13,8 @@ type
 implementation
 
 
-begin
 
-procedure permuter (var X,Y:typeentier); //procedure qui échange deux tèrmes
+procedure permuter(var X,Y:typeentier); //procedure qui échange deux tèrmes
 VAR
   Z:typeentier;
 begin

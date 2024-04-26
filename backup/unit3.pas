@@ -43,7 +43,7 @@ MENU PRICIPALE
 DISTRIBUITION INITIALE
   Du moment oú le form2 est activé:
   Un array 1..32 de cartes est crée avec les cartes de deckStructure mélagés de façon aleatoire
-     **Faire fonction qui prends l'array de de Init_Cartes, et qui retourne un array mélangé. Placer cette fonction dans l'unité deckStructure
+     FAIT**Faire fonction qui prends l'array de de Init_Cartes, et qui retourne un array mélangé. Placer cette fonction dans l'unité deckStructure
      **C'est l'array mélangé qu'on va travailler avec, sa position est 'deck'
   On fera la distruibuition initial (3-3-3-3, 2-2-2-2), on prennant les cartes du deck melangé par ordre, et on montrera la carté à prendre
      **Procedure de distribuition qui change la position des cartes de 'deck' pour 'main'
@@ -71,7 +71,7 @@ Demander a iji pour couper/melanger entre parties
 }
 begin
      basedeck[1].id:='7P'; //7 de Piques
-     basebasedeck[1].atout:=False;
+     basedeck[1].atout:=False;
      basedeck[1].rang:=9; //0 = Vallet d'atout, 1 = 9 d'atout, 2 = As, 3 = Dix, 4 = Roi, 5 = Dame, 6 = Vallet, 7 = neuf, 8 = huit, 9 = sept
      basedeck[1].pos:='basedeck';
      //******************

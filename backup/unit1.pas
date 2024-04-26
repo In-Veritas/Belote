@@ -5,7 +5,7 @@ unit Unit1;
 interface
 
 uses
-  Classes,uos, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   deckstructure,Unit2, Unit3;
 
 type
@@ -27,7 +27,7 @@ type
 
 var
   Form1: TForm1;
-  basedeck: array[1..32] of carte;
+  deck: array[1..32] of carte;
 
 implementation
 
@@ -42,7 +42,7 @@ end;
 
 procedure TForm1.FormActivate(Sender: TObject);
 begin
-   basedeck:=deck;
+   deck:=basedeck;
 end;
 
 procedure TForm1.Panel2Click(Sender: TObject); //Ouvre une partie sauvegardé
