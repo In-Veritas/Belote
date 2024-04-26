@@ -12,7 +12,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="28"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -23,7 +23,7 @@
         <UnitName Value="Unit1"/>
         <TopLine Value="18"/>
         <CursorPos X="10" Y="44"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -34,10 +34,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit2"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos Y="9"/>
-        <UsageCount Value="26"/>
+        <TopLine Value="21"/>
+        <CursorPos Y="6"/>
+        <UsageCount Value="27"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -51,13 +51,14 @@
         <EditorIndex Value="2"/>
         <TopLine Value="13"/>
         <CursorPos X="33" Y="31"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="27"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="deckstructure.pas"/>
         <UnitName Value="DeckStructure"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="25"/>
         <CursorPos X="38" Y="61"/>

@@ -41,5 +41,10 @@ begin
   melangertableau:=T;  //la fonction renvois le tableau mélanger
 end;
 
+procedure afficher_carte (var Place:TImage;)
+begin
+
+end;
+
 end.
 
