@@ -5,6 +5,29 @@ unit DeckStructure;
 interface
 uses
   Classes, SysUtils;
+Type carte = record
+                  id : string[2];  //[1] = Nom de la carte(V = Vallet, R = Roi, N = neuf(...)), [2] = Couleur de la carte (Piques: P, Coeurs: C. Trèfles: T, Carreaux: K)
+                  atout: boolean;
+                  rang : integer;
+                  pos: string[10]; //deck, Joeur(1..4), Centre, Pile(1..2)
+                            end;
+type
+
+  tableau_deck = array [1..32] of carte; //Type permettant l'usage des foonctions
+  tableau_mains = array[1..4,1..8] of carte;
+  tableau_plie = array[1..32,1..2] of carte;
+  tableau_centre = array[1..4] of carte;
+
+var
+  //Les positions
+  deck: tableau_deck;
+  main: tableau_mains;
+  plie: tableau_plie;
+  centre: tableau_centre;
+  // Premier joueur/Joueur qui joue en premier
+  focus_joueur: integer;
+  preneur: integer;
+
 
 implementation
 

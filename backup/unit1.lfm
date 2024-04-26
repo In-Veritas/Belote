@@ -1,11 +1,19 @@
 object Form1: TForm1
+<<<<<<< HEAD
   Left = 2859
   Height = 720
   Top = 438
   Width = 1280
+=======
+  Left = 2905
+  Height = 1440
+  Top = 493
+  Width = 2560
+>>>>>>> 2719f87a2bc900b4c16666424a148d29f6a2618b
   Caption = 'Belote'
-  ClientHeight = 720
-  ClientWidth = 1280
+  ClientHeight = 1440
+  ClientWidth = 2560
+  DesignTimePPI = 192
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
     1A0A0000000D49484452000001000000010008060000005C72A86600002C4549
@@ -366,12 +374,17 @@ object Form1: TForm1
     49AEFF0F50C6BDC4947591D40000000049454E44AE426082
   }
   OnActivate = FormActivate
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '2.2.4.0'
   object Image1: TImage
+<<<<<<< HEAD
     Left = -2
     Height = 720
+=======
+    Left = 0
+    Height = 1440
+>>>>>>> 2719f87a2bc900b4c16666424a148d29f6a2618b
     Top = 0
-    Width = 1282
+    Width = 2564
     Picture.Data = {
       1754506F727461626C654E6574776F726B47726170686963D2D50F0089504E47
       0D0A1A0A0000000D4948445200000500000002D00806000000CF7DDD56000000
@@ -32808,25 +32821,25 @@ object Form1: TForm1
     }
   end
   object Panel1: TPanel
-    Left = 56
-    Height = 136
-    Top = 552
-    Width = 354
+    Left = 112
+    Height = 272
+    Top = 1104
+    Width = 708
     BevelOuter = bvNone
     TabOrder = 0
     OnClick = Panel1Click
   end
   object Panel2: TPanel
-    Left = 872
-    Height = 154
-    Top = 544
-    Width = 360
+    Left = 1744
+    Height = 308
+    Top = 1088
+    Width = 720
     BevelOuter = bvNone
     TabOrder = 1
     OnClick = Panel2Click
   end
   object OpenDialog1: TOpenDialog
-    Left = 1192
-    Top = 568
+    Left = 2384
+    Top = 1136
   end
 end
