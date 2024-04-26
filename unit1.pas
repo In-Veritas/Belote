@@ -27,7 +27,10 @@ type
 
 var
   Form1: TForm1;
-  deck: array[1..32] of carte;
+
+
+
+
 
 implementation
 
