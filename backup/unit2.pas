@@ -6,12 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Menus;
-Type carte = record
-                    id : string[2];  //[1] = Nom de la carte(V = Vallet, R = Roi, N = neuf(...)), [2] = Couleur de la carte (Piques: P, Coeurs: C. Trèfles: T, Carreaux: K)
-                    atout: boolean;
-                    rang : integer;
-                    pos: string[10]; //Deck, Joeur(1..4), Centre, Pile(1..2)
-                              end;
+
 type
 
   { TForm2 }

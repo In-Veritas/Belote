@@ -58,8 +58,8 @@
         <UnitName Value="DeckStructure"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="15"/>
-        <CursorPos Y="32"/>
+        <TopLine Value="5"/>
+        <CursorPos X="12" Y="11"/>
         <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit>
@@ -72,10 +72,6 @@
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="unit3.pas"/>
-        <Caret Line="75" Column="33" TopLine="57"/>
-      </Position>
       <Position>
         <Filename Value="unit3.pas"/>
         <Caret Line="24" Column="13" TopLine="13"/>
@@ -191,6 +187,10 @@
       <Position>
         <Filename Value="deckstructure.pas"/>
         <Caret Line="24" Column="23" TopLine="6"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="32" TopLine="15"/>
       </Position>
     </JumpHistory>
     <RunParams>

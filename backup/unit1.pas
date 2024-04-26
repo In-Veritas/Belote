@@ -28,14 +28,7 @@ type
 var
   Form1: TForm1;
 
-  //Les positions
-  deck: tableau_deck;
-  main: tableau_mains
-  plie: tableau_plie;
-  centre: tableau_centre;
-  // Premier joueur/Joueur qui joue en premier
-  focus_joueur: integer;
-  preneur: integer;
+
 
 
 

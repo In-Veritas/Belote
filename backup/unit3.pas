@@ -6,12 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls;
-Type carte = record
-                    id : string[2];  //[1] = Nom de la carte(V = Vallet, R = Roi, N = neuf(...)), [2] = Couleur de la carte (Piques: P, Coeurs: C. Trèfles: T, Carreaux: K)
-                    atout: boolean;
-                    rang : integer;
-                    pos: string[10]; //deck, Joeur(1..4), Centre, Pile(1..2)
-                              end;
+
 type
 
   { TForm3 }
@@ -21,6 +16,7 @@ type
     Image2: TImage;
     Image3: TImage;
     Label1: TLabel;
+    procedure FormCreate(Sender: TObject);
   private
 
   public
@@ -43,8 +39,8 @@ MENU PRICIPALE
 DISTRIBUITION INITIALE
   Du moment oú le form2 est activé:
   Un array 1..32 de cartes est crée avec les cartes de deckStructure mélagés de façon aleatoire
-     FAIT**Faire fonction qui prends l'array de de Init_Cartes, et qui retourne un array mélangé. Placer cette fonction dans l'unité deckStructure
-     **C'est l'array mélangé qu'on va travailler avec, sa position est 'deck'
+     FAIT  **Faire fonction qui prends l'array de de Init_Cartes, et qui retourne un array mélangé. Placer cette fonction dans l'unité deckStructure
+     FAIT  **C'est l'array mélangé qu'on va travailler avec, sa position est 'deck'
   On fera la distruibuition initial (3-3-3-3, 2-2-2-2), on prennant les cartes du deck melangé par ordre, et on montrera la carté à prendre
      **Procedure de distribuition qui change la position des cartes de 'deck' pour 'main'
      **Tri de la main a la fin(plus élegant)
@@ -69,6 +65,10 @@ Demander a iji pour couper/melanger entre parties
 
 
 }
+
+{ TForm3 }
+
+
 begin
 
 end.
