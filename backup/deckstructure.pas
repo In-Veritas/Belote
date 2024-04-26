@@ -7,17 +7,15 @@ uses
   Classes, SysUtils;
 
 type
-  typeentier=integer; //Type afin de facilité l'usage de la procedure permuter
-  typetableau= array [1..32] of typeentier; //Type permettant l'usage des foonctions 
+  tableau_deck= array [1..32] of typeentier; //Type permettant l'usage des foonctions
 
 implementation
 
 
-begin
 
-procedure permuter (var X,Y:typeentier); //procedure qui échange deux tèrmes
+procedure permuter(var X,Y:carte); //procedure qui échange deux tèrmes
 VAR
-  Z:typeentier;
+  Z:carte;
 begin
   Z:=X;
   X:=Y;
@@ -25,37 +23,22 @@ begin
 end;
 
 
-function creertableau():typetableau; //procédure qui crée un tableau trier
+function melangertableau(N:integer;
+                         T:tableau_deck):tableau_deck;
 VAR
-  T:typetableau;
-  I:integer;
-
-begin
-  for I:=1 to 32 do
-    begin
-      T[I]:=I;
-    end;
-
-  creertableau:=T;
-end;
-
-function melangertableau(N:integer):typetableau; //procédure qui mélange un taableau, N sert à selon si la personne mélange beaucoup ou pas
-VAR
-  T:typetableau;
   I,X,Y:integer;
 
 begin
-  T:=creertableau(); //on commence par initier le tableau, peut être le faire qu'au début et après on le reremplit avec les plies fait, ça fera plus "vivant"
 
   for I:=1 to N do //dépend du nombre de mélange
     begin
       X:=random(31)+1;
       Y:=random(31)+1;
 
-      permuter(T[X],T[Y]); 
+      permuter(T[X],T[Y]); //le melange permute N fois 2 cartes choisit aléatoirement
     end;
 
-  melangertableau:=T;
+  melangertableau:=T;  //la fonction renvois le tableau mélanger
 end;
 
 end.
