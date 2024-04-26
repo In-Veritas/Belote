@@ -5,7 +5,7 @@ unit Unit1;
 interface
 
 uses
-  Classes,uos, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   deckstructure,Unit2, Unit3;
 
 type
@@ -27,7 +27,10 @@ type
 
 var
   Form1: TForm1;
-  deck: array[1..32] of carte;
+
+
+
+
 
 implementation
 
