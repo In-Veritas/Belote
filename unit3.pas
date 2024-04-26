@@ -39,9 +39,9 @@ DISTRIBUITION INITIALE
   Du moment oú le form2 est activé:
   Un array 1..32 de cartes est crée avec les cartes de deckStructure mélagés de façon aleatoire
      FAIT**Faire fonction qui prends l'array de de Init_Cartes, et qui retourne un array mélangé. Placer cette fonction dans l'unité deckStructure
-     **C'est l'array mélangé qu'on va travailler avec, sa position est 'deck'
+     FAIT**C'est l'array mélangé qu'on va travailler avec, sa position est 'deck'
   On fera la distruibuition initial (3-3-3-3, 2-2-2-2), on prennant les cartes du deck melangé par ordre, et on montrera la carté à prendre
-     **Procedure de distribuition qui change la position des cartes de 'deck' pour 'main'
+     FAIT**Procedure de distribuition qui change la position des cartes de 'deck' pour 'main'
      **Tri de la main a la fin(plus élegant)
 CHOIX DE L'ATOUT
   On verifie qui commence pour savoir qui va dire en premier(au début tous les joueurs artificiels diront 'une'/'deux')
@@ -52,8 +52,10 @@ CHOIX DE L'ATOUT
   On va parcourir toutes les cartes dans les positions 'main', et 'deck', et changer l'aout pour TRUE pour les cartes qui sont á l'atout
 DISTRIBUITION FINALE
   On identifie le joueur qui a pris, il recevera une carte de mois. On suit l'ordre des cartes dans deck et on fait la distribuition(3,3,3,2).
-     **Procedure de distribuition qui prendra le joueur qui a pris en compte.
+     FAIT**Procedure de distribuition qui prendra le joueur qui a pris en compte.
      Tri de la main a la fin(plus élegant)
+
+
 ******LE JEU COMMENCE******
 
 

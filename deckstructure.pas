@@ -9,7 +9,7 @@ Type carte = record
                   id : string[2];  //[1] = Nom de la carte(V = Vallet, R = Roi, N = neuf(...)), [2] = Couleur de la carte (Piques: P, Coeurs: C. Trèfles: T, Carreaux: K)
                   atout: boolean;
                   rang : integer;
-                  pos: string[10]; //deck, Joeur(1..4), Centre, Pile(1..2)
+                  pos: string[10]; //deck, Joueur(1..4), Centre, Pile(1..2)
                             end;
 type
 
@@ -31,9 +31,9 @@ var
 
 implementation
 
-procedure permuter (var X,Y:typeentier); //procedure qui échange deux tèrmes
+procedure permuter (var X,Y:carte); //procedure qui échange deux tèrmes
 VAR
-  Z:typeentier;
+  Z:carte;
 begin
   Z:=X;
   X:=Y;
@@ -41,28 +41,13 @@ begin
 end;
 
 
-function creertableau():typetableau; //procédure qui crée un tableau trier
+function melangertableau(N:integer):tableau_deck; //procédure qui mélange un taableau, N sert à selon si la personne mélange beaucoup ou pas
 VAR
-  T:typetableau;
-  I:integer;
-
-begin
-  for I:=1 to 32 do
-    begin
-      T[I]:=I;
-    end;
-
-  creertableau:=T;
-end;
-
-function melangertableau(N:integer):typetableau; //procédure qui mélange un taableau, N sert à selon si la personne mélange beaucoup ou pas
-VAR
-  T:typetableau;
+  T:tableau_deck;
   I,X,Y:integer;
 
 begin
-  T:=creertableau(); //on commence par initier le tableau, peut être le faire qu'au début et après on le reremplit avec les plies fait, ça fera plus "vivant"
-
+  T:=deck;
   for I:=1 to N do //dépend du nombre de mélange
     begin
       X:=random(31)+1;
@@ -71,7 +56,7 @@ begin
       permuter(T[X],T[Y]); 
     end;
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
   melangertableau:=T;  //la fonction renvois le tableau mélanger
 end;
 
@@ -79,10 +64,73 @@ procedure afficher_carte (var Place_image:TImage;
                           var Carte:carte);
 begin
   //fonction qui affiche l'image à tel place
-=======
-  melangertableau:=T;
->>>>>>> 938be85dff2a1381cc47918601013cb7d139edef
 end;
+
+procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
+                                var IndiceCarte,positioncartemain:integer);
+VAR
+  I,J,X:integer;
+  Chaine: string;
+begin
+  for I:=1 to 4 do
+    begin
+      if preneur=PremierJoueur then
+      begin
+        X:=positioncartemain+1;
+        for J:=1 to Nombredecarte-1 do
+         begin
+          main[PremierJoueur,X]:=deck[IndiceCarte];
+          Chaine:='Joueur'+inttostr(PremierJoueur);
+          deck[IndiceCarte].pos:=Chaine;
+          IndiceCarte:=IndiceCarte+1;
+          X:=X+1;
+         end;
+      end
+                                else
+      begin
+        X:=positioncartemain;
+        for J:=1 to Nombredecarte do
+         begin
+          main[PremierJoueur,X]:=deck[IndiceCarte];
+          Chaine:='Joueur'+inttostr(PremierJoueur);
+          deck[IndiceCarte].pos:=Chaine;
+          IndiceCarte:=IndiceCarte+1;
+          X:=X+1;
+         end;
+      end;
+
+      positioncartemain:=positioncartemain+Nombredecarte;
+      PremierJoueur:=PremierJoueur+1;
+      If (PremierJoueur=5) then
+        begin
+          PremierJoueur:=1;
+        end;
+
+    end;
+end;
+
+procedure premiere_distribution (PremierJoueur:integer);
+
+VAR
+  IndiceCarte,positioncartemain:integer;
+begin
+  IndiceCarte:=1;
+  positioncartemain:=1;
+  distribution_4joueurs(3,PremierJoueur,IndiceCarte,positioncartemain);
+  distribution_4joueurs(2,PremierJoueur,IndiceCarte,positioncartemain);
+end;
+
+procedure deuxieme_distribution (PremierJoueur:integer);
+VAR
+  IndiceCarte,positioncartemain:integer;
+begin
+  main[6,preuneur]:=deck[IndiceCarte];
+  positioncartemain:=6;
+  IndiceCarte:=22;
+  distribution_4joueurs(3,PremierJoueur,IndiceCarte,positioncartemain);
+end;
+
+begin
 basedeck[1].id:='7P'; //7 de Piques
 basedeck[1].atout:=False;
 basedeck[1].rang:=9; //0 = Vallet d'atout, 1 = 9 d'atout, 2 = As, 3 = Dix, 4 = Roi, 5 = Dame, 6 = Vallet, 7 = neuf, 8 = huit, 9 = sept
