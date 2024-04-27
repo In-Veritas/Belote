@@ -3,20 +3,24 @@ unit DeckStructure;
 
 {$mode ObjFPC}{$H+}
 interface
+
+
+
+
 uses
   Classes, SysUtils,Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, Unit2, Unit3;
 Type carte = record
                   id : string[2];  //[1] = Nom de la carte(V = Vallet, R = Roi, N = neuf(...)), [2] = Couleur de la carte (Piques: P, Coeurs: C. Trèfles: T, Carreaux: K)
                   atout: boolean;
                   rang : integer;
-
+                  jouable: boolean;
                   pos: string[10]; //deck, Joueur(1..4), Centre, Pile(1..2)
                   id_image: integer;
                             end;
 type
 
   tableau_deck = array [1..32] of carte; //Type permettant l'usage des foonctions
-  tableau_mains = array[1..4,1..8] of carte;
+  tableau_mains = array of array of carte; //tableau multidimensionnel des mains de chaque joeur
   tableau_plie = array of carte;
   tableau_centre = array of carte;
 
@@ -31,7 +35,15 @@ var
   // Premier joueur/Joueur qui joue en premier
   focus_joueur: integer;
   preneur: integer;
-
+procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);
+procedure cartes_jouables(joueur:integer; var jouables: array of boolean);
+procedure permuter (var X,Y:carte);
+function melangertableau(N:integer):tableau_deck;
+procedure afficher_carte (var Place_image:TImage);
+procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;var IndiceCarte,positioncartemain:integer);
+procedure premiere_distribution (PremierJoueur:integer);
+procedure deuxieme_distribution (PremierJoueur:integer);
+procedure init_jeu;
 
 
 
@@ -93,11 +105,139 @@ end;
 
 //Vérifie quelles cartes dans la main sont jouables, et donne un array dynamique de booleans pour dire quels sont jouables
 procedure cartes_jouables(joueur:integer; var jouables: array of boolean);
+var
+i,j: integer;
+plus_fort: carte;
+jouable_trouve:boolean;
 begin
+{Primeiro voce ve se ja tem cartas na mesa
+Se sim, voce olha pra primeira carta, e pega o naipe
+  se o naipe for atout:
+          Se jogar um atout mais forte é possivel:
+             os atous mais fortes sao jogaveis
+          senao qualquer carta de atout vale]
+  senão, voce só pode jogar o naipe da primeira carta
+         se voce tiver o naipe da primeira carta:
+            todas as cartas desse naipe são jogaveis
+         se voce nao tiver o naipe da primeira carta:
+             se tem atout na mão:
+                verificar os atouts na mesa:
+                          Pegar o atout mais forte na mesa
+                                Se tiver um atout na mão, mais forte que os da mesa, ele é jogavel
+                                senão, todos os atouts são jogaveis
+             senã :
+                todas as cartas são jogaveis
+Se não, todas as cartas são jogaveis}
+jouable_trouve:= false;
+if length(centre) = 0 then
+  begin
+    for i:=1 to length(main[joueur]) do
+    begin
+      main[joueur,i].jouable:= True;
+    end;
+  end
+else if centre[focus_joueur].atout=True then
+    begin
+       plus_fort:=centre[focus_joueur];
+       for i:=i to length(centre) do
+       begin
+          if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then plus_fort:=centre[i];
+       end;
+       for i:=1 to length(main[joueur])do
+       begin
+         if plus_fort.rang > main[joueur,i].rang then main[joueur,i].jouable:=True;
+         jouable_trouve:= True;
+       end;
+       if not(jouable_trouve) then
+       begin
+          for i:=1 to length(main[joueur])do
+          begin
+            if main[joueur,i].atout then
+            begin
+              jouable_trouve:= True;
+              main[joueur,i].jouable:=true;
+            end;
+          end;
+       end;
+       if not(jouable_trouve) then
+       begin
+           for i:=1 to length(main[joueur]) do
+            begin
+              main[joueur,i].jouable:= True;
+              jouable_trouve:= True;
+            end;
+       end;
+    end else
+    begin
+      for i:=1 to length(main[joueur]) do
+      begin
+        if main[joueur,i].id[2] = centre[focus_joueur].id[2] then
+          begin
+            main[joueur,i].jouable:= True;
+            jouable_trouve:= True;
+          end;
+      end;
+      if not(jouable_trouve) then
+        begin
+          for i:=1 to length(main[joueur])do
+          begin
+            if main[joueur,i].atout then
+            begin
+              for j:=1 to length(centre) do
+              begin
+                if centre[j].atout then plus_fort:=centre[j];
+                break;
+              end;
+              for j:=1 to length(centre) do
+              begin
+                if (centre[j].atout)AND(centre[j].rang < plus_fort.rang) then plus_fort:=centre[j];
+              end;
+              for j:=1 to length(main[joueur]) do
+              begin
+                if main[joueur,j].rang < plus_fort.rang then
+                begin
+                  main[joueur,j].jouable:=True;
+                  jouable_trouve:=True;
+                end;
+              end;
+              if not(jouable_trouve)then
+              begin
+              for j:=1 to length(main[joueur]) do
+                  begin
+                    if main[joueur,j].atout then
+                    begin
+                         main[joueur,j].jouable:=True;
+                         jouable_trouve:=True;
+                    end;
+                    end;
+              end;
+              break;
+              end;
+            end;
+          end;
+        if not(jouable_trouve) then
+         begin
+             for i:=1 to length(main[joueur]) do
+              begin
+                main[joueur,i].jouable:= True;
+                jouable_trouve:= True
+              end;
+         end;
+        end;
 
+
+    end;
 end;
-
-
+{if not(jouable_trouve) then
+ begin
+     for i:=1 to length(main[joueur]) do
+      begin
+        main[joueur,i].jouable:= True;
+        jouable_trouve:= True
+      end;
+ end;}
+{
+  }
 
 
 
@@ -130,14 +270,12 @@ begin
   melangertableau:=T;  //la fonction renvois le tableau mélanger
 end;
 
-procedure afficher_carte (var Place_image:TImage;
-                          var Carte:carte);
+procedure afficher_carte (var Place_image:TImage);
 begin
   //fonction qui affiche l'image à tel place
 end;
 
-procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
-                                var IndiceCarte,positioncartemain:integer);
+procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;var IndiceCarte,positioncartemain:integer);
 VAR
   I,J,X:integer;
   Chaine: string;
@@ -200,11 +338,15 @@ begin
   distribution_4joueurs(3,PremierJoueur,IndiceCarte,positioncartemain);
 end;
 
-
-
-end
-
+//Initialization du basedeck
+procedure init_jeu;
+var
+  i: integer;
 begin
+for i:=1 to 32 do
+begin
+  basedeck[i].jouable:=false;
+end;
 basedeck[1].id:='7P'; //7 de Piques
 basedeck[1].atout:=False;
 basedeck[1].rang:=9; //0 = Vallet d'atout, 1 = 9 d'atout, 2 = As, 3 = Dix, 4 = Roi, 5 = Dame, 6 = Vallet, 7 = neuf, 8 = huit, 9 = sept
@@ -398,6 +540,9 @@ basedeck[32].atout:=False;
 basedeck[32].rang:=7;
 basedeck[32].pos:='basedeck';
 basedeck[32].id_image:=32;
+
+end;
+
 
 end.
 

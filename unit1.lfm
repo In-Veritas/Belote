@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 2859
+  Left = 3002
   Height = 720
-  Top = 438
+  Top = 532
   Width = 1280
   Caption = 'Belote'
   ClientHeight = 720
@@ -32828,5 +32828,34 @@ object Form1: TForm1
   object OpenDialog1: TOpenDialog
     Left = 1192
     Top = 568
+  end
+  object playsound1: Tplaysound
+    About.Description.Strings = (
+      'Plays WAVE sounds in Windows or Linux'#13#10'Public methods: Execute and StopSound'
+    )
+    About.Title = 'About PlaySound'
+    About.Height = 400
+    About.Width = 400
+    About.Font.Color = clNavy
+    About.Font.Height = -13
+    About.BackGroundColor = clCream
+    About.Version = '0.0.8'
+    About.Authorname = 'Gordon Bamber'
+    About.Organisation = 'Public Domain'
+    About.AuthorEmail = 'minesadorada@charcodelvalle.com'
+    About.ComponentName = 'PlaySound'
+    About.LicenseType = abModifiedGPL
+    SoundFile = 'music.wav'
+    PlayCommand = 'sndPlaySound'
+    Left = 16
+    Top = 8
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 168000
+    OnTimer = Timer1Timer
+    OnStartTimer = Timer1StartTimer
+    Left = 45
+    Top = 8
   end
 end

@@ -1,19 +1,11 @@
 object Form1: TForm1
-<<<<<<< HEAD
-  Left = 2859
+  Left = 3002
   Height = 720
-  Top = 438
+  Top = 532
   Width = 1280
-=======
-  Left = 2905
-  Height = 1440
-  Top = 493
-  Width = 2560
->>>>>>> 2719f87a2bc900b4c16666424a148d29f6a2618b
   Caption = 'Belote'
-  ClientHeight = 1440
-  ClientWidth = 2560
-  DesignTimePPI = 192
+  ClientHeight = 720
+  ClientWidth = 1280
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
     1A0A0000000D49484452000001000000010008060000005C72A86600002C4549
@@ -374,17 +366,12 @@ object Form1: TForm1
     49AEFF0F50C6BDC4947591D40000000049454E44AE426082
   }
   OnActivate = FormActivate
-  LCLVersion = '2.2.4.0'
+  LCLVersion = '3.2.0.0'
   object Image1: TImage
-<<<<<<< HEAD
     Left = -2
     Height = 720
-=======
-    Left = 0
-    Height = 1440
->>>>>>> 2719f87a2bc900b4c16666424a148d29f6a2618b
     Top = 0
-    Width = 2564
+    Width = 1282
     Picture.Data = {
       1754506F727461626C654E6574776F726B47726170686963D2D50F0089504E47
       0D0A1A0A0000000D4948445200000500000002D00806000000CF7DDD56000000
@@ -32821,25 +32808,54 @@ object Form1: TForm1
     }
   end
   object Panel1: TPanel
-    Left = 112
-    Height = 272
-    Top = 1104
-    Width = 708
+    Left = 56
+    Height = 136
+    Top = 552
+    Width = 354
     BevelOuter = bvNone
     TabOrder = 0
     OnClick = Panel1Click
   end
   object Panel2: TPanel
-    Left = 1744
-    Height = 308
-    Top = 1088
-    Width = 720
+    Left = 872
+    Height = 154
+    Top = 544
+    Width = 360
     BevelOuter = bvNone
     TabOrder = 1
     OnClick = Panel2Click
   end
   object OpenDialog1: TOpenDialog
-    Left = 2384
-    Top = 1136
+    Left = 1192
+    Top = 568
+  end
+  object playsound1: Tplaysound
+    About.Description.Strings = (
+      'Plays WAVE sounds in Windows or Linux'#13#10'Public methods: Execute and StopSound'
+    )
+    About.Title = 'About PlaySound'
+    About.Height = 400
+    About.Width = 400
+    About.Font.Color = clNavy
+    About.Font.Height = -13
+    About.BackGroundColor = clCream
+    About.Version = '0.0.8'
+    About.Authorname = 'Gordon Bamber'
+    About.Organisation = 'Public Domain'
+    About.AuthorEmail = 'minesadorada@charcodelvalle.com'
+    About.ComponentName = 'PlaySound'
+    About.LicenseType = abModifiedGPL
+    SoundFile = 'music.wav'
+    PlayCommand = 'sndPlaySound'
+    Left = 16
+    Top = 8
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 168000
+    OnTimer = Timer1Timer
+    OnStartTimer = Timer1StartTimer
+    Left = 45
+    Top = 8
   end
 end
