@@ -4,17 +4,14 @@ unit DeckStructure;
 {$mode ObjFPC}{$H+}
 interface
 uses
-  Classes, SysUtils;
+  Classes, SysUtils,Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, Unit2, Unit3;
 Type carte = record
                   id : string[2];  //[1] = Nom de la carte(V = Vallet, R = Roi, N = neuf(...)), [2] = Couleur de la carte (Piques: P, Coeurs: C. Trèfles: T, Carreaux: K)
                   atout: boolean;
                   rang : integer;
-<<<<<<< HEAD
+
                   pos: string[10]; //deck, Joueur(1..4), Centre, Pile(1..2)
-=======
-                  pos: string[10]; //deck, Joeur(1..4), Centre, Pile(1..2)
                   id_image: integer;
->>>>>>> 5bfd3d9... waedgvgv frdcsxvx
                             end;
 type
 
@@ -100,7 +97,7 @@ begin
 
 end;
 
-{
+
 
 
 
@@ -129,11 +126,7 @@ begin
 
       permuter(T[X],T[Y]); 
     end;
-<<<<<<< HEAD
 
-// <<<<<<< HEAD
-=======
->>>>>>> 5bfd3d9... waedgvgv frdcsxvx
   melangertableau:=T;  //la fonction renvois le tableau mélanger
 end;
 
@@ -141,7 +134,6 @@ procedure afficher_carte (var Place_image:TImage;
                           var Carte:carte);
 begin
   //fonction qui affiche l'image à tel place
-<<<<<<< HEAD
 end;
 
 procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
@@ -202,17 +194,12 @@ procedure deuxieme_distribution (PremierJoueur:integer);
 VAR
   IndiceCarte,positioncartemain:integer;
 begin
-  main[6,preuneur]:=deck[IndiceCarte];
+  main[6,preneur]:=deck[IndiceCarte];
   positioncartemain:=6;
   IndiceCarte:=22;
   distribution_4joueurs(3,PremierJoueur,IndiceCarte,positioncartemain);
 end;
 
-=======
-
-end
-}
->>>>>>> 5bfd3d9... waedgvgv frdcsxvx
 begin
 basedeck[1].id:='7P'; //7 de Piques
 basedeck[1].atout:=False;

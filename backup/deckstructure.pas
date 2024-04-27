@@ -4,55 +4,39 @@ unit DeckStructure;
 {$mode ObjFPC}{$H+}
 interface
 uses
-  Classes, SysUtils;
+  Classes, SysUtils,Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, Unit2, Unit3;
 Type carte = record
                   id : string[2];  //[1] = Nom de la carte(V = Vallet, R = Roi, N = neuf(...)), [2] = Couleur de la carte (Piques: P, Coeurs: C. Trèfles: T, Carreaux: K)
                   atout: boolean;
                   rang : integer;
-<<<<<<< HEAD
+
                   pos: string[10]; //deck, Joueur(1..4), Centre, Pile(1..2)
-=======
-                  pos: string[10]; //deck, Joeur(1..4), Centre, Pile(1..2)
                   id_image: integer;
->>>>>>> 5bfd3d9... waedgvgv frdcsxvx
                             end;
 type
 
   tableau_deck = array [1..32] of carte; //Type permettant l'usage des foonctions
   tableau_mains = array[1..4,1..8] of carte;
-<<<<<<< HEAD
-  tableau_plie = array[1..32,1..2] of carte;
-=======
   tableau_plie = array of carte;
->>>>>>> 5bfd3d9... waedgvgv frdcsxvx
-  tableau_centre = array[1..4] of carte;
+  tableau_centre = array of carte;
 
 var
   //Les positions
-<<<<<<< HEAD
-  deck: tableau_deck;
-  main: tableau_mains;
-  plie: tableau_plie;
-=======
   basedeck: tableau_deck;
   deck: tableau_deck;
   main: tableau_mains;
   plie1: tableau_plie;
   plie2: tableau_plie;
->>>>>>> 5bfd3d9... waedgvgv frdcsxvx
   centre: tableau_centre;
   // Premier joueur/Joueur qui joue en premier
   focus_joueur: integer;
   preneur: integer;
 
-<<<<<<< HEAD
-=======
 
 
 
 
 
->>>>>>> 5bfd3d9... waedgvgv frdcsxvx
 
 implementation
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
@@ -113,7 +97,7 @@ begin
 
 end;
 
-{
+
 
 
 
@@ -143,7 +127,6 @@ begin
       permuter(T[X],T[Y]); 
     end;
 
-// <<<<<<< HEAD
   melangertableau:=T;  //la fonction renvois le tableau mélanger
 end;
 
@@ -194,7 +177,6 @@ begin
         end;
 
     end;
-<<<<<<< HEAD
 end;
 
 procedure premiere_distribution (PremierJoueur:integer);
@@ -210,26 +192,18 @@ end;
 
 procedure deuxieme_distribution (PremierJoueur:integer);
 VAR
-  IndiceCarte:integer;
+  IndiceCarte,positioncartemain:integer;
 begin
-  main[6,preuneur]:=deck[IndiceCarte]
+  main[6,preneur]:=deck[IndiceCarte];
+  positioncartemain:=6;
   IndiceCarte:=22;
-  distribution_4joueurs(3,PremierJoueur,IndiceCarte);
-  distribution_4joueurs(2,PremierJoueur,IndiceCarte);
+  distribution_4joueurs(3,PremierJoueur,IndiceCarte,positioncartemain);
 end;
 
-=======
-  melangertableau:=T;  //la fonction renvois le tableau mélanger
-end;
 
-procedure afficher_carte (var Place_image:TImage;
-                          var Carte:carte);
-begin
-  //fonction qui affiche l'image à tel place
 
 end
-}
->>>>>>> 5bfd3d9... waedgvgv frdcsxvx
+
 begin
 basedeck[1].id:='7P'; //7 de Piques
 basedeck[1].atout:=False;
@@ -419,14 +393,11 @@ basedeck[31].rang:=3;
 basedeck[31].pos:='basedeck';
 basedeck[31].id_image:=31;
 //******************
-<<<<<<< HEAD
-=======
 basedeck[32].id:='9C';
 basedeck[32].atout:=False;
 basedeck[32].rang:=7;
 basedeck[32].pos:='basedeck';
 basedeck[32].id_image:=32;
->>>>>>> 5bfd3d9... waedgvgv frdcsxvx
 
 end.
 
