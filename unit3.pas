@@ -23,7 +23,6 @@ type
 
 var
   Form3: TForm3;
-  basedeck: array[1..32] of carte;
 implementation
 
 {$R *.lfm}
