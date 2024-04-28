@@ -35,14 +35,23 @@ var
   // Premier joueur/Joueur qui joue en premier
   focus_joueur: integer;
   preneur: integer;
+  atout:string; //l'atout choisi
+
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);
 procedure cartes_jouables(joueur:integer; var jouables: array of boolean);
 procedure permuter (var X,Y:carte);
 function melangertableau(N:integer):tableau_deck;
-procedure afficher_carte (var Place_image:TImage);
-procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;var IndiceCarte,positioncartemain:integer);
+procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
+                                var IndiceCarte:integer);
 procedure premiere_distribution (PremierJoueur:integer);
 procedure deuxieme_distribution (PremierJoueur:integer);
+procedure miseajouratout();
+function premierchoixcouleur (toutcouleur:string):integer;
+function changementcouleur (x:integer):integer;
+procedure triecouleur (I:integer;
+                      couleur:string;
+                      var C:integer);
+procedure trieparcouleur ();
 procedure init_jeu;
 
 
@@ -51,6 +60,8 @@ procedure init_jeu;
 
 
 implementation
+
+
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
 var i,j: integer;
     atout_trouve: boolean;
@@ -136,7 +147,7 @@ if length(centre) = 0 then
       main[joueur,i].jouable:= True;
     end;
   end
-else if centre[focus_joueur].atout=True then
+  else if centre[focus_joueur].atout=True then
     begin
        plus_fort:=centre[focus_joueur];
        for i:=i to length(centre) do
@@ -224,22 +235,7 @@ else if centre[focus_joueur].atout=True then
               end;
          end;
         end;
-
-
     end;
-end;
-{if not(jouable_trouve) then
- begin
-     for i:=1 to length(main[joueur]) do
-      begin
-        main[joueur,i].jouable:= True;
-        jouable_trouve:= True
-      end;
- end;}
-{
-  }
-
-
 
 
 procedure permuter (var X,Y:carte); //procedure qui échange deux tèrmes
@@ -252,7 +248,7 @@ begin
 end;
 
 
-function melangertableau(N:integer):tableau_deck; //procédure qui mélange un taableau, N sert à selon si la personne mélange beaucoup ou pas
+function melangertableau(N:integer):tableau_deck; //fonction qui mélange un tableau, N sert au nombre de mélange
 VAR
   T:tableau_deck;
   I,X,Y:integer;
@@ -267,76 +263,170 @@ begin
       permuter(T[X],T[Y]); 
     end;
 
-  melangertableau:=T;  //la fonction renvois le tableau mélanger
+  melangertableau:=T;  //la fonction renvois le tableau mélanger  (a un moment deck:=melangertableau(nombre de mélange);)
 end;
 
-procedure afficher_carte (var Place_image:TImage);
-begin
-  //fonction qui affiche l'image à tel place
-end;
+procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
+                                var IndiceCarte:integer);
+//Nombredecarte => le nombre de carte à distribuer
+//PremierJoueur => le premier joueur à recevoir les cartes (de 1 à 4)
+//IndiceCarte => à quelle carte on en est dans la "pioche"
 
-procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;var IndiceCarte,positioncartemain:integer);
 VAR
-  I,J,X:integer;
+  I,J:integer;
   Chaine: string;
 begin
-  for I:=1 to 4 do
+    for I:=1 to 4 do
     begin
       if preneur=PremierJoueur then
-      begin
-        X:=positioncartemain+1;
-        for J:=1 to Nombredecarte-1 do
-         begin
-          main[PremierJoueur,X]:=deck[IndiceCarte];
-          Chaine:='Joueur'+inttostr(PremierJoueur);
-          deck[IndiceCarte].pos:=Chaine;
-          IndiceCarte:=IndiceCarte+1;
-          X:=X+1;
-         end;
-      end
+        begin
+          for J:=1 to Nombredecarte-1 do
+            begin
+              SetLength(main[I], length(main[I])+1);
+              main[PremierJoueur,length(main[I])]:=deck[IndiceCarte];
+              Chaine:='Joueur'+inttostr(PremierJoueur);
+              deck[IndiceCarte].pos:=Chaine;
+              main[PremierJoueur,length(main[I])].pos:=Chaine;
+              IndiceCarte:=IndiceCarte+1;
+            end;
+        end
                                 else
       begin
-        X:=positioncartemain;
         for J:=1 to Nombredecarte do
          begin
-          main[PremierJoueur,X]:=deck[IndiceCarte];
+          SetLength(main[I], length(main[I])+1);
+          main[PremierJoueur,length(main[I])]:=deck[IndiceCarte];
           Chaine:='Joueur'+inttostr(PremierJoueur);
           deck[IndiceCarte].pos:=Chaine;
+          main[PremierJoueur,length(main[I])].pos:=Chaine;
           IndiceCarte:=IndiceCarte+1;
-          X:=X+1;
          end;
       end;
 
-      positioncartemain:=positioncartemain+Nombredecarte;
       PremierJoueur:=PremierJoueur+1;
-      If (PremierJoueur=5) then
+      If (PremierJoueur>4) then
         begin
           PremierJoueur:=1;
         end;
+    end;
 
+end;
+
+procedure miseajouratout ();
+VAR
+  I,J:integer;
+  couleurcarte:string;
+begin
+  for I:=1 to 4 do
+    begin
+      for J:=1 to 8 do
+        begin
+          couleurcarte:=copy(main[I,J].pos,2,1);
+          if couleurcarte=atout then
+            begin
+              main[I,J].atout:=true;
+            end;
+        end;
+    end;
+
+end;
+
+procedure premiere_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
+
+VAR
+  IndiceCarte:integer;
+begin
+  SetLength(main, 4, 0);  //j'alloue le tableau main
+  preneur:=0;
+  atout:='0';
+  IndiceCarte:=1;
+
+  distribution_4joueurs(3,PremierJoueur,IndiceCarte);
+  distribution_4joueurs(2,PremierJoueur,IndiceCarte);
+end;
+
+procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
+VAR
+  IndiceCarte:integer;
+  Chaine:string;
+begin
+  SetLength(main[preneur], length(main[preneur])+1);
+  main[preneur,length(main[preneur])]:=deck[21];
+  Chaine:='Joueur'+inttostr(preneur);
+  main[preneur,length(main[preneur])].pos:=Chaine;
+  deck[21].pos:=Chaine;
+
+  IndiceCarte:=22;
+  distribution_4joueurs(3,PremierJoueur,IndiceCarte);
+  miseajouratout();
+end;
+
+function premierchoixcouleur (toutcouleur:string):integer;
+begin
+  if atout='0' then
+    begin
+      premierchoixcouleur:=1;
+    end
+               else
+    begin
+      premierchoixcouleur:=Pos(atout,toutcouleur);
     end;
 end;
 
-procedure premiere_distribution (PremierJoueur:integer);
-
-VAR
-  IndiceCarte,positioncartemain:integer;
+function changementcouleur (x:integer):integer;
 begin
-  IndiceCarte:=1;
-  positioncartemain:=1;
-  distribution_4joueurs(3,PremierJoueur,IndiceCarte,positioncartemain);
-  distribution_4joueurs(2,PremierJoueur,IndiceCarte,positioncartemain);
+  x:=x+1;
+  if x>4 then
+    begin
+      x:=1;
+    end;
+  changementcouleur:=x;
 end;
 
-procedure deuxieme_distribution (PremierJoueur:integer);
+procedure triecouleur (I:integer;
+                      couleur:string;
+                      var C:integer);
 VAR
-  IndiceCarte,positioncartemain:integer;
+  couleurcarte:string;
+  J,Min:integer;
+
 begin
-  main[6,preneur]:=deck[IndiceCarte];
-  positioncartemain:=6;
-  IndiceCarte:=22;
-  distribution_4joueurs(3,PremierJoueur,IndiceCarte,positioncartemain);
+  Min:=C;
+  for J:=Min to 8 do
+    begin
+      couleurcarte:=copy(main[I,J].id,2,1);
+      if couleurcarte=couleur then
+        begin
+          permuter (main[I,J],main[I,C]);
+          C:=C+1;
+
+        end;
+    end;
 end;
+
+procedure trieparcouleur();
+VAR
+  toutcouleur:string;
+  a,I,C,x:integer;
+  couleur:string;
+
+begin
+  toutcouleur:='PCTK';
+  for I:=1 to 4 do //pour faire sur les quatres joueur
+    begin
+      C:=1;
+      x:=premierchoixcouleur (toutcouleur);
+      couleur:=copy(toutcouleur,x,1);
+      for a:=1 to 4 do //pour faire les 4 couleur
+        begin
+          triecouleur(I,couleur,C);
+          x:=changementcouleur(x);
+          couleur:=copy(toutcouleur,x,1);
+        end;
+    end;
+end;
+
+
 
 //Initialization du basedeck
 procedure init_jeu;

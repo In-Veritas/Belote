@@ -52,9 +52,9 @@ end;
 
 procedure TForm1.FormActivate(Sender: TObject);
 begin
-   Timer1.enabled:=True;
-   deck:=basedeck;
+  deck:=basedeck;
 end;
+
 
 procedure TForm1.Panel2Click(Sender: TObject); //Ouvre une partie sauvegardé
 begin

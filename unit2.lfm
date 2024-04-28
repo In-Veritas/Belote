@@ -366,6 +366,7 @@ object Form2: TForm2
     49AEFF0F50C6BDC4947591D40000000049454E44AE426082
   }
   LCLVersion = '3.2.0.0'
+  Visible = True
   object Image1: TImage
     Left = 0
     Height = 720

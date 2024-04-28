@@ -46,15 +46,19 @@ implementation
 procedure TForm1.Panel1Click(Sender: TObject); //Ouvre une nouvelle partie
 begin
    Form1.hide;
-   fin_tour;
+   init_jeu;
    Form2.show;
 end;
 
 procedure TForm1.FormActivate(Sender: TObject);
 begin
-   Timer1.enabled:=True;
-   deck:=basedeck;
+  RequireDerivedFormResource:=True;
+  Form1.Show;
+  Form1.Visible:=True;
+  Timer1.enabled:=True;
+  deck:=basedeck;
 end;
+
 
 procedure TForm1.Panel2Click(Sender: TObject); //Ouvre une partie sauvegardé
 begin

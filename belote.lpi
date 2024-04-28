@@ -60,6 +60,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit3"/>
       </Unit>
+      <Unit>
+        <Filename Value="deckstructure.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DeckStructure"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
