@@ -5,7 +5,8 @@ unit Unit2;  //INTERFACE PRINCIPALE
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Menus;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Menus,
+  StdCtrls, deckstructure;
 
 type
 
@@ -22,7 +23,12 @@ type
     Image15: TImage;
     Image16: TImage;
     Image17: TImage;
+    Image18: TImage;
+    Image19: TImage;
     Image2: TImage;
+    Image20: TImage;
+    Image21: TImage;
+    Image22: TImage;
     Image3: TImage;
     Image4: TImage;
     Image5: TImage;
@@ -31,11 +37,23 @@ type
     Image8: TImage;
     Image9: TImage;
     ImageList1: TImageList;
+    MainMenu1: TMainMenu;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
-    PopupMenu1: TPopupMenu;
+    procedure Image3Click(Sender: TObject);
+    procedure Image4Click(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+    procedure Image6Click(Sender: TObject);
+    procedure Image7Click(Sender: TObject);
+    procedure Image8Click(Sender: TObject);
+    procedure Image9Click(Sender: TObject);
+    procedure jouercarte (cartejouer:carte;
+               joueur : integer);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
   private
 
   public
@@ -47,7 +65,162 @@ var
 
 implementation
 
+
 {$R *.lfm}
+
+{ TForm2 }
+
+procedure TForm2.jouercarte (cartejouer:carte;
+                            joueur : integer);
+VAR
+  I:integer;
+
+begin
+  setlength(centre,5);
+  centre[joueur]:=cartejouer;
+
+  if joueur=1 then
+    begin
+      imagelist1.getbitmap(centre[joueur].id_image,Image14.Picture.Bitmap);
+    end;
+
+  if joueur=4 then
+    begin
+      imagelist1.getbitmap(centre[joueur].id_image,Image17.Picture.Bitmap);
+    end;
+
+  if joueur=3 then
+    begin
+      imagelist1.getbitmap(centre[joueur].id_image,Image15.Picture.Bitmap);
+    end;
+
+  if joueur=2 then
+    begin
+      imagelist1.getbitmap(centre[joueur].id_image,Image16.Picture.Bitmap);
+    end;
+
+
+
+
+
+
+
+end;
+
+
+
+procedure TForm2.Image3Click(Sender: TObject);
+VAR
+  cartejouer:carte;
+begin
+  if main[1,1].jouable=true then
+    begin
+      cartejouer:=main[1,1];
+      jouercarte(cartejouer,1);
+      Image3.visible:= False;
+    end;
+end;
+
+
+
+
+procedure TForm2.Image4Click(Sender: TObject);
+VAR
+  cartejouer:carte;
+begin
+  if main[1,2].jouable=true then
+    begin
+      cartejouer:=main[1,2];
+      jouercarte(cartejouer,1);
+      Image4.visible:= False;
+    end;
+
+
+end;
+
+procedure TForm2.Image5Click(Sender: TObject);
+VAR
+  cartejouer:carte;
+begin
+  if main[1,3].jouable=true then
+    begin
+      cartejouer:=main[1,3];
+      jouercarte(cartejouer,1);
+      Image5.visible:= False;
+    end;
+end;
+
+procedure TForm2.Image6Click(Sender: TObject);
+VAR
+  cartejouer:carte;
+begin
+  if main[1,4].jouable=true then
+    begin
+      cartejouer:=main[1,4];
+      jouercarte(cartejouer,1);
+      Image6.visible:= False;
+    end;
+end;
+
+procedure TForm2.Image7Click(Sender: TObject);
+VAR
+  cartejouer:carte;
+begin
+  if main[1,5].jouable=true then
+    begin
+      cartejouer:=main[1,5];
+      jouercarte(cartejouer,1);
+      Image7.visible:= False;
+    end;
+end;
+
+procedure TForm2.Image8Click(Sender: TObject);
+VAR
+  cartejouer:carte;
+begin
+  if main[1,6].jouable=true then
+    begin
+      cartejouer:=main[1,6];
+      jouercarte(cartejouer,1);
+      Image8.visible:= False;
+    end;
+end;
+
+procedure TForm2.Image9Click(Sender: TObject);
+VAR
+  cartejouer:carte;
+begin
+  if main[1,7].jouable=true then
+    begin
+      cartejouer:=main[1,7];
+      jouercarte(cartejouer,1);
+      Image9.visible:= False;
+    end;
+end;
+
+procedure TForm2.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  application.Terminate;
+end;
+
+procedure TForm2.FormShow(Sender: TObject);
+begin
+  focus_joueur:=1;
+
+  premiere_distribution (focus_joueur);
+end;
+
+procedure TForm2.Image2Click(Sender: TObject);
+VAR
+  cartejouer:carte;
+begin
+  if main[1,0].jouable=true then
+    begin
+      cartejouer:=main[1,0];
+      jouercarte(cartejouer,1);
+      Image2.visible:= False;
+    end;
+end;
 
 end.
 

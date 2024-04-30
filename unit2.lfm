@@ -1,12 +1,12 @@
 object Form2: TForm2
-  Left = 19
-  Height = 1440
-  Top = 922
-  Width = 2560
+  Left = 583
+  Height = 751
+  Top = 110
+  Width = 1280
   Caption = 'Belote'
-  ClientHeight = 1440
-  ClientWidth = 2560
-  DesignTimePPI = 192
+  ClientHeight = 751
+  ClientWidth = 1280
+  Enabled = False
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
     1A0A0000000D49484452000001000000010008060000005C72A86600002C4549
@@ -366,13 +366,15 @@ object Form2: TForm2
     19E49E01B2C7BF541299FD3399F36FA91C98DBFBF73E494AF82B22EF90BDF961
     49AEFF0F50C6BDC4947591D40000000049454E44AE426082
   }
-  LCLVersion = '2.2.4.0'
-  Visible = True
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnShow = FormShow
+  LCLVersion = '3.2.0.0'
   object Image1: TImage
     Left = 0
-    Height = 1440
+    Height = 720
     Top = 0
-    Width = 2560
+    Width = 1280
     Picture.Data = {
       1754506F727461626C654E6574776F726B4772617068696320530C0089504E47
       0D0A1A0A0000000D4948445200000500000002D00806000000CF7DDD56000000
@@ -25619,58 +25621,74 @@ object Form2: TForm2
     }
   end
   object Image2: TImage
-    Left = 208
-    Height = 352
-    Top = 1056
-    Width = 228
+    Left = 104
+    Height = 176
+    Top = 528
+    Width = 114
+    Enabled = False
+    OnClick = Image2Click
   end
   object Image3: TImage
-    Left = 480
-    Height = 352
-    Top = 1056
-    Width = 228
+    Left = 240
+    Height = 176
+    Top = 528
+    Width = 114
+    Enabled = False
+    OnClick = Image3Click
   end
   object Image4: TImage
-    Left = 752
-    Height = 352
-    Top = 1056
-    Width = 228
+    Left = 376
+    Height = 176
+    Top = 528
+    Width = 114
+    Enabled = False
+    OnClick = Image4Click
   end
   object Image5: TImage
-    Left = 1024
-    Height = 352
-    Top = 1056
-    Width = 228
+    Left = 512
+    Height = 176
+    Top = 528
+    Width = 114
+    Enabled = False
+    OnClick = Image5Click
   end
   object Image6: TImage
-    Left = 1296
-    Height = 352
-    Top = 1056
-    Width = 228
+    Left = 648
+    Height = 176
+    Top = 528
+    Width = 114
+    Enabled = False
+    OnClick = Image6Click
   end
   object Image7: TImage
-    Left = 1568
-    Height = 352
-    Top = 1056
-    Width = 228
+    Left = 784
+    Height = 176
+    Top = 528
+    Width = 114
+    Enabled = False
+    OnClick = Image7Click
   end
   object Image8: TImage
-    Left = 1840
-    Height = 352
-    Top = 1056
-    Width = 228
+    Left = 920
+    Height = 176
+    Top = 528
+    Width = 114
+    Enabled = False
+    OnClick = Image8Click
   end
   object Image9: TImage
-    Left = 2112
-    Height = 352
-    Top = 1056
-    Width = 228
+    Left = 1056
+    Height = 176
+    Top = 528
+    Width = 114
+    Enabled = False
+    OnClick = Image9Click
   end
   object Image10: TImage
-    Left = 576
-    Height = 700
-    Top = 320
-    Width = 1400
+    Left = 288
+    Height = 350
+    Top = 160
+    Width = 700
     Picture.Data = {
       1754506F727461626C654E6574776F726B477261706869639D97010089504E47
       0D0A1A0A0000000D49484452000002BC0000015E080600000067DECC57000000
@@ -28937,65 +28955,89 @@ object Form2: TForm2
     }
   end
   object Image11: TImage
-    Left = 160
-    Height = 200
-    Top = 528
-    Width = 200
+    Left = 80
+    Height = 100
+    Top = 264
+    Width = 100
   end
   object Image12: TImage
-    Left = 2176
-    Height = 200
-    Top = 528
-    Width = 200
+    Left = 1088
+    Height = 100
+    Top = 264
+    Width = 100
   end
   object Image13: TImage
-    Left = 1168
-    Height = 200
-    Top = 96
-    Width = 200
+    Left = 584
+    Height = 100
+    Top = 48
+    Width = 100
   end
   object Image14: TImage
-    Left = 1200
-    Height = 176
-    Top = 720
-    Width = 114
+    Left = 600
+    Height = 88
+    Top = 376
+    Width = 57
+    Proportional = True
   end
   object Image15: TImage
-    Left = 1200
-    Height = 176
-    Top = 400
-    Width = 114
+    Left = 600
+    Height = 88
+    Top = 200
+    Width = 57
+    Proportional = True
   end
   object Image16: TImage
-    Left = 1024
-    Height = 176
-    Top = 560
-    Width = 114
+    Left = 512
+    Height = 88
+    Top = 280
+    Width = 57
+    Proportional = True
   end
   object Image17: TImage
-    Left = 1376
-    Height = 176
-    Top = 560
-    Width = 114
+    Left = 688
+    Height = 88
+    Top = 280
+    Width = 57
+    Proportional = True
   end
-  object PopupMenu1: TPopupMenu
-    object MenuItem1: TMenuItem
-      Caption = 'Règles du jeu'
-    end
-    object MenuItem2: TMenuItem
-      Caption = 'Sauvegarder'
-    end
-    object MenuItem3: TMenuItem
-      Caption = 'Recommencer'
-    end
-    object MenuItem4: TMenuItem
-      Caption = 'Menu Principal'
-    end
+  object Image18: TImage
+    Left = 600
+    Height = 88
+    Top = 288
+    Width = 57
+    Proportional = True
+    Visible = False
+  end
+  object Image19: TImage
+    Left = 832
+    Height = 88
+    Top = 168
+    Width = 57
+    Proportional = True
+  end
+  object Image20: TImage
+    Left = 376
+    Height = 88
+    Top = 408
+    Width = 57
+    Proportional = True
+  end
+  object Image21: TImage
+    Left = 8
+    Height = 90
+    Top = 616
+    Width = 90
+  end
+  object Image22: TImage
+    Left = 1176
+    Height = 90
+    Top = 616
+    Width = 90
   end
   object ImageList1: TImageList
     Height = 176
     Width = 114
-    Left = 104
+    Left = 52
     Bitmap = {
       4C7A2100000072000000B0000000B75307000000000078DAECBD87571569BA2E
       FE1FDC7BA6DBAC6D4E6D26E72C12443080620233282A2228184031A2606A1115
@@ -44005,5 +44047,20 @@ object Form2: TForm2
       6868683366CC98CBB57DCE9A3469D2DA2953A628A7C1D5891327AE1D366CD8AC
       51A346F5851D0CFF1FA03BB33E
     }
+  end
+  object MainMenu1: TMainMenu
+    Left = 8
+    object MenuItem1: TMenuItem
+      Caption = 'Règles du jeu'
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Sauvegarder'
+    end
+    object MenuItem3: TMenuItem
+      Caption = 'Recommencer'
+    end
+    object MenuItem4: TMenuItem
+      Caption = 'Menu principal'
+    end
   end
 end

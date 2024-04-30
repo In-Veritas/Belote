@@ -18,7 +18,7 @@ type
     Image1: TImage;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
 
   public
@@ -34,20 +34,22 @@ implementation
 
 { TForm4 }
 
-procedure TForm4.FormActivate(Sender: TObject);
+
+
+procedure TForm4.FormShow(Sender: TObject);
 begin
-  Form4.Image1.Picture:=Form2.Image16.Picture;
+  Form4.Image1.Picture:=Form2.Image18.Picture;
 end;
 
 procedure TForm4.Button1Click(Sender: TObject);
 begin
   atout:=copy(deck[21].id,2,1);
-  TForm4.Close;
+  Form4.Close;
 end;
 
 procedure TForm4.Button2Click(Sender: TObject);
 begin
-  TForm4.Close;
+  Form4.Close;
 end;
 
 end.

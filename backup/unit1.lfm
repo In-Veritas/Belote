@@ -1,11 +1,11 @@
 object Form1: TForm1
-  Left = 421
-  Height = 720
-  Top = 154
-  Width = 1280
+  Left = 326
+  Height = 718
+  Top = 149
+  Width = 1276
   Caption = 'Belote'
-  ClientHeight = 720
-  ClientWidth = 1280
+  ClientHeight = 0
+  ClientWidth = 0
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
     1A0A0000000D49484452000001000000010008060000005C72A86600002C4549
@@ -32810,7 +32810,7 @@ object Form1: TForm1
   end
   object Panel1: TPanel
     Left = 56
-    Height = 136
+    Height = 144
     Top = 552
     Width = 354
     BevelOuter = bvNone
@@ -32827,8 +32827,8 @@ object Form1: TForm1
     OnClick = Panel2Click
   end
   object OpenDialog1: TOpenDialog
-    Left = 1192
-    Top = 568
+    Left = 168
+    Top = 8
   end
   object playsound1: Tplaysound
     About.Description.Strings = (
@@ -32855,7 +32855,7 @@ object Form1: TForm1
     Interval = 168000
     OnTimer = Timer1Timer
     OnStartTimer = Timer1StartTimer
-    Left = 45
+    Left = 88
     Top = 8
   end
 end

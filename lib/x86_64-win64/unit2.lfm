@@ -1,11 +1,12 @@
 object Form2: TForm2
-  Left = 639
-  Height = 720
-  Top = 161
+  Left = 583
+  Height = 751
+  Top = 110
   Width = 1280
   Caption = 'Belote'
-  ClientHeight = 720
+  ClientHeight = 751
   ClientWidth = 1280
+  Enabled = False
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
     1A0A0000000D49484452000001000000010008060000005C72A86600002C4549
@@ -365,8 +366,10 @@ object Form2: TForm2
     19E49E01B2C7BF541299FD3399F36FA91C98DBFBF73E494AF82B22EF90BDF961
     49AEFF0F50C6BDC4947591D40000000049454E44AE426082
   }
-  LCLVersion = '2.2.6.0'
-  Visible = True
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnShow = FormShow
+  LCLVersion = '3.2.0.0'
   object Image1: TImage
     Left = 0
     Height = 720
@@ -25622,48 +25625,64 @@ object Form2: TForm2
     Height = 176
     Top = 528
     Width = 114
+    Enabled = False
+    OnClick = Image2Click
   end
   object Image3: TImage
     Left = 240
     Height = 176
     Top = 528
     Width = 114
+    Enabled = False
+    OnClick = Image3Click
   end
   object Image4: TImage
     Left = 376
     Height = 176
     Top = 528
     Width = 114
+    Enabled = False
+    OnClick = Image4Click
   end
   object Image5: TImage
     Left = 512
     Height = 176
     Top = 528
     Width = 114
+    Enabled = False
+    OnClick = Image5Click
   end
   object Image6: TImage
     Left = 648
     Height = 176
     Top = 528
     Width = 114
+    Enabled = False
+    OnClick = Image6Click
   end
   object Image7: TImage
     Left = 784
     Height = 176
     Top = 528
     Width = 114
+    Enabled = False
+    OnClick = Image7Click
   end
   object Image8: TImage
     Left = 920
     Height = 176
     Top = 528
     Width = 114
+    Enabled = False
+    OnClick = Image8Click
   end
   object Image9: TImage
     Left = 1056
     Height = 176
     Top = 528
     Width = 114
+    Enabled = False
+    OnClick = Image9Click
   end
   object Image10: TImage
     Left = 288
@@ -28956,40 +28975,64 @@ object Form2: TForm2
   object Image14: TImage
     Left = 600
     Height = 88
-    Top = 360
+    Top = 376
     Width = 57
+    Proportional = True
   end
   object Image15: TImage
     Left = 600
     Height = 88
     Top = 200
     Width = 57
+    Proportional = True
   end
   object Image16: TImage
     Left = 512
     Height = 88
     Top = 280
     Width = 57
+    Proportional = True
   end
   object Image17: TImage
     Left = 688
     Height = 88
     Top = 280
     Width = 57
+    Proportional = True
   end
-  object PopupMenu1: TPopupMenu
-    object MenuItem1: TMenuItem
-      Caption = 'Règles du jeu'
-    end
-    object MenuItem2: TMenuItem
-      Caption = 'Sauvegarder'
-    end
-    object MenuItem3: TMenuItem
-      Caption = 'Recommencer'
-    end
-    object MenuItem4: TMenuItem
-      Caption = 'Menu Principal'
-    end
+  object Image18: TImage
+    Left = 600
+    Height = 88
+    Top = 288
+    Width = 57
+    Proportional = True
+    Visible = False
+  end
+  object Image19: TImage
+    Left = 832
+    Height = 88
+    Top = 168
+    Width = 57
+    Proportional = True
+  end
+  object Image20: TImage
+    Left = 376
+    Height = 88
+    Top = 408
+    Width = 57
+    Proportional = True
+  end
+  object Image21: TImage
+    Left = 8
+    Height = 90
+    Top = 616
+    Width = 90
+  end
+  object Image22: TImage
+    Left = 1176
+    Height = 90
+    Top = 616
+    Width = 90
   end
   object ImageList1: TImageList
     Height = 176
@@ -44004,5 +44047,20 @@ object Form2: TForm2
       6868683366CC98CBB57DCE9A3469D2DA2953A628A7C1D5891327AE1D366CD8AC
       51A346F5851D0CFF1FA03BB33E
     }
+  end
+  object MainMenu1: TMainMenu
+    Left = 8
+    object MenuItem1: TMenuItem
+      Caption = 'Règles du jeu'
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Sauvegarder'
+    end
+    object MenuItem3: TMenuItem
+      Caption = 'Recommencer'
+    end
+    object MenuItem4: TMenuItem
+      Caption = 'Menu principal'
+    end
   end
 end

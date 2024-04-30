@@ -8,7 +8,7 @@ interface
 
 
 uses
-  Classes, SysUtils,Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, Unit2, Unit3;
+  Classes, SysUtils,Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, Unit3;
 Type carte = record
                   id : string[2];  //[1] = Nom de la carte(V = Vallet, R = Roi, N = neuf(...)), [2] = Couleur de la carte (Piques: P, Coeurs: C. Trèfles: T, Carreaux: K)
                   atout: boolean;
@@ -36,16 +36,17 @@ var
   focus_joueur: integer;
   preneur: integer;
   atout:string; //l'atout choisi
+  score1: integer;
+  score2: integer;
+  etat:string;
 
+
+procedure init_jeu;
+procedure choix_atout;
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);
 procedure cartes_jouables(joueur:integer; var jouables: array of boolean);
 procedure permuter (var X,Y:carte);
-function melangertableau(N:integer):tableau_deck;
-procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
-                                var IndiceCarte:integer);
-procedure premiere_distribution (PremierJoueur:integer);
-procedure deuxieme_distribution (PremierJoueur:integer);
-procedure miseajouratout();
+
 function premierchoixcouleur (toutcouleur:string):integer;
 function changementcouleur (x:integer):integer;
 procedure triecouleur (I:integer;
@@ -53,457 +54,122 @@ procedure triecouleur (I:integer;
                       var C:integer);
 
 procedure trieparcouleur ();
-procedure trierang();
 procedure trieminmaxparcouleur (I,min,max:integer);
-procedure init_jeu;
+procedure trierang();
+
+
+function melangertableau(N:integer):tableau_deck;
+procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
+                                var IndiceCarte:integer);
+procedure premiere_distribution (PremierJoueur:integer);
+procedure deuxieme_distribution (PremierJoueur:integer);
 
 
 
 
 
+
+
+
+
+{etat choix d'aout
+
+verifie focus joueur
+variable pris: boolean
+cartes de main visibles mais pas clickables
+boucle 1-4
+  joeurquiprend va etre focusjoueur
+  if elif pour chaque cas de joueur
+  si joueurquiprend depasse 4 il CHUTE a 1
+  si pris break
+si not pris
+   boucle 1-4
+         changer les possibilitês de choix
+         joeurquiprend va etre focusjoueur
+        if elif pour chaque cas de joueur}
+
+{etat debut
+
+        verifie focus joueur
+        faire boucle 1-8
+        	boucle 1-4
+        		joeurquijoue va etre focusjoueur
+        		if elif pour chaque cas de joueur
+        		si joueurquijoue depasse 4 il CHUTE a 1
+        	il appelle fintour
+                rajouter 10 de dern
+        change letat du jeu pour fin    }
+{etat fin
+Ouvre le form3 et compte le plie de lequipe qui a pris
+      obs. belote, points de l²aout
+      on verifie les cas >81 <81 =162
+      on affiche qui a gagne
+      on demande au joueur humain si il veut continuer
+      si oui
+         On reinitialize tout (c chian)
+      sinon
+      APPLICATION TERMINATE!!!!!!!!!!!!!!!!!!!
+
+}
 
 implementation
 
+USES Unit2, unit4;
 
-procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
-var i,j: integer;
-    atout_trouve: boolean;
-    plus_fort: carte;
-    demande: char;
-    joueur_gagnant: integer;
-begin
-  atout_trouve:=false;
-  //En cas d'atout
-  for i:=1 to 4 do
-    begin
-      if centre_fintour[i].atout=true then
-        begin
-
-           atout_trouve:=true;
-           joueur_gagnant:=i;
-
-           for j:=i to 4 do
-             begin
-                   if (centre_fintour[i].atout=true)AND(centre_fintour[i].rang < plus_fort.rang) then
-                      joueur_gagnant:=j
-             end;
-        end
-    end;
-  //Si il n'y a pas d'atout
-  if atout_trouve=false then
-    begin
-       plus_fort:=centre_fintour[focus_joueur];
-       for i:=1 to 4 do
-         begin
-           if (centre_fintour[i].rang < plus_fort.rang)AND(centre_fintour[i].id[2]=plus_fort.id[2])then
-             joueur_gagnant:=i;
-         end;
-    end;
-  //On envoie les cartes à la pile de l'équipe gagnante:
-  if joueur_gagnant > 2 then
-    begin
-       for i:=1 to 4 do
-         begin
-              Insert(centre_fintour[i], plie2,length(plie2));
-         end;
-    end else
-    begin
-         for i:=1 to 4 do
-         begin
-              Insert(centre_fintour[i], plie1,length(plie1));
-         end;
-    end;
-  focus_joueur:=joueur_gagnant;
-  Delete(centre,1,4);
-end;
-
-//Vérifie quelles cartes dans la main sont jouables, et donne un array dynamique de booleans pour dire quels sont jouables
-procedure cartes_jouables(joueur:integer; var jouables: array of boolean);
+procedure choix_atout;
 var
-i,j: integer;
-plus_fort: carte;
-jouable_trouve:boolean;
+  pris:boolean;
+  joueurquiprend:integer;
+  I:integer;
 begin
-{Primeiro voce ve se ja tem cartas na mesa
-Se sim, voce olha pra primeira carta, e pega o naipe
-  se o naipe for atout:
-          Se jogar um atout mais forte é possivel:
-             os atous mais fortes sao jogaveis
-          senao qualquer carta de atout vale]
-  senão, voce só pode jogar o naipe da primeira carta
-         se voce tiver o naipe da primeira carta:
-            todas as cartas desse naipe são jogaveis
-         se voce nao tiver o naipe da primeira carta:
-             se tem atout na mão:
-                verificar os atouts na mesa:
-                          Pegar o atout mais forte na mesa
-                                Se tiver um atout na mão, mais forte que os da mesa, ele é jogavel
-                                senão, todos os atouts são jogaveis
-             senã :
-                todas as cartas são jogaveis
-Se não, todas as cartas são jogaveis}
-jouable_trouve:= false;
-if length(centre) = 0 then
-  begin
-    for i:=1 to length(main[joueur]) do
+  pris:=false;
+  joueurquiprend:=focus_joueur;
+  for I:=1 to 4 do
     begin
-      main[joueur,i].jouable:= True;
-    end;
-  end
-  else if centre[focus_joueur].atout=True then
-    begin
-       plus_fort:=centre[focus_joueur];
-       for i:=i to length(centre) do
-       begin
-          if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then plus_fort:=centre[i];
-       end;
-       for i:=1 to length(main[joueur])do
-       begin
-         if plus_fort.rang > main[joueur,i].rang then main[joueur,i].jouable:=True;
-         jouable_trouve:= True;
-       end;
-       if not(jouable_trouve) then
-       begin
-          for i:=1 to length(main[joueur])do
-          begin
-            if main[joueur,i].atout then
-            begin
-              jouable_trouve:= True;
-              main[joueur,i].jouable:=true;
-            end;
-          end;
-       end;
-       if not(jouable_trouve) then
-       begin
-           for i:=1 to length(main[joueur]) do
-            begin
-              main[joueur,i].jouable:= True;
-              jouable_trouve:= True;
-            end;
-       end;
-    end else
-    begin
-      for i:=1 to length(main[joueur]) do
-      begin
-        if main[joueur,i].id[2] = centre[focus_joueur].id[2] then
-          begin
-            main[joueur,i].jouable:= True;
-            jouable_trouve:= True;
-          end;
-      end;
-      if not(jouable_trouve) then
+      if joueurquiprend=1 then
         begin
-          for i:=1 to length(main[joueur])do
-          begin
-            if main[joueur,i].atout then
-            begin
-              for j:=1 to length(centre) do
-              begin
-                if centre[j].atout then plus_fort:=centre[j];
-                break;
-              end;
-              for j:=1 to length(centre) do
-              begin
-                if (centre[j].atout)AND(centre[j].rang < plus_fort.rang) then plus_fort:=centre[j];
-              end;
-              for j:=1 to length(main[joueur]) do
-              begin
-                if main[joueur,j].rang < plus_fort.rang then
-                begin
-                  main[joueur,j].jouable:=True;
-                  jouable_trouve:=True;
-                end;
-              end;
-              if not(jouable_trouve)then
-              begin
-              for j:=1 to length(main[joueur]) do
-                  begin
-                    if main[joueur,j].atout then
-                    begin
-                         main[joueur,j].jouable:=True;
-                         jouable_trouve:=True;
-                    end;
-                    end;
-              end;
-              break;
-              end;
-            end;
-          end;
-        if not(jouable_trouve) then
-         begin
-             for i:=1 to length(main[joueur]) do
-              begin
-                main[joueur,i].jouable:= True;
-                jouable_trouve:= True
-              end;
-         end;
-        end;
-    end;
-
-
-procedure permuter (var X,Y:carte); //procedure qui échange deux tèrmes
-VAR
-  Z:carte;
-begin
-  Z:=X;
-  X:=Y;
-  Y:=Z;
-end;
-
-
-function melangertableau(N:integer):tableau_deck; //fonction qui mélange un tableau, N sert au nombre de mélange
-VAR
-  T:tableau_deck;
-  I,X,Y:integer;
-
-begin
-  T:=deck;
-  for I:=1 to N do //dépend du nombre de mélange
-    begin
-      X:=random(31)+1;
-      Y:=random(31)+1;
-
-      permuter(T[X],T[Y]); 
-    end;
-
-  melangertableau:=T;  //la fonction renvois le tableau mélanger  (a un moment deck:=melangertableau(nombre de mélange);)
-end;
-
-procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
-                                var IndiceCarte:integer);
-//Nombredecarte => le nombre de carte à distribuer
-//PremierJoueur => le premier joueur à recevoir les cartes (de 1 à 4)
-//IndiceCarte => à quelle carte on en est dans la "pioche"
-
-VAR
-  I,J:integer;
-  Chaine: string;
-begin
-    for I:=1 to 4 do
-    begin
-      if preneur=PremierJoueur then
-        begin
-          for J:=1 to Nombredecarte-1 do
-            begin
-              SetLength(main[I], length(main[I])+1);
-              main[PremierJoueur,length(main[I])]:=deck[IndiceCarte];
-              Chaine:='Joueur'+inttostr(PremierJoueur);
-              deck[IndiceCarte].pos:=Chaine;
-              main[PremierJoueur,length(main[I])].pos:=Chaine;
-              IndiceCarte:=IndiceCarte+1;
-            end;
+          form4.showmodal;
+          showmessage('');
+          if atout<>'0' then pris:=true;
         end
-                                else
-      begin
-        for J:=1 to Nombredecarte do
-         begin
-          SetLength(main[I], length(main[I])+1);
-          main[PremierJoueur,length(main[I])]:=deck[IndiceCarte];
-          Chaine:='Joueur'+inttostr(PremierJoueur);
-          deck[IndiceCarte].pos:=Chaine;
-          main[PremierJoueur,length(main[I])].pos:=Chaine;
-          IndiceCarte:=IndiceCarte+1;
-         end;
-      end;
 
-      PremierJoueur:=PremierJoueur+1;
-      If (PremierJoueur>4) then
+                          else
         begin
-          PremierJoueur:=1;
+          //Choix de la IA
+        end;
+      if pris then break;
+      joueurquiprend:=joueurquiprend+1;
+      if joueurquiprend=5 then
+        begin
+          joueurquiprend:=4;
         end;
     end;
-
-end;
-
-procedure miseajouratout ();
-VAR
-  I,J:integer;
-  couleurcarte:string;
-begin
-  for I:=1 to 4 do
-    begin
-      for J:=1 to 8 do
+   //Deux
+   if not pris then
+   begin
+     for I:=1 to 4 do
+     begin
+       if joueurquiprend=1 then
         begin
-          couleurcarte:=copy(main[I,J].pos,2,1);
-          if couleurcarte=atout then
-            begin
-              main[I,J].atout:=true;
-            end;
-        end;
-    end;
+          form5.showmodal;
+          showmessage('');
+          if atout<>'0' then pris:=true;
+        end
 
-end;
-
-procedure premiere_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
-
-VAR
-  IndiceCarte,Indiceimagecarte:integer;
-begin
-  SetLength(main, 4, 0);  //j'alloue le tableau main
-  preneur:=0;
-  atout:='0';
-  IndiceCarte:=1;
-
-  distribution_4joueurs(3,PremierJoueur,IndiceCarte);
-  distribution_4joueurs(2,PremierJoueur,IndiceCarte);
-
-  trieparcouleur();//trie des cartes de chaques joueurs
-
-  //affiche la mains du joueur 1
-  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image2.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image3.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image4.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image5.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image6.Picture.Bitmap);
-
-end;
-
-procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
-VAR
-  IndiceCarte:integer;
-  Chaine:string;
-begin
-  SetLength(main[preneur], length(main[preneur])+1);
-  main[preneur,length(main[preneur])]:=deck[21];
-  Chaine:='Joueur'+inttostr(preneur);
-  main[preneur,length(main[preneur])].pos:=Chaine;
-  deck[21].pos:=Chaine;
-
-  IndiceCarte:=22;
-  distribution_4joueurs(3,PremierJoueur,IndiceCarte);
-  miseajouratout();
-
-  trieparcouleur();//trie des cartes de chaques joueurs
-
-  //affiche les cartes du joueurs 1
-  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image2.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image3.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image4.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image5.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image6.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image7.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image8.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,8].id_image,Form2.Image9.Picture.Bitmap);
-end;
-
-function premierchoixcouleur (toutcouleur:string):integer;
-begin
-  if atout='0' then
-    begin
-      premierchoixcouleur:=1;
-    end
-               else
-    begin
-      premierchoixcouleur:=Pos(atout,toutcouleur);
-    end;
-end;
-
-function changementcouleur (x:integer):integer;
-begin
-  x:=x+1;
-  if x>4 then
-    begin
-      x:=1;
-    end;
-  changementcouleur:=x;
-end;
-
-procedure triecouleur (I:integer;
-                      couleur:string;
-                      var C:integer);
-VAR
-  couleurcarte:string;
-  J,Min:integer;
-
-begin
-  Min:=C;
-  for J:=Min to 8 do
-    begin
-      couleurcarte:=copy(main[I,J].id,2,1);
-      if couleurcarte=couleur then
+                          else
         begin
-          permuter (main[I,J],main[I,C]);
-          C:=C+1;
-
+          //Choix de la IA 2
         end;
-    end;
-end;
-
-procedure trieparcouleur();
-VAR
-  toutcouleur:string;
-  a,I,C,x:integer;
-  couleur:string;
-
-begin
-  toutcouleur:='PCTK';
-  for I:=1 to 4 do //pour faire sur les quatres joueur
-    begin
-      C:=1;
-      x:=premierchoixcouleur (toutcouleur);
-      couleur:=copy(toutcouleur,x,1);
-      for a:=1 to 4 do //pour faire les 4 couleur
+      if pris then break;
+      joueurquiprend:=joueurquiprend+1;
+      if joueurquiprend=5 then
         begin
-          triecouleur(I,couleur,C);
-          x:=changementcouleur(x);
-          couleur:=copy(toutcouleur,x,1);
+          joueurquiprend:=4;
         end;
-    end;
+     end;
+   end;
 end;
 
-procedure trieminmaxparcouleur (I,min,max:integer);
-VAR
-  J1,J2:integer;
-
-begin
-  For J1:=min to max-1 do
-    begin
-      for J2:=J1+1 to max do
-        begin
-          if (main[I,J1]>main[I,J2]) then
-            begin
-              permuter(main[I,J1],main[I,J2]);
-            end;
-        end;
-    end;
-end;
-
-procedure trierang();
-VAR
-  I,J,min,max:integer;
-  couleur1,couleur2:string;
-
-begin
-  for I:=1 to 4 do
-    begin
-      min:=1;
-      max:=1;
-      while min<8 do
-        begin
-          couleur1:=copy(main[I,min].id,2,1);
-          couleur2:=copy(main[I,max].id,2,1);
-          while (couleur1=couleur2) and (max<8) do
-            begin
-              max:=max+1;
-              couleur2:=copy(main[I,max].id,2,1);
-            end;
-          if (couleur1<>couleur2) then
-            begin
-              max:=max-1;
-            end;
-
-          if min<>max then
-            begin
-              trieminmaxparcouleur(I,min,max);
-            end;
-
-          min:=max+1;
-          max:=min;
-        end;
-    end;
-end;
-
-//Initialization du basedeck
 procedure init_jeu;
 var
   i: integer;
@@ -707,6 +373,523 @@ basedeck[32].pos:='basedeck';
 basedeck[32].id_image:=32;
 
 end;
+
+
+procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
+var i,j: integer;
+    atout_trouve: boolean;
+    plus_fort: carte;
+    demande: char;
+    joueur_gagnant: integer;
+begin
+  atout_trouve:=false;
+  //En cas d'atout
+  for i:=1 to 4 do
+    begin
+      if centre_fintour[i].atout=true then
+        begin
+
+           atout_trouve:=true;
+           joueur_gagnant:=i;
+
+           for j:=i to 4 do
+             begin
+                   if (centre_fintour[i].atout=true)AND(centre_fintour[i].rang < plus_fort.rang) then
+                      joueur_gagnant:=j
+             end;
+        end
+    end;
+  //Si il n'y a pas d'atout
+  if atout_trouve=false then
+    begin
+       plus_fort:=centre_fintour[focus_joueur];
+       for i:=1 to 4 do
+         begin
+           if (centre_fintour[i].rang < plus_fort.rang)AND(centre_fintour[i].id[2]=plus_fort.id[2])then
+             joueur_gagnant:=i;
+         end;
+    end;
+  //On envoie les cartes à la pile de l'équipe gagnante:
+  if joueur_gagnant > 2 then
+    begin
+       for i:=1 to 4 do
+         begin
+              Insert(centre_fintour[i], plie2,length(plie2));
+         end;
+    end else
+    begin
+         for i:=1 to 4 do
+         begin
+              Insert(centre_fintour[i], plie1,length(plie1));
+         end;
+    end;
+  focus_joueur:=joueur_gagnant;
+  Delete(centre,1,4);
+end;
+
+//Vérifie quelles cartes dans la main sont jouables, et donne un array dynamique de booleans pour dire quels sont jouables
+procedure cartes_jouables(joueur:integer; var jouables: array of boolean);
+var
+i,j: integer;
+plus_fort: carte;
+jouable_trouve:boolean;
+begin
+{Primeiro voce ve se ja tem cartas na mesa
+Se sim, voce olha pra primeira carta, e pega o naipe
+  se o naipe for atout:
+          Se jogar um atout mais forte é possivel:
+             os atous mais fortes sao jogaveis
+          senao qualquer carta de atout vale]
+  senão, voce só pode jogar o naipe da primeira carta
+         se voce tiver o naipe da primeira carta:
+            todas as cartas desse naipe são jogaveis
+         se voce nao tiver o naipe da primeira carta:
+             se tem atout na mão:
+                verificar os atouts na mesa:
+                          Pegar o atout mais forte na mesa
+                                Se tiver um atout na mão, mais forte que os da mesa, ele é jogavel
+                                senão, todos os atouts são jogaveis
+             senã :
+                todas as cartas são jogaveis
+Se não, todas as cartas são jogaveis}
+jouable_trouve:= false;
+if length(centre) = 0 then
+  begin
+    for i:=1 to length(main[joueur]) do
+    begin
+      main[joueur,i].jouable:= True;
+    end;
+  end
+  else if centre[focus_joueur].atout=True then
+    begin
+       plus_fort:=centre[focus_joueur];
+       for i:=i to length(centre) do
+       begin
+          if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then plus_fort:=centre[i];
+       end;
+       for i:=1 to length(main[joueur])do
+       begin
+         if plus_fort.rang > main[joueur,i].rang then main[joueur,i].jouable:=True;
+         jouable_trouve:= True;
+       end;
+       if not(jouable_trouve) then
+       begin
+          for i:=1 to length(main[joueur])do
+          begin
+            if main[joueur,i].atout then
+            begin
+              jouable_trouve:= True;
+              main[joueur,i].jouable:=true;
+            end;
+          end;
+       end;
+       if not(jouable_trouve) then
+       begin
+           for i:=1 to length(main[joueur]) do
+            begin
+              main[joueur,i].jouable:= True;
+              jouable_trouve:= True;
+            end;
+       end;
+    end else
+    begin
+      for i:=1 to length(main[joueur]) do
+      begin
+        if main[joueur,i].id[2] = centre[focus_joueur].id[2] then
+          begin
+            main[joueur,i].jouable:= True;
+            jouable_trouve:= True;
+          end;
+      end;
+      if not(jouable_trouve) then
+        begin
+          for i:=1 to length(main[joueur])do
+          begin
+            if main[joueur,i].atout then
+            begin
+              for j:=1 to length(centre) do
+              begin
+                if centre[j].atout then plus_fort:=centre[j];
+                break;
+              end;
+              for j:=1 to length(centre) do
+              begin
+                if (centre[j].atout)AND(centre[j].rang < plus_fort.rang) then plus_fort:=centre[j];
+              end;
+              for j:=1 to length(main[joueur]) do
+              begin
+                if main[joueur,j].rang < plus_fort.rang then
+                begin
+                  main[joueur,j].jouable:=True;
+                  jouable_trouve:=True;
+                end;
+              end;
+              if not(jouable_trouve)then
+              begin
+              for j:=1 to length(main[joueur]) do
+                  begin
+                    if main[joueur,j].atout then
+                    begin
+                         main[joueur,j].jouable:=True;
+                         jouable_trouve:=True;
+                    end;
+                    end;
+              end;
+              break;
+              end;
+            end;
+          end;
+        if not(jouable_trouve) then
+         begin
+             for i:=1 to length(main[joueur]) do
+              begin
+                main[joueur,i].jouable:= True;
+                jouable_trouve:= True
+              end;
+         end;
+        end;
+    end;
+
+
+procedure permuter (var X,Y:carte); //procedure qui échange deux tèrmes
+VAR
+  Z:carte;
+begin
+  Z:=X;
+  X:=Y;
+  Y:=Z;
+end;
+
+
+function premierchoixcouleur (toutcouleur:string):integer;
+begin
+  if atout='0' then
+    begin
+      premierchoixcouleur:=1;
+    end
+               else
+    begin
+      premierchoixcouleur:=Pos(atout,toutcouleur);
+    end;
+end;
+
+function changementcouleur (x:integer):integer;
+begin
+  x:=x+1;
+  if x>4 then
+    begin
+      x:=1;
+    end;
+  changementcouleur:=x;
+end;
+
+
+procedure triecouleur (I:integer;
+                      couleur:string;
+                      var C:integer);
+VAR
+  couleurcarte:string;
+  J,Min:integer;
+
+begin
+  Min:=C;
+  for J:=Min to 7 do
+    begin
+      couleurcarte:=copy(main[I,J-1].id,2,1);
+      if couleurcarte=couleur then
+        begin
+          permuter (main[I,J-1],main[I,C]);
+          C:=C+1;
+
+        end;
+    end;
+end;
+
+procedure trieparcouleur();
+VAR
+  toutcouleur:string;
+  a,I,C,x:integer;
+  couleur:string;
+
+begin
+  toutcouleur:='PCTK';
+  for I:=1 to 4 do //pour faire sur les quatres joueur
+    begin
+      C:=1;
+      x:=premierchoixcouleur(toutcouleur);
+      couleur:=copy(toutcouleur,x,1);
+      for a:=1 to 4 do //pour faire les 4 couleur
+        begin
+          triecouleur(I,couleur,C);
+          x:=changementcouleur(x);
+          couleur:=copy(toutcouleur,x,1);
+        end;
+    end;
+end;
+
+procedure trieminmaxparcouleur (I,min,max:integer);
+VAR
+  J1,J2:integer;
+
+begin
+  For J1:=min to max-1 do
+    begin
+      for J2:=J1+1 to max do
+        begin
+          if (main[I,J1].rang>main[I,J2].rang) then
+            begin
+              permuter(main[I,J1],main[I,J2]);
+            end;
+        end;
+    end;
+end;
+
+procedure trierang();
+VAR
+  I,J,min,max:integer;
+  couleur1,couleur2:string;
+
+begin
+  for I:=1 to 4 do
+    begin
+      min:=1;
+      max:=1;
+      while min<8 do
+        begin
+          couleur1:=copy(main[I,min].id,2,1);
+          couleur2:=copy(main[I,max].id,2,1);
+          while (couleur1=couleur2) and (max<8) do
+            begin
+              max:=max+1;
+              couleur2:=copy(main[I,max].id,2,1);
+            end;
+          if (couleur1<>couleur2) then
+            begin
+              max:=max-1;
+            end;
+
+          if min<>max then
+            begin
+              trieminmaxparcouleur(I,min,max);
+            end;
+
+          min:=max+1;
+          max:=min;
+        end;
+    end;
+end;
+
+function melangertableau(N:integer):tableau_deck; //fonction qui mélange un tableau, N sert au nombre de mélange
+VAR
+  T:tableau_deck;
+  I,X,Y:integer;
+
+begin
+  randomize;
+  T:=deck;
+  for I:=1 to N do //dépend du nombre de mélange
+    begin
+      X:=random(31)+1;
+      Y:=random(31)+1;
+
+      permuter(T[X],T[Y]); 
+    end;
+
+  melangertableau:=T;  //la fonction renvois le tableau mélanger  (a un moment deck:=melangertableau(nombre de mélange);)
+end;
+
+procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
+                                var IndiceCarte:integer);
+//Nombredecarte => le nombre de carte à distribuer
+//PremierJoueur => le premier joueur à recevoir les cartes (de 1 à 4)
+//IndiceCarte => à quelle carte on en est dans la "pioche"
+
+{
+ quand joueur prend ba on rajoute la carte deck[21] comme premier truc!!!!
+}
+
+VAR
+  I,J:integer;
+  Chaine: string;
+  distribue: array of carte;
+begin
+  for I:=1 to 4 do
+    begin
+      setlength(distribue,nombredecarte);
+      for J:=1 to Nombredecarte do
+        begin
+          distribue[J-1]:= deck[IndiceCarte];
+          Chaine:='Joueur'+inttostr(PremierJoueur);
+          deck[IndiceCarte].pos:=Chaine;
+          distribue[J-1].pos:=Chaine;
+          IndiceCarte:=IndiceCarte+1;
+          //showmessage(inttostr(distribue[J-1].id_image));
+        end;
+      insert(distribue,main[I],1);
+
+
+      PremierJoueur:=PremierJoueur+1;
+
+      If (PremierJoueur>4) then
+        begin
+          PremierJoueur:=1;
+        end;
+    end;
+
+
+
+
+
+
+
+
+
+
+
+
+{
+for I:=1 to 4 do
+
+    begin
+      showmessage(inttostr(PremierJoueur));
+      {if preneur=PremierJoueur then
+        begin
+          for J:=1 to Nombredecarte-1 do
+            begin
+
+              SetLength(main[PremierJoueur], length(main[PremierJoueur])+1);
+              main[PremierJoueur,length(main[PremierJoueur])]:=deck[IndiceCarte];
+              Chaine:='Joueur'+inttostr(PremierJoueur);
+              deck[IndiceCarte].pos:=Chaine;
+              main[PremierJoueur,length(main[PremierJoueur])].pos:=Chaine;
+              IndiceCarte:=IndiceCarte+1;
+            end;
+        end
+                                else  }
+      //begin
+        for J:=1 to Nombredecarte do
+         begin
+           showmessage(inttostr(length(deck)));
+           showmessage(inttostr(IndiceCarte));
+           insert(deck[IndiceCarte],main[PremierJoueur],length(main[PremierJoueur])+1);
+         // SetLength(main[PremierJoueur], length(main[PremierJoueur])+1);
+
+          //main[PremierJoueur,length(main[PremierJoueur])]:=deck[IndiceCarte];
+          Chaine:='Joueur'+inttostr(PremierJoueur);
+          deck[IndiceCarte].pos:=Chaine;
+          main[PremierJoueur,length(main[PremierJoueur])].pos:=Chaine;
+          IndiceCarte:=IndiceCarte+1;
+          {showmessage(inttostr(I));
+          showmessage(inttostr(length(main[I])));}
+        // end;
+      end;
+
+      PremierJoueur:=PremierJoueur+1;
+
+      If (PremierJoueur>4) then
+        begin
+          PremierJoueur:=1;
+        end;
+      showmessage(inttostr(PremierJoueur));
+    end;
+
+
+      PremierJoueur:=PremierJoueur+1;
+
+      If (PremierJoueur>4) then
+        begin
+          PremierJoueur:=1;
+        end;
+      showmessage(inttostr(PremierJoueur));   }
+
+end;
+
+procedure miseajouratout ();
+VAR
+  I,J:integer;
+  couleurcarte:string;
+begin
+  for I:=1 to 4 do
+    begin
+      for J:=1 to 8 do
+        begin
+          couleurcarte:=copy(main[I,J].pos,2,1);
+          if couleurcarte=atout then
+            begin
+              main[I,J].atout:=true;
+            end;
+        end;
+    end;
+
+end;
+
+procedure premiere_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
+
+VAR
+  IndiceCarte,Indiceimagecarte:integer;
+begin
+  SetLength(main, 5, 0);  //j'alloue le tableau main
+  preneur:=0;
+  atout:='0';
+  IndiceCarte:=1;
+  deck:=melangertableau(3000);
+
+  distribution_4joueurs(3,PremierJoueur,IndiceCarte);
+  distribution_4joueurs(2,PremierJoueur,IndiceCarte);
+  distribution_4joueurs(3,PremierJoueur,IndiceCarte);
+
+
+  {trieparcouleur();//trie des cartes de chaques joueurs
+  trierang();    }
+
+  //affiche la mains du joueur 1
+  Form2.ImageList1.GetBitmap(main[1,0].id_image,Form2.Image2.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image3.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image4.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image5.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image6.Picture.Bitmap);
+
+  Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image7.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image8.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image9.Picture.Bitmap);
+
+end;
+
+procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
+VAR
+  IndiceCarte:integer;
+  Chaine:string;
+begin
+  SetLength(main[preneur], length(main[preneur])+1);
+  main[preneur,length(main[preneur])]:=deck[21];
+  Chaine:='Joueur'+inttostr(preneur);
+  main[preneur,length(main[preneur])].pos:=Chaine;
+  deck[21].pos:=Chaine;
+
+  IndiceCarte:=22;
+  distribution_4joueurs(3,PremierJoueur,IndiceCarte);
+  miseajouratout();
+
+  {trieparcouleur();//trie des cartes de chaques joueurs
+  trierang(); }
+
+  //affiche les cartes du joueurs 1
+  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image2.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image3.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image4.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image5.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image6.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image7.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image8.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,8].id_image,Form2.Image9.Picture.Bitmap);
+end;
+
+
+
+
+
+//Initialization du basedeck
+
 
 
 end.

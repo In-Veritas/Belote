@@ -49,6 +49,7 @@ end;
 
 procedure TForm1.FormActivate(Sender: TObject);
 begin
+  init_jeu;
   deck:=basedeck;
 end;
 
