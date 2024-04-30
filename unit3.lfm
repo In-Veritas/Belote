@@ -1,7 +1,7 @@
 object Form3: TForm3
-  Left = 3269
+  Left = 785
   Height = 500
-  Top = 558
+  Top = 301
   Width = 500
   Caption = 'Belote'
   ClientHeight = 500
@@ -365,7 +365,7 @@ object Form3: TForm3
     19E49E01B2C7BF541299FD3399F36FA91C98DBFBF73E494AF82B22EF90BDF961
     49AEFF0F50C6BDC4947591D40000000049454E44AE426082
   }
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '2.2.6.0'
   object Image1: TImage
     Left = 0
     Height = 500
@@ -2160,5 +2160,6 @@ object Form3: TForm3
     Font.Quality = fqDraft
     ParentColor = False
     ParentFont = False
+    Transparent = False
   end
 end

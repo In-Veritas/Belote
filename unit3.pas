@@ -41,7 +41,7 @@ DISTRIBUITION INITIALE
      FAIT**C'est l'array mélangé qu'on va travailler avec, sa position est 'deck'
   On fera la distruibuition initial (3-3-3-3, 2-2-2-2), on prennant les cartes du deck melangé par ordre, et on montrera la carté à prendre
      FAIT**Procedure de distribuition qui change la position des cartes de 'deck' pour 'main'
-     **Tri de la main a la fin(plus élegant)
+     FAIT**Tri de la main a la fin(plus élegant)
 CHOIX DE L'ATOUT
   On verifie qui commence pour savoir qui va dire en premier(au début tous les joueurs artificiels diront 'une'/'deux')
   Lá, on attend une action de l'utilisateur, deux bouttons vont apparaitre 'Une', 'Je Prends'
@@ -59,8 +59,6 @@ DISTRIBUITION FINALE
 
 
 Demander a iji pour couper/melanger entre parties
-
-
 
 
 

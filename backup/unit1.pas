@@ -35,9 +35,6 @@ var
   Form1: TForm1;
 
 
-
-
-
 implementation
 
 {$R *.lfm}
@@ -52,10 +49,6 @@ end;
 
 procedure TForm1.FormActivate(Sender: TObject);
 begin
-  RequireDerivedFormResource:=True;
-  Form1.Show;
-  Form1.Visible:=True;
-  Timer1.enabled:=True;
   deck:=basedeck;
 end;
 

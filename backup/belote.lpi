@@ -65,6 +65,18 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="DeckStructure"/>
       </Unit>
+      <Unit>
+        <Filename Value="unit1.lfm"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="unit2.lfm"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="unit3.lfm"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

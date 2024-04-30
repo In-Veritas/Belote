@@ -1,0 +1,36 @@
+object Form4: TForm4
+  Left = 963
+  Height = 650
+  Top = 439
+  Width = 1200
+  Caption = 'Form4'
+  ClientHeight = 650
+  ClientWidth = 1200
+  DesignTimePPI = 192
+  OnActivate = FormActivate
+  LCLVersion = '2.2.4.0'
+  object Image1: TImage
+    Left = 130
+    Height = 403
+    Top = 90
+    Width = 297
+  end
+  object Button1: TButton
+    Left = 648
+    Height = 130
+    Top = 144
+    Width = 339
+    Caption = 'Prendre'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Button2: TButton
+    Left = 648
+    Height = 136
+    Top = 312
+    Width = 339
+    Caption = 'Passer'
+    OnClick = Button2Click
+    TabOrder = 1
+  end
+end

@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 3002
+  Left = 421
   Height = 720
-  Top = 532
+  Top = 154
   Width = 1280
   Caption = 'Belote'
   ClientHeight = 720
@@ -366,7 +366,8 @@ object Form1: TForm1
     49AEFF0F50C6BDC4947591D40000000049454E44AE426082
   }
   OnActivate = FormActivate
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '2.2.6.0'
+  Visible = True
   object Image1: TImage
     Left = -2
     Height = 720
@@ -32851,7 +32852,6 @@ object Form1: TForm1
     Top = 8
   end
   object Timer1: TTimer
-    Enabled = False
     Interval = 168000
     OnTimer = Timer1Timer
     OnStartTimer = Timer1StartTimer

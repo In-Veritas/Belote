@@ -51,7 +51,10 @@ function changementcouleur (x:integer):integer;
 procedure triecouleur (I:integer;
                       couleur:string;
                       var C:integer);
+
 procedure trieparcouleur ();
+procedure trierang();
+procedure trieminmaxparcouleur (I,min,max:integer);
 procedure init_jeu;
 
 
@@ -334,7 +337,7 @@ end;
 procedure premiere_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
 
 VAR
-  IndiceCarte:integer;
+  IndiceCarte,Indiceimagecarte:integer;
 begin
   SetLength(main, 4, 0);  //j'alloue le tableau main
   preneur:=0;
@@ -345,6 +348,15 @@ begin
   distribution_4joueurs(2,PremierJoueur,IndiceCarte);
 
   trieparcouleur();//trie des cartes de chaques joueurs
+  trierang();
+
+  //affiche la mains du joueur 1
+  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image2.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image3.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image4.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image5.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image6.Picture.Bitmap);
+
 end;
 
 procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
@@ -363,6 +375,17 @@ begin
   miseajouratout();
 
   trieparcouleur();//trie des cartes de chaques joueurs
+  trierang();
+
+  //affiche les cartes du joueurs 1
+  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image2.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image3.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image4.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image5.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image6.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image7.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image8.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,8].id_image,Form2.Image9.Picture.Bitmap);
 end;
 
 function premierchoixcouleur (toutcouleur:string):integer;
@@ -430,7 +453,57 @@ begin
     end;
 end;
 
+procedure trieminmaxparcouleur (I,min,max:integer);
+VAR
+  J1,J2:integer;
 
+begin
+  For J1:=min to max-1 do
+    begin
+      for J2:=J1+1 to max do
+        begin
+          if (main[I,J1]>main[I,J2]) then
+            begin
+              permuter(main[I,J1],main[I,J2]);
+            end;
+        end;
+    end;
+end;
+
+procedure trierang();
+VAR
+  I,J,min,max:integer;
+  couleur1,couleur2:string;
+
+begin
+  for I:=1 to 4 do
+    begin
+      min:=1;
+      max:=1;
+      while min<8 do
+        begin
+          couleur1:=copy(main[I,min].id,2,1);
+          couleur2:=copy(main[I,max].id,2,1);
+          while (couleur1=couleur2) and (max<8) do
+            begin
+              max:=max+1;
+              couleur2:=copy(main[I,max].id,2,1);
+            end;
+          if (couleur1<>couleur2) then
+            begin
+              max:=max-1;
+            end;
+
+          if min<>max then
+            begin
+              trieminmaxparcouleur(I,min,max);
+            end;
+
+          min:=max+1;
+          max:=min;
+        end;
+    end;
+end;
 
 //Initialization du basedeck
 procedure init_jeu;
