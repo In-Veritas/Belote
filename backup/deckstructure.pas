@@ -49,13 +49,13 @@ procedure permuter (var X,Y:carte);
 
 function premierchoixcouleur (toutcouleur:string):integer;
 function changementcouleur (x:integer):integer;
-procedure triecouleur (I:integer;
+procedure triecouleur (I,Maximum:integer;
                       couleur:string;
                       var C:integer);
 
-procedure trieparcouleur ();
+procedure trieparcouleur (Maximum:integer);
 procedure trieminmaxparcouleur (I,min,max:integer);
-procedure trierang();
+procedure trierang(Maximum:integer);
 
 
 function melangertableau(N:integer):tableau_deck;
@@ -146,6 +146,9 @@ for i:=1 to 32 do
 begin
   basedeck[i].jouable:=false;
 end;
+atout:='0'; //j'inicie atout ici
+
+
 basedeck[1].id:='7P'; //7 de Piques
 basedeck[1].atout:=False;
 basedeck[1].rang:=9; //0 = Vallet d'atout, 1 = 9 d'atout, 2 = As, 3 = Dix, 4 = Roi, 5 = Dame, 6 = Vallet, 7 = neuf, 8 = huit, 9 = sept
@@ -200,145 +203,144 @@ basedeck[9].rang:=7;
 basedeck[9].pos:='basedeck';
 basedeck[9].id_image:=9;
 //******************
-//******************
+basedeck[32].id:='9C';
+basedeck[32].atout:=False;
+basedeck[32].rang:=7;
+basedeck[32].pos:='basedeck';
+basedeck[32].id_image:=10;
 //******************
 basedeck[10].id:='9T';
 basedeck[10].atout:=False;
 basedeck[10].rang:=7;
 basedeck[10].pos:='basedeck';
-basedeck[10].id_image:=10;
+basedeck[10].id_image:=11;
 //******************
 basedeck[11].id:='9K';
 basedeck[11].atout:=False;
 basedeck[11].rang:=7;
 basedeck[11].pos:='basedeck';
-basedeck[11].id_image:=11;
+basedeck[11].id_image:=12;
 //******************
 basedeck[12].id:='XP';   //Le ID de 10 est décrit comme X pour respecter la taille du array
 basedeck[12].atout:=False;
 basedeck[12].rang:=3;
 basedeck[12].pos:='basedeck';
-basedeck[12].id_image:=12;
+basedeck[12].id_image:=13;
 //******************
 basedeck[13].id:='XC';
 basedeck[13].atout:=False;
 basedeck[13].rang:=3;
 basedeck[13].pos:='basedeck';
-basedeck[13].id_image:=13;
+basedeck[13].id_image:=14;
 //******************
 basedeck[14].id:='XT';
 basedeck[14].atout:=False;
 basedeck[14].rang:=3;
 basedeck[14].pos:='basedeck';
-basedeck[14].id_image:=14;
+basedeck[14].id_image:=15;
 //******************
 basedeck[15].id:='XK';
 basedeck[15].atout:=False;
 basedeck[15].rang:=3;
 basedeck[15].pos:='basedeck';
-basedeck[15].id_image:=15;
+basedeck[15].id_image:=16;
 //******************
 basedeck[16].id:='VP';
 basedeck[16].atout:=False;
 basedeck[16].rang:=6;
 basedeck[16].pos:='basedeck';
-basedeck[16].id_image:=16;
+basedeck[16].id_image:=17;
 //******************
 basedeck[17].id:='VC';
 basedeck[17].atout:=False;
 basedeck[17].rang:=6;
 basedeck[17].pos:='basedeck';
-basedeck[17].id_image:=17;
+basedeck[17].id_image:=18;
 //******************
 basedeck[18].id:='VT';
 basedeck[18].atout:=False;
 basedeck[18].rang:=6;
 basedeck[18].pos:='basedeck';
-basedeck[18].id_image:=18;
+basedeck[18].id_image:=19;
 //******************
 basedeck[19].id:='VK';
 basedeck[19].atout:=False;
 basedeck[19].rang:=6;
 basedeck[19].pos:='basedeck';
-basedeck[19].id_image:=19;
+basedeck[19].id_image:=20;
 //******************
 basedeck[20].id:='DP';
 basedeck[20].atout:=False;
 basedeck[20].rang:=5;
 basedeck[20].pos:='basedeck';
-basedeck[20].id_image:=20;
+basedeck[20].id_image:=21;
 //******************
 basedeck[21].id:='DC';
 basedeck[21].atout:=False;
 basedeck[21].rang:=5;
 basedeck[21].pos:='basedeck';
-basedeck[21].id_image:=21;
+basedeck[21].id_image:=22;
 //******************
 basedeck[22].id:='DT';
 basedeck[22].atout:=False;
 basedeck[22].rang:=5;
 basedeck[22].pos:='basedeck';
-basedeck[22].id_image:=22;
+basedeck[22].id_image:=23;
 //******************
 basedeck[23].id:='DK';
 basedeck[23].atout:=False;
 basedeck[23].rang:=5;
 basedeck[23].pos:='basedeck';
-basedeck[23].id_image:=23;
+basedeck[23].id_image:=24;
 //******************
 basedeck[24].id:='RP';
 basedeck[24].atout:=False;
 basedeck[24].rang:=4;
 basedeck[24].pos:='basedeck';
-basedeck[24].id_image:=24;
+basedeck[24].id_image:=25;
 //******************
 basedeck[25].id:='RC';
 basedeck[25].atout:=False;
 basedeck[25].rang:=4;
 basedeck[25].pos:='basedeck';
-basedeck[25].id_image:=25;
+basedeck[25].id_image:=26;
 //******************
 basedeck[26].id:='RT';
 basedeck[26].atout:=False;
 basedeck[26].rang:=4;
 basedeck[26].pos:='basedeck';
-basedeck[26].id_image:=26;
+basedeck[26].id_image:=27;
 //******************
 basedeck[27].id:='RK';
 basedeck[27].atout:=False;
 basedeck[27].rang:=4;
 basedeck[27].pos:='basedeck';
-basedeck[27].id_image:=27;
+basedeck[27].id_image:=28;
 //******************
 basedeck[28].id:='AP';
 basedeck[28].atout:=False;
-basedeck[28].rang:=3;
+basedeck[28].rang:=2;
 basedeck[28].pos:='basedeck';
-basedeck[28].id_image:=28;
+basedeck[28].id_image:=29;
 //******************
 basedeck[29].id:='AC';
 basedeck[29].atout:=False;
-basedeck[29].rang:=3;
+basedeck[29].rang:=2;
 basedeck[29].pos:='basedeck';
-basedeck[29].id_image:=29;
+basedeck[29].id_image:=30;
 //******************
 basedeck[30].id:='AT';
 basedeck[30].atout:=False;
-basedeck[30].rang:=3;
+basedeck[30].rang:=2;
 basedeck[30].pos:='basedeck';
-basedeck[30].id_image:=30;
+basedeck[30].id_image:=31;
 //******************
 basedeck[31].id:='AK';
 basedeck[31].atout:=False;
-basedeck[31].rang:=3;
+basedeck[31].rang:=2;
 basedeck[31].pos:='basedeck';
-basedeck[31].id_image:=31;
+basedeck[31].id_image:=32;
 //******************
-basedeck[32].id:='9C';
-basedeck[32].atout:=False;
-basedeck[32].rang:=7;
-basedeck[32].pos:='basedeck';
-basedeck[32].id_image:=32;
 
 end;
 
@@ -533,7 +535,7 @@ begin
 end;
 
 
-procedure triecouleur (I:integer;
+procedure triecouleur (I,Maximum:integer;
                       couleur:string;
                       var C:integer);
 VAR
@@ -542,19 +544,18 @@ VAR
 
 begin
   Min:=C;
-  for J:=Min to 7 do
+  for J:=Min to Maximum do
     begin
-      couleurcarte:=copy(main[I,J-1].id,2,1);
+      couleurcarte:=main[I,J].id[2];
       if couleurcarte=couleur then
         begin
-          permuter (main[I,J-1],main[I,C]);
+          permuter (main[I,J],main[I,C]);
           C:=C+1;
-
         end;
     end;
 end;
 
-procedure trieparcouleur();
+procedure trieparcouleur(Maximum:integer);
 VAR
   toutcouleur:string;
   a,I,C,x:integer;
@@ -564,12 +565,12 @@ begin
   toutcouleur:='PCTK';
   for I:=1 to 4 do //pour faire sur les quatres joueur
     begin
-      C:=1;
+      C:=0;
       x:=premierchoixcouleur(toutcouleur);
       couleur:=copy(toutcouleur,x,1);
-      for a:=1 to 4 do //pour faire les 4 couleur
+      for a:=1 to 4 do
         begin
-          triecouleur(I,couleur,C);
+          triecouleur(I,Maximum,couleur,C);
           x:=changementcouleur(x);
           couleur:=copy(toutcouleur,x,1);
         end;
@@ -593,21 +594,21 @@ begin
     end;
 end;
 
-procedure trierang();
+procedure trierang(Maximum:integer);
 VAR
-  I,J,min,max:integer;
+  I,min,max:integer;
   couleur1,couleur2:string;
 
 begin
   for I:=1 to 4 do
     begin
-      min:=1;
-      max:=1;
-      while min<8 do
+      min:=0;
+      max:=0;
+      while min<Maximum do
         begin
           couleur1:=copy(main[I,min].id,2,1);
           couleur2:=copy(main[I,max].id,2,1);
-          while (couleur1=couleur2) and (max<8) do
+          while (couleur1=couleur2) and (max<Maximum) do
             begin
               max:=max+1;
               couleur2:=copy(main[I,max].id,2,1);
@@ -653,103 +654,48 @@ procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
 //PremierJoueur => le premier joueur à recevoir les cartes (de 1 à 4)
 //IndiceCarte => à quelle carte on en est dans la "pioche"
 
-{
- quand joueur prend ba on rajoute la carte deck[21] comme premier truc!!!!
-}
 
 VAR
   I,J:integer;
   Chaine: string;
   distribue: array of carte;
 begin
-  for I:=1 to 4 do
+  for I:=1 to 4 do //distribue aux 4 joueurs
     begin
-      setlength(distribue,nombredecarte);
-      for J:=1 to Nombredecarte do
+      setlength(distribue,nombredecarte); //on donne les dimensions du tableau alternatif
+      If preneur<>PremierJoueur then  //si ce joueur n'est pas preneur
         begin
-          distribue[J-1]:= deck[IndiceCarte];
-          Chaine:='Joueur'+inttostr(PremierJoueur);
-          deck[IndiceCarte].pos:=Chaine;
-          distribue[J-1].pos:=Chaine;
-          IndiceCarte:=IndiceCarte+1;
-          //showmessage(inttostr(distribue[J-1].id_image));
-        end;
-      insert(distribue,main[I],1);
-
-
-      PremierJoueur:=PremierJoueur+1;
-
-      If (PremierJoueur>4) then
-        begin
-          PremierJoueur:=1;
-        end;
-    end;
-
-
-
-
-
-
-
-
-
-
-
-
-{
-for I:=1 to 4 do
-
-    begin
-      showmessage(inttostr(PremierJoueur));
-      {if preneur=PremierJoueur then
-        begin
-          for J:=1 to Nombredecarte-1 do
+          for J:=1 to Nombredecarte do     //on distribue les carte normalement
             begin
-
-              SetLength(main[PremierJoueur], length(main[PremierJoueur])+1);
-              main[PremierJoueur,length(main[PremierJoueur])]:=deck[IndiceCarte];
+              distribue[J-1]:= deck[IndiceCarte];  //J-1 car distibue commance à l'indice 0
               Chaine:='Joueur'+inttostr(PremierJoueur);
-              deck[IndiceCarte].pos:=Chaine;
-              main[PremierJoueur,length(main[PremierJoueur])].pos:=Chaine;
-              IndiceCarte:=IndiceCarte+1;
+              deck[IndiceCarte].pos:=Chaine;            //on change l'état
+              distribue[J-1].pos:=Chaine;
+              IndiceCarte:=IndiceCarte+1;  //on augmente l'indice de la carte
             end;
         end
-                                else  }
-      //begin
-        for J:=1 to Nombredecarte do
-         begin
-           showmessage(inttostr(length(deck)));
-           showmessage(inttostr(IndiceCarte));
-           insert(deck[IndiceCarte],main[PremierJoueur],length(main[PremierJoueur])+1);
-         // SetLength(main[PremierJoueur], length(main[PremierJoueur])+1);
+                               else   //SINON
+        begin
+          distribue[0]:=deck[21];    //la première carte qu'on lui donne c'est la 21ème toujours
+          for J:=2 to Nombredecarte do         //on lui donne une carte de moins et on suit lamême logique
+            begin
+              distribue[J-1]:= deck[IndiceCarte];
+              Chaine:='Joueur'+inttostr(PremierJoueur);
+              deck[IndiceCarte].pos:=Chaine;
+              distribue[J-1].pos:=Chaine;
+              IndiceCarte:=IndiceCarte+1;
+            end;
+        end;
+      insert(distribue,main[PremierJoueur],0);   //on 'insert' les carte distribuer dans la mains du joueur
 
-          //main[PremierJoueur,length(main[PremierJoueur])]:=deck[IndiceCarte];
-          Chaine:='Joueur'+inttostr(PremierJoueur);
-          deck[IndiceCarte].pos:=Chaine;
-          main[PremierJoueur,length(main[PremierJoueur])].pos:=Chaine;
-          IndiceCarte:=IndiceCarte+1;
-          {showmessage(inttostr(I));
-          showmessage(inttostr(length(main[I])));}
-        // end;
-      end;
+      PremierJoueur:=PremierJoueur+1; //On change de joueur
 
-      PremierJoueur:=PremierJoueur+1;
-
-      If (PremierJoueur>4) then
+      If (PremierJoueur>4) then    //on vérifie qu'il dépasse pas 4
         begin
           PremierJoueur:=1;
         end;
-      showmessage(inttostr(PremierJoueur));
+
     end;
-
-
-      PremierJoueur:=PremierJoueur+1;
-
-      If (PremierJoueur>4) then
-        begin
-          PremierJoueur:=1;
-        end;
-      showmessage(inttostr(PremierJoueur));   }
 
 end;
 
@@ -775,7 +721,7 @@ end;
 procedure premiere_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
 
 VAR
-  IndiceCarte,Indiceimagecarte:integer;
+  IndiceCarte:integer;
 begin
   etat:='choix';
 
@@ -786,17 +732,23 @@ begin
   deck:=melangertableau(3000);
 
   distribution_4joueurs(3,PremierJoueur,IndiceCarte);
+  distribution_4joueurs(2,PremierJoueur,IndiceCarte);
+  //faut faire les 2 distribution avant parce que vu qu'on utilise la fct insert ça pousse les image
+  //et donc après c'est plus les bon indices
+
+  trieparcouleur(4);  //5carte-1 car on commence à 0
+  trierang(4);
+
   Form2.ImageList1.GetBitmap(main[1,0].id_image,Form2.Image2.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image3.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image4.Picture.Bitmap);
-  distribution_4joueurs(2,PremierJoueur,IndiceCarte);
   Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image5.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image6.Picture.Bitmap);
   Form2.Timer1.Enabled:=True;
+
   {trieparcouleur();//trie des cartes de chaques joueurs
   trierang();    }
 
-  //affiche la mains du joueur 1
 
   Form2.Image18.Visible:=True;
   Form2.ImageList1.GetBitmap(deck[21].id_image,Form2.Image18.Picture.Bitmap);
@@ -807,33 +759,24 @@ end;
 procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
 VAR
   IndiceCarte:integer;
-  Chaine:string;
-  carte_prise: array of carte;
 begin
-  SetLength(carte_prise,1);
-  carte_prise[0]:=deck[21];
-  insert(carte_prise,main[preneur],length(main[preneur]));
-  Chaine:='Joueur'+inttostr(preneur);
-  main[preneur,length(main[preneur])].pos:=Chaine;
-  deck[21].pos:=Chaine;
 
   IndiceCarte:=22;
   distribution_4joueurs(3,PremierJoueur,IndiceCarte);
-  miseajouratout();
 
-  {trieparcouleur();//trie des cartes de chaques joueurs
+  {miseajouratout();
   trierang(); }
 
   //affiche les cartes du joueurs 1
+  trieparcouleur(7);
   Form2.ImageList1.GetBitmap(main[1,0].id_image,Form2.Image2.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image3.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image3.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image4.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image5.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image6.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image7.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image8.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image9.Picture.Bitmap);
-  showmessage(atout);
 
 
 end;
@@ -869,18 +812,21 @@ begin
              end;
            deck[21].pos:='main';
            preneur:=I;
-           deuxieme_distribution(focus_joueur);
+           deuxieme_distribution(joueurquiprend);
            Form2.Image18.Visible:=False;
            break;
 
       end;
+
       joueurquiprend:=joueurquiprend+1;
       if joueurquiprend=5 then
         begin
           joueurquiprend:=1;
         end;
+
     end;
    //Deux
+
    if not(pris) then
    begin
      for I:=1 to 4 do
@@ -906,10 +852,12 @@ begin
              end;
            deck[21].pos:='main';
            preneur:=I;
-           deuxieme_distribution(focus_joueur);
+           deuxieme_distribution(joueurquiprend);
            Form2.Image18.Visible:=False;
            break;
       end;
+
+
       joueurquiprend:=joueurquiprend+1;
       if joueurquiprend=5 then
         begin

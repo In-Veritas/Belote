@@ -1,0 +1,36 @@
+object Form4: TForm4
+  Left = 1011
+  Height = 317
+  Top = 967
+  Width = 594
+  Caption = 'Form4'
+  ClientHeight = 317
+  ClientWidth = 594
+  OnShow = FormShow
+  LCLVersion = '3.2.0.0'
+  object Image1: TImage
+    Left = 65
+    Height = 202
+    Top = 45
+    Width = 148
+    Proportional = True
+  end
+  object Button1: TButton
+    Left = 324
+    Height = 65
+    Top = 72
+    Width = 170
+    Caption = 'Prendre'
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 324
+    Height = 68
+    Top = 156
+    Width = 170
+    Caption = 'Passer'
+    TabOrder = 1
+    OnClick = Button2Click
+  end
+end

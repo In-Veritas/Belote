@@ -104,10 +104,6 @@ begin
 
 
 
-
-
-
-
 end;
 
 
@@ -124,8 +120,6 @@ begin
     end;
 end;
 
-
-
 procedure TForm2.Image10Click(Sender: TObject);
 begin
   if etat='choix' then
@@ -137,11 +131,6 @@ begin
     Image10.Enabled:=False;
   end;
 end;
-
-
-
-
-
 
 procedure TForm2.Image4Click(Sender: TObject);
 VAR
@@ -230,6 +219,7 @@ begin
   Form2.ImageList1.GetBitmap(0,Form2.Image5.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(0,Form2.Image6.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(0,Form2.Image18.Picture.Bitmap);
+
   focus_joueur:=1;
   etat:='choix';
   Form2.Hint:='Cliquez sur le tapis pour commencer';
