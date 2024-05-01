@@ -32,6 +32,7 @@ var
   plie1: tableau_plie;
   plie2: tableau_plie;
   centre: tableau_centre;
+
   // Premier joueur/Joueur qui joue en premier
   focus_joueur: integer;
   preneur: integer;
@@ -39,6 +40,8 @@ var
   score1: integer;
   score2: integer;
   etat:string;
+  cartes_joues:integer;
+  manche:integer;
 
 
 procedure init_jeu;
@@ -64,6 +67,8 @@ procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
 procedure premiere_distribution (PremierJoueur:integer);
 procedure deuxieme_distribution (PremierJoueur:integer);
 procedure debut_manche(joueur: integer);
+procedure debut_jeu;
+procedure fin_jeu(joueur_preneur:integer; dix_de_dern, belote:boolean);
 
 
 
@@ -89,7 +94,7 @@ si not pris
          joeurquiprend va etre focusjoueur
         if elif pour chaque cas de joueur}
 
-{etat debut
+{**FAIT etat debut
 
         verifie focus joueur
         faire boucle 1-8
@@ -115,7 +120,7 @@ Ouvre le form3 et compte le plie de lequipe qui a pris
 
 implementation
 
-USES Unit2, unit4, unit5;
+USES Unit2, unit4, unit5, unit6;
 
 
 
@@ -142,6 +147,8 @@ procedure init_jeu;
 var
   i: integer;
 begin
+cartes_joues:=0;
+manche:=1;
 for i:=1 to 32 do
 begin
   basedeck[i].jouable:=false;
@@ -350,8 +357,11 @@ var i,j: integer;
     plus_fort: carte;
     demande: char;
     joueur_gagnant: integer;
+    dern:boolean;
+    nom_joueur: string;
 begin
   atout_trouve:=false;
+  dern:=false;
   //En cas d'atout
   for i:=1 to 4 do
     begin
@@ -384,16 +394,55 @@ begin
        for i:=1 to 4 do
          begin
               Insert(centre_fintour[i], plie2,length(plie2));
+              Form2.ImageList1.GetBitmap(0,Form2.Image19.Picture.Bitmap);
          end;
     end else
     begin
          for i:=1 to 4 do
          begin
               Insert(centre_fintour[i], plie1,length(plie1));
+              Form2.ImageList1.GetBitmap(0,Form2.Image20.Picture.Bitmap);
          end;
     end;
   focus_joueur:=joueur_gagnant;
   Delete(centre,1,4);
+  if joueur_gagnant=1 then
+  begin
+     Showmessage('Vous avez gagné la manche!');
+  end else if joueur_gagnant=2 then
+  begin
+     Showmessage('Giovanni a remporté la manche');
+  end else if joueur_gagnant=3 then
+  begin
+     Showmessage('Paul a gagné la manche');
+  end else
+  begin
+    Showmessage('Martiniel a gagné la manche');
+  end;
+    form2.timer1.Enabled:=True;
+
+  manche:=manche+1;
+  cartes_joues:=0;
+  Form2.Image15.Visible:=False;
+  Form2.Image16.Visible:=False;
+  Form2.Image17.Visible:=False;
+  Form2.Image14.Visible:=False;
+  if manche<=8 then
+  begin
+     debut_jeu;
+  end
+  else
+  begin
+    if joueur_gagnant=preneur then
+    begin
+       dern:=true;
+    end;
+    showmessage('Fin du jeu');
+    form6.show;
+    form2.hide;
+    fin_jeu(preneur, dern, false);
+  end;
+
 end;
 
 //Vérifie quelles cartes dans la main sont jouables, et donne un array dynamique de booleans pour dire quels sont jouables
@@ -406,7 +455,7 @@ begin
 jouable_trouve:= false;
 if length(centre) = 0 then
   begin
-    for i:=1 to length(main[joueur]) do
+    for i:=0 to length(main[joueur]) do
     begin
       main[joueur,i].jouable:= True;
     end;
@@ -499,6 +548,18 @@ if length(centre) = 0 then
               end;
          end;
         end;
+    if joueur<>1 then
+     begin
+       for i:=0 to length(main[joueur]) do
+       begin
+         if main[joueur,i].jouable      then
+         begin
+          Form2.jouercarte(main[joueur,i],joueur);
+          break;
+         end;
+
+       end;
+     end;
     end;
 
 
@@ -554,7 +615,6 @@ begin
         end;
     end;
 end;
-
 procedure trieparcouleur(Maximum:integer);
 VAR
   toutcouleur:string;
@@ -576,7 +636,6 @@ begin
         end;
     end;
 end;
-
 procedure trieminmaxparcouleur (I,min,max:integer);
 VAR
   J1,J2:integer;
@@ -769,6 +828,8 @@ begin
 
   //affiche les cartes du joueurs 1
   trieparcouleur(7);
+  trierang(7);
+
   Form2.ImageList1.GetBitmap(main[1,0].id_image,Form2.Image2.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image3.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image4.Picture.Bitmap);
@@ -805,15 +866,21 @@ begin
       begin
            for j:=1 to 32 do
              begin
-               if deck[i].id[2]=deck[20].id[2] then
+               if deck[i].id[2]=deck[21].id[2] then
                begin
                  deck[i].atout:=True;
+                 if deck[i].rang=6 then deck[i].rang:=0;
+                 if deck[i].rang=7 then deck[i].rang:=1;
                end;
              end;
            deck[21].pos:='main';
+           atout:=deck[21].id[2];
+           Form2.label2.caption:='Atout: '+atout;
            preneur:=I;
            deuxieme_distribution(joueurquiprend);
            Form2.Image18.Visible:=False;
+           etat:='debut';
+           debut_jeu;
            break;
 
       end;
@@ -854,6 +921,8 @@ begin
            preneur:=I;
            deuxieme_distribution(joueurquiprend);
            Form2.Image18.Visible:=False;
+           etat:='debut';
+           debut_jeu;
            break;
       end;
 
@@ -868,7 +937,84 @@ begin
    end;
 end;
 
+procedure debut_jeu;
 
+var
+i: integer;
+begin
+    form2.label3.caption:='Manche: ' + inttostr(manche);
+    cartes_jouables(focus_joueur);
+    Form2.image2.Enabled:=True;
+    Form2.image3.Enabled:=True;
+    Form2.image4.Enabled:=True;
+    Form2.image5.Enabled:=True;
+    Form2.image6.Enabled:=True;
+    Form2.image7.Enabled:=True;
+    Form2.image8.Enabled:=True;
+    Form2.image9.Enabled:=True;
+end;
+
+procedure fin_jeu(joueur_preneur:integer; dix_de_dern, belote:boolean);
+var
+plie_a_compter: tableau_plie;
+i, count, points: integer;
+
+
+begin
+  count:=0;
+  if joueur_preneur < 3 then
+  begin
+    plie_a_compter:=plie1;
+  end else
+  begin
+    plie_a_compter:=plie2;
+  end;
+  for i:=0 to length(plie_a_compter) do
+  begin
+       if plie_a_compter[i].rang=0 then
+       begin
+         points:=20;
+       end else if plie_a_compter[i].rang=1 then
+       begin
+           points:=14;
+       end else if plie_a_compter[i].rang=2 then
+       begin
+             points:=11;
+            end else if plie_a_compter[i].rang=3 then
+       begin
+                points:=10;
+                 end else if plie_a_compter[i].rang=4 then
+       begin
+                   points:=4;
+                      end else if plie_a_compter[i].rang=5 then
+       begin
+                       points:=3
+                           end else if plie_a_compter[i].rang=6 then
+       begin
+                          points:=2;
+       end else
+       begin
+         points:=0;
+       end;
+
+
+       count:=count+points;
+       Form6.label1.caption:='Points: '+ inttostr(count);
+
+  end;
+  if dix_de_dern then count:=count+10;
+  if belote then count:=count+20;
+  if count >  81 then
+  begin
+    Form6.ImageList1.GetBitmap(1,Form6.Image1.Picture.Bitmap);
+    Form6.label2.caption:='Vous avez gagné la partie!';
+  end
+  else
+  begin
+    Form6.ImageList1.GetBitmap(0,Form6.Image1.Picture.Bitmap);
+    Form6.label2.caption:='Vous etes dedans!';
+  end;
+end;
 
 //Initialization du basedeck
 

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  uplaysound, deckstructure, Unit2, Unit3;
+  uplaysound, deckstructure, Unit2, Unit3, unit6;
 
 type
 

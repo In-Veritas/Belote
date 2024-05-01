@@ -37,6 +37,13 @@ type
     Image8: TImage;
     Image9: TImage;
     ImageList1: TImageList;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
     MainMenu1: TMainMenu;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -56,6 +63,8 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Image2Click(Sender: TObject);
+    procedure Timer1StartTimer(Sender: TObject);
+
 
   private
 
@@ -84,26 +93,74 @@ begin
 
   if joueur=1 then
     begin
+      Form2.Image14.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image14.Picture.Bitmap);
+      image2.Enabled:=False;
+      image3.Enabled:=False;
+      image4.Enabled:=False;
+      image5.Enabled:=False;
+      image6.Enabled:=False;
+      image7.Enabled:=False;
+      image8.Enabled:=False;
+      image9.Enabled:=False;
+      cartes_joues:=cartes_joues+1;
+      if cartes_joues=4 then
+      begin
+        fin_tour(centre,focus_joueur);
+      end                 else
+      begin
+        cartes_jouables(2);
+      end;
+
     end;
+
+
+
 
   if joueur=4 then
     begin
+      Form2.Image17.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image17.Picture.Bitmap);
+      cartes_joues:=cartes_joues+1;
+      if cartes_joues=4 then
+      begin
+        fin_tour(centre,focus_joueur);
+        cartes_joues:=0;
+      end                 else
+      begin
+        cartes_jouables(1);
+      end;
     end;
 
   if joueur=3 then
     begin
+      Form2.Image16.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image15.Picture.Bitmap);
+      cartes_joues:=cartes_joues+1;
+       if cartes_joues=4 then
+      begin
+        fin_tour(centre,focus_joueur);
+        cartes_joues:=0;
+      end                 else
+      begin
+        cartes_jouables(4);
+      end;
     end;
 
   if joueur=2 then
     begin
+      Form2.Image15.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image16.Picture.Bitmap);
+      cartes_joues:=cartes_joues+1;
+       if cartes_joues=4 then
+       begin
+         fin_tour(centre,focus_joueur);
+         cartes_joues:=0;
+       end                 else
+      begin
+        cartes_jouables(3);
+      end;
     end;
-
-
-
 end;
 
 
@@ -237,6 +294,12 @@ begin
       Image2.visible:= False;
     end;
 end;
+
+procedure TForm2.Timer1StartTimer(Sender: TObject);
+begin
+  Application.processmessages;
+end;
+
 
 
 end.

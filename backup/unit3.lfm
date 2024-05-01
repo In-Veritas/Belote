@@ -1,11 +1,11 @@
 object Form3: TForm3
-  Left = 997
+  Left = 1902
   Height = 497
-  Top = 340
+  Top = 329
   Width = 500
   Caption = 'Belote'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 497
+  ClientWidth = 500
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
     1A0A0000000D49484452000001000000010008060000005C72A86600002C4549

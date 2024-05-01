@@ -5,13 +5,15 @@ unit Unit5;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls,deckstructure;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,unit2
+  ,deckstructure;
 
 type
 
   { TForm5 }
 
   TForm5 = class(TForm)
+    Image1: TImage;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -37,26 +39,30 @@ implementation
 
 procedure TForm5.Panel4Click(Sender: TObject);
 begin
-  atout:='C';
-  Form5.Hide;
+  atout:='Coeur';
+  Form5.Close;
+  Form2.label2.caption:='Atout: '+atout;
 end;
 
 procedure TForm5.Panel1Click(Sender: TObject);
 begin
-  atout:='P';
-  Form5.Hide;
+  atout:='Piques';
+  Form5.Close;
+  Form2.label2.caption:='Atout: '+atout;
 end;
 
 procedure TForm5.Panel2Click(Sender: TObject);
 begin
-  atout:='K';
-  Form5.Hide;
+  tout:='Carreaux';
+  Form5.Close;
+  Form2.label2.caption:='Atout: '+atout;
 end;
 
 procedure TForm5.Panel3Click(Sender: TObject);
 begin
-  atout:='T';
-  Form5.Hide;
+  atout:='Trefle';
+  Form5.Close;
+  Form2.label2.caption:='Atout: '+atout;
 end;
 
 end.

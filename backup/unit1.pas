@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  uplaysound, deckstructure, Unit2, Unit3;
+  uplaysound, deckstructure, Unit2, Unit3, unit6;
 
 type
 
@@ -46,6 +46,7 @@ begin
    Form1.hide;
    init_jeu;
    Form2.show;
+   Form6.show;
 end;
 
 procedure TForm1.FormActivate(Sender: TObject);
