@@ -44,7 +44,7 @@ var
 procedure init_jeu;
 procedure choix_atout;
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);
-procedure cartes_jouables(joueur:integer; var jouables: array of boolean);
+procedure cartes_jouables(joueur:integer);
 procedure permuter (var X,Y:carte);
 
 function premierchoixcouleur (toutcouleur:string):integer;
@@ -63,6 +63,7 @@ procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
                                 var IndiceCarte:integer);
 procedure premiere_distribution (PremierJoueur:integer);
 procedure deuxieme_distribution (PremierJoueur:integer);
+procedure debut_manche(joueur: integer);
 
 
 
@@ -72,7 +73,7 @@ procedure deuxieme_distribution (PremierJoueur:integer);
 
 
 
-{etat choix d'aout
+{**FAIT etat choix d'aout
 
 verifie focus joueur
 variable pris: boolean
@@ -114,60 +115,27 @@ Ouvre le form3 et compte le plie de lequipe qui a pris
 
 implementation
 
-USES Unit2, unit4;
+USES Unit2, unit4, unit5;
 
-procedure choix_atout;
-var
-  pris:boolean;
-  joueurquiprend:integer;
-  I:integer;
+
+
+procedure debut_manche(joueur: integer);
+var I:integer;
 begin
-  pris:=false;
-  joueurquiprend:=focus_joueur;
   for I:=1 to 4 do
     begin
-      if joueurquiprend=1 then
-        begin
-          form4.showmodal;
-          showmessage('');
-          if atout<>'0' then pris:=true;
-        end
+       if joueur=1 then
+       begin
+         cartes_jouables(joueur);
+       end         else
+       begin
+         cartes_jouables(joueur);
+         //jouer_carte_ia();
+       end;
+       joueur:=joueur+1;
+       if joueur=5 then joueur := 1;
 
-                          else
-        begin
-          //Choix de la IA
-        end;
-      if pris then break;
-      joueurquiprend:=joueurquiprend+1;
-      if joueurquiprend=5 then
-        begin
-          joueurquiprend:=4;
-        end;
     end;
-   //Deux
-   if not pris then
-   begin
-     for I:=1 to 4 do
-     begin
-       if joueurquiprend=1 then
-        begin
-          form5.showmodal;
-          showmessage('');
-          if atout<>'0' then pris:=true;
-        end
-
-                          else
-        begin
-          //Choix de la IA 2
-        end;
-      if pris then break;
-      joueurquiprend:=joueurquiprend+1;
-      if joueurquiprend=5 then
-        begin
-          joueurquiprend:=4;
-        end;
-     end;
-   end;
 end;
 
 procedure init_jeu;
@@ -374,7 +342,6 @@ basedeck[32].id_image:=32;
 
 end;
 
-
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
 var i,j: integer;
     atout_trouve: boolean;
@@ -428,30 +395,12 @@ begin
 end;
 
 //Vérifie quelles cartes dans la main sont jouables, et donne un array dynamique de booleans pour dire quels sont jouables
-procedure cartes_jouables(joueur:integer; var jouables: array of boolean);
+procedure cartes_jouables(joueur:integer);
 var
 i,j: integer;
 plus_fort: carte;
 jouable_trouve:boolean;
 begin
-{Primeiro voce ve se ja tem cartas na mesa
-Se sim, voce olha pra primeira carta, e pega o naipe
-  se o naipe for atout:
-          Se jogar um atout mais forte é possivel:
-             os atous mais fortes sao jogaveis
-          senao qualquer carta de atout vale]
-  senão, voce só pode jogar o naipe da primeira carta
-         se voce tiver o naipe da primeira carta:
-            todas as cartas desse naipe são jogaveis
-         se voce nao tiver o naipe da primeira carta:
-             se tem atout na mão:
-                verificar os atouts na mesa:
-                          Pegar o atout mais forte na mesa
-                                Se tiver um atout na mão, mais forte que os da mesa, ele é jogavel
-                                senão, todos os atouts são jogaveis
-             senã :
-                todas as cartas são jogaveis
-Se não, todas as cartas são jogaveis}
 jouable_trouve:= false;
 if length(centre) = 0 then
   begin
@@ -828,6 +777,8 @@ procedure premiere_distribution (PremierJoueur:integer);//en variable globale pe
 VAR
   IndiceCarte,Indiceimagecarte:integer;
 begin
+  etat:='choix';
+
   SetLength(main, 5, 0);  //j'alloue le tableau main
   preneur:=0;
   atout:='0';
@@ -835,23 +786,21 @@ begin
   deck:=melangertableau(3000);
 
   distribution_4joueurs(3,PremierJoueur,IndiceCarte);
+  Form2.ImageList1.GetBitmap(main[1,0].id_image,Form2.Image2.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image3.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image4.Picture.Bitmap);
   distribution_4joueurs(2,PremierJoueur,IndiceCarte);
-  distribution_4joueurs(3,PremierJoueur,IndiceCarte);
-
-
+  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image5.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image6.Picture.Bitmap);
+  Form2.Timer1.Enabled:=True;
   {trieparcouleur();//trie des cartes de chaques joueurs
   trierang();    }
 
   //affiche la mains du joueur 1
-  Form2.ImageList1.GetBitmap(main[1,0].id_image,Form2.Image2.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image3.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image4.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image5.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image6.Picture.Bitmap);
 
-  Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image7.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image8.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image9.Picture.Bitmap);
+  Form2.Image18.Visible:=True;
+  Form2.ImageList1.GetBitmap(deck[21].id_image,Form2.Image18.Picture.Bitmap);
+  Form2.Enabled:=True;
 
 end;
 
@@ -859,9 +808,11 @@ procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale pe
 VAR
   IndiceCarte:integer;
   Chaine:string;
+  carte_prise: array of carte;
 begin
-  SetLength(main[preneur], length(main[preneur])+1);
-  main[preneur,length(main[preneur])]:=deck[21];
+  SetLength(carte_prise,1);
+  carte_prise[0]:=deck[21];
+  insert(carte_prise,main[preneur],length(main[preneur]));
   Chaine:='Joueur'+inttostr(preneur);
   main[preneur,length(main[preneur])].pos:=Chaine;
   deck[21].pos:=Chaine;
@@ -874,17 +825,100 @@ begin
   trierang(); }
 
   //affiche les cartes du joueurs 1
-  Form2.ImageList1.GetBitmap(main[1,1].id_image,Form2.Image2.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,0].id_image,Form2.Image2.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image3.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image4.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image5.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image6.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image7.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image8.Picture.Bitmap);
-  Form2.ImageList1.GetBitmap(main[1,8].id_image,Form2.Image9.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,2].id_image,Form2.Image4.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,3].id_image,Form2.Image5.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,4].id_image,Form2.Image6.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image7.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image8.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image9.Picture.Bitmap);
+  showmessage(atout);
+
+
 end;
 
+procedure choix_atout;
+var
+  pris:boolean;
+  joueurquiprend:integer;
+  I,J:integer;
+begin
+  pris:=false;
+  joueurquiprend:=focus_joueur;
+  for I:=1 to 4 do
+    begin
+      if joueurquiprend=1 then
+        begin
+          form4.showmodal;
+          if atout<>'0' then pris:=true;
+        end
 
+                          else
+        begin
+          //Choix de la IA
+        end;
+      if pris then
+      begin
+           for j:=1 to 32 do
+             begin
+               if deck[i].id[2]=deck[20].id[2] then
+               begin
+                 deck[i].atout:=True;
+               end;
+             end;
+           deck[21].pos:='main';
+           preneur:=I;
+           deuxieme_distribution(focus_joueur);
+           Form2.Image18.Visible:=False;
+           break;
+
+      end;
+      joueurquiprend:=joueurquiprend+1;
+      if joueurquiprend=5 then
+        begin
+          joueurquiprend:=1;
+        end;
+    end;
+   //Deux
+   if not(pris) then
+   begin
+     for I:=1 to 4 do
+     begin
+       if joueurquiprend=1 then
+        begin
+          form5.showmodal;
+          if atout<>'0' then pris:=true;
+        end
+
+                          else
+        begin
+          //Choix de la IA 2
+        end;
+      if pris then
+      begin
+           for j:=1 to 32 do
+             begin
+               if deck[i].id[2]=atout then
+               begin
+                 deck[i].atout:=True;
+               end;
+             end;
+           deck[21].pos:='main';
+           preneur:=I;
+           deuxieme_distribution(focus_joueur);
+           Form2.Image18.Visible:=False;
+           break;
+      end;
+      joueurquiprend:=joueurquiprend+1;
+      if joueurquiprend=5 then
+        begin
+          joueurquiprend:=1;
+        end;
+     end;
+     //FAIRE LE CAS OU PERSONNE PRENDS ET LES CARTES SONT REDISTRIBUÉS
+   end;
+end;
 
 
 

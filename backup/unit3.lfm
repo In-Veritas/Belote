@@ -1,7 +1,7 @@
 object Form3: TForm3
-  Left = 812
+  Left = 997
   Height = 497
-  Top = 269
+  Top = 340
   Width = 500
   Caption = 'Belote'
   ClientHeight = 0
@@ -365,7 +365,7 @@ object Form3: TForm3
     19E49E01B2C7BF541299FD3399F36FA91C98DBFBF73E494AF82B22EF90BDF961
     49AEFF0F50C6BDC4947591D40000000049454E44AE426082
   }
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object Image1: TImage
     Left = 0
     Height = 500

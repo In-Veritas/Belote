@@ -1,12 +1,11 @@
 object Form2: TForm2
-  Left = 583
-  Height = 751
-  Top = 110
+  Left = 685
+  Height = 719
+  Top = 327
   Width = 1280
   Caption = 'Belote'
-  ClientHeight = 751
+  ClientHeight = 719
   ClientWidth = 1280
-  Enabled = False
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
     1A0A0000000D49484452000001000000010008060000005C72A86600002C4549
@@ -25689,6 +25688,7 @@ object Form2: TForm2
     Height = 350
     Top = 160
     Width = 700
+    OnClick = Image10Click
     Picture.Data = {
       1754506F727461626C654E6574776F726B477261706869639D97010089504E47
       0D0A1A0A0000000D49484452000002BC0000015E080600000067DECC57000000
@@ -29006,7 +29006,6 @@ object Form2: TForm2
     Top = 288
     Width = 57
     Proportional = True
-    Visible = False
   end
   object Image19: TImage
     Left = 832
@@ -44062,5 +44061,10 @@ object Form2: TForm2
     object MenuItem4: TMenuItem
       Caption = 'Menu principal'
     end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Left = 1054
+    Top = 60
   end
 end

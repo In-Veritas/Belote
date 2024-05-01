@@ -44,7 +44,6 @@ end;
 procedure TForm4.Button1Click(Sender: TObject);
 begin
   atout:=copy(deck[21].id,2,1);
-
   Form4.Close;
 end;
 

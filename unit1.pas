@@ -23,6 +23,7 @@ type
     procedure Panel1Click(Sender: TObject);
     procedure Panel2Click(Sender: TObject);
     procedure Timer1StartTimer(Sender: TObject);
+    procedure Timer1StopTimer(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Random_music;
   private
@@ -51,6 +52,7 @@ procedure TForm1.FormActivate(Sender: TObject);
 begin
   init_jeu;
   deck:=basedeck;
+  random_music;
 end;
 
 
@@ -85,6 +87,11 @@ end;
 procedure TForm1.Timer1StartTimer(Sender: TObject);
 begin
    random_music;
+end;
+
+procedure TForm1.Timer1StopTimer(Sender: TObject);
+begin
+  random_music;
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);

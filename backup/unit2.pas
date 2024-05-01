@@ -42,6 +42,8 @@ type
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
+    Timer1: TTimer;
+    procedure Image10Click(Sender: TObject);
     procedure Image3Click(Sender: TObject);
     procedure Image4Click(Sender: TObject);
     procedure Image5Click(Sender: TObject);
@@ -54,6 +56,7 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Image2Click(Sender: TObject);
+
   private
 
   public
@@ -120,6 +123,22 @@ begin
       Image3.visible:= False;
     end;
 end;
+
+
+
+procedure TForm2.Image10Click(Sender: TObject);
+begin
+  if etat='choix' then
+  begin
+    premiere_distribution (focus_joueur);
+    //METTRE LE VRAI SLEEP
+    choix_atout;
+    Form2.showhint:=False;
+    Image10.Enabled:=False;
+  end;
+end;
+
+
 
 
 
@@ -205,9 +224,16 @@ end;
 
 procedure TForm2.FormShow(Sender: TObject);
 begin
+  Form2.ImageList1.GetBitmap(0,Form2.Image2.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(0,Form2.Image3.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(0,Form2.Image4.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(0,Form2.Image5.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(0,Form2.Image6.Picture.Bitmap);
+  Form2.ImageList1.GetBitmap(0,Form2.Image18.Picture.Bitmap);
   focus_joueur:=1;
-
-  premiere_distribution (focus_joueur);
+  etat:='choix';
+  Form2.Hint:='Cliquez sur le tapis pour commencer';
+  Form2.Showhint:=True;
 end;
 
 procedure TForm2.Image2Click(Sender: TObject);
@@ -221,6 +247,7 @@ begin
       Image2.visible:= False;
     end;
 end;
+
 
 end.
 

@@ -1,0 +1,46 @@
+object Form5: TForm5
+  Left = 1128
+  Height = 335
+  Top = 501
+  Width = 383
+  Caption = 'Form5'
+  ClientHeight = 335
+  ClientWidth = 383
+  LCLVersion = '3.2.0.0'
+  object Panel1: TPanel
+    Left = 48
+    Height = 82
+    Top = 64
+    Width = 96
+    Caption = 'Piques'
+    TabOrder = 0
+    OnClick = Panel1Click
+  end
+  object Panel2: TPanel
+    Left = 200
+    Height = 82
+    Top = 64
+    Width = 96
+    Caption = 'Carreau'
+    TabOrder = 1
+    OnClick = Panel2Click
+  end
+  object Panel3: TPanel
+    Left = 48
+    Height = 82
+    Top = 184
+    Width = 96
+    Caption = 'Trefle'
+    TabOrder = 2
+    OnClick = Panel3Click
+  end
+  object Panel4: TPanel
+    Left = 200
+    Height = 82
+    Top = 184
+    Width = 96
+    Caption = 'Coeur'
+    TabOrder = 3
+    OnClick = Panel4Click
+  end
+end
