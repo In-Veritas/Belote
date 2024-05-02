@@ -1,4 +1,6 @@
 1- VERIFIER L'AFFICHAGE DES CARTES SUR CENTRE ET QUI GAGNE A CHAQUE MANCHE
+--> petite erreur dans procédure jouable, tu commençais à 1
+--> j'ai changer les length pour des high (renvoie la borne sup d'un tableau dynamique, en enlevant la carte jouer je baisserait la taille du tableau!)
 2- ENLEVER LES CARTES JOUÉS DE LA MAIN DES JOUEURS ARTIFICIELS
 3- REDISTRIBUER LES CARTES QUAND PERSONNE NE PREND
 4- INTELLIGENCE ARTIFICIEL POUR PRENDRE OU PAS
@@ -12,3 +14,4 @@
 12- Faire un IF 4x pour afficher le nom/image de l'atout comme il faut
 13- AMELIORER L'IA
 w
+

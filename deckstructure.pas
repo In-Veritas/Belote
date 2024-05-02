@@ -455,7 +455,7 @@ begin
 jouable_trouve:= false;
 if length(centre) = 0 then
   begin
-    for i:=0 to length(main[joueur]) do
+    for i:=0 to High(main[joueur]) do // J'ai mis HIGH car elle renvoie la borne suppérieur du tableau (plus logique et plus simple dans ce cas là!
     begin
       main[joueur,i].jouable:= True;
     end;
@@ -463,18 +463,18 @@ if length(centre) = 0 then
   else if centre[focus_joueur].atout=True then
     begin
        plus_fort:=centre[focus_joueur];
-       for i:=i to length(centre) do
+       for i:=i to length(centre) do //tu peut faire un i:=i?? i est pas initialisé!
        begin
           if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then plus_fort:=centre[i];
        end;
-       for i:=1 to length(main[joueur])do
+       for i:=0 to High(main[joueur])do
        begin
          if plus_fort.rang > main[joueur,i].rang then main[joueur,i].jouable:=True;
          jouable_trouve:= True;
        end;
        if not(jouable_trouve) then
        begin
-          for i:=1 to length(main[joueur])do
+          for i:=0 to High(main[joueur])do
           begin
             if main[joueur,i].atout then
             begin
@@ -485,7 +485,7 @@ if length(centre) = 0 then
        end;
        if not(jouable_trouve) then
        begin
-           for i:=1 to length(main[joueur]) do
+           for i:=0 to High(main[joueur]) do
             begin
               main[joueur,i].jouable:= True;
               jouable_trouve:= True;
@@ -493,7 +493,7 @@ if length(centre) = 0 then
        end;
     end else
     begin
-      for i:=1 to length(main[joueur]) do
+      for i:=0 to High(main[joueur]) do
       begin
         if main[joueur,i].id[2] = centre[focus_joueur].id[2] then
           begin
@@ -503,7 +503,7 @@ if length(centre) = 0 then
       end;
       if not(jouable_trouve) then
         begin
-          for i:=1 to length(main[joueur])do
+          for i:=0 to High(main[joueur])do
           begin
             if main[joueur,i].atout then
             begin
@@ -516,7 +516,7 @@ if length(centre) = 0 then
               begin
                 if (centre[j].atout)AND(centre[j].rang < plus_fort.rang) then plus_fort:=centre[j];
               end;
-              for j:=1 to length(main[joueur]) do
+              for j:=0 to High(main[joueur]) do
               begin
                 if main[joueur,j].rang < plus_fort.rang then
                 begin
@@ -526,7 +526,7 @@ if length(centre) = 0 then
               end;
               if not(jouable_trouve)then
               begin
-              for j:=1 to length(main[joueur]) do
+              for j:=0 to High(main[joueur]) do
                   begin
                     if main[joueur,j].atout then
                     begin
@@ -541,7 +541,7 @@ if length(centre) = 0 then
           end;
         if not(jouable_trouve) then
          begin
-             for i:=1 to length(main[joueur]) do
+             for i:=0 to High(main[joueur]) do
               begin
                 main[joueur,i].jouable:= True;
                 jouable_trouve:= True
@@ -550,11 +550,12 @@ if length(centre) = 0 then
         end;
     if joueur<>1 then
      begin
-       for i:=0 to length(main[joueur]) do
+       for i:=0 to High(main[joueur]) do
        begin
          if main[joueur,i].jouable      then
          begin
           Form2.jouercarte(main[joueur,i],joueur);
+          //procedure qui enlèverait cette carte de sa main! (j'ai une idée :))
           break;
          end;
 

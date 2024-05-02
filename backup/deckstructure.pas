@@ -455,7 +455,7 @@ begin
 jouable_trouve:= false;
 if length(centre) = 0 then
   begin
-    for i:=0 to length(main[joueur]) do
+    for i:=0 to High(main[joueur]) do // J'ai mis HIGH car elle renvoie la borne suppérieur du tableau (plus logique et plus simple dans ce cas là!
     begin
       main[joueur,i].jouable:= True;
     end;
@@ -969,6 +969,7 @@ begin
   begin
     plie_a_compter:=plie2;
   end;
+  //travailler plus sur le cas ou length(plie a compter)=0
   for i:=0 to length(plie_a_compter) do
   begin
        if plie_a_compter[i].rang=0 then
