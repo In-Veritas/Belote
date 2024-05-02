@@ -37,13 +37,13 @@ type
     Image8: TImage;
     Image9: TImage;
     ImageList1: TImageList;
-    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    Label8: TLabel;
     MainMenu1: TMainMenu;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -108,15 +108,16 @@ begin
       if cartes_joues=4 then
       begin
         cartes_joues:=0;
-        fin_tour(centre,focus_joueur);
+        fin_tour(centre);
       end                 else
       begin
-        showmessage('player->giovanni');
+        showmessage('player->giovanni'+inttostr(joueur)+' ' + inttostr(cartes_joues));
+        focus_joueur:=2;
         cartes_jouables(2);
 
       end;
 
-    end;
+    end else
 
 
 
@@ -129,15 +130,16 @@ begin
 
       if cartes_joues=4 then
       begin
-        fin_tour(centre,focus_joueur);
+        fin_tour(centre);
         cartes_joues:=0;
       end                 else
       begin
-        showmessage('martiniel->player');
+        showmessage('martiniel->player'+inttostr(joueur)+' ' + inttostr(cartes_joues));
+        focus_joueur:=1;
         cartes_jouables(1);
 
       end;
-    end;
+    end else
 
 
   if joueur=3 then
@@ -147,14 +149,15 @@ begin
       cartes_joues:=cartes_joues+1;
        if cartes_joues=4 then
       begin
-        fin_tour(centre,focus_joueur);
+        fin_tour(centre);
         cartes_joues:=0;
       end                 else
       begin
-        showmessage('paul ->martiniel');
+        showmessage('paul ->martiniel'+inttostr(joueur)+' ' + inttostr(cartes_joues));
+        focus_joueur:=4;
         cartes_jouables(4);
       end;
-    end;
+    end else
 
   if joueur=2 then
     begin
@@ -163,11 +166,12 @@ begin
       cartes_joues:=cartes_joues+1;
        if cartes_joues=4 then
        begin
-         fin_tour(centre,focus_joueur);
+         fin_tour(centre);
          cartes_joues:=0;
        end                 else
       begin
-        showmessage('giovanni->paul');
+        showmessage('giovanni->paul'+inttostr(joueur)+ ' ' + inttostr(cartes_joues));
+        focus_joueur:=3;
         cartes_jouables(3);
 
       end;

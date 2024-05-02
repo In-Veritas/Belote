@@ -52,7 +52,7 @@ procedure prendre_IA (joueur,numeroduchoix:integer;
                      var pris:boolean);
 procedure init_jeu;
 procedure debut_manche(joueur: integer);
-procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);
+procedure fin_tour(centre_fintour : tableau_centre);
 procedure modificationmain (Joueur,Indice_carte_jouer:integer);
 procedure cartes_jouables(joueur:integer);
 procedure permuter (var X,Y:carte);
@@ -543,7 +543,7 @@ begin
 
     end;
 end;
-procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
+procedure fin_tour(centre_fintour : tableau_centre);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
 var i,j: integer;
     atout_trouve: boolean;
     plus_fort: carte;
@@ -734,7 +734,6 @@ if length(centre) = 0 then
          begin
              for i:=0 to High(main[joueur]) do
               begin
-                showmessage('Pas d atout, jouez n importe quel carte');
                 main[joueur,i].jouable:= True;
                 jouable_trouve:= True;
               end;
@@ -1078,6 +1077,7 @@ begin
   Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image7.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image8.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image9.Picture.Bitmap);
+  Form2.Label8.caption:='Preneur: '+inttostr(preneur);
 
 
 end;

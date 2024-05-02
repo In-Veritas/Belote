@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="103"/>
+        <UsageCount Value="105"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -21,7 +21,7 @@
         <UnitName Value="Unit1"/>
         <TopLine Value="67"/>
         <CursorPos X="35" Y="51"/>
-        <UsageCount Value="103"/>
+        <UsageCount Value="105"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -32,10 +32,10 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit2"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="95"/>
-        <CursorPos X="24" Y="115"/>
-        <FoldState Value=" T3l60A812 Pj2kJ0L"/>
-        <UsageCount Value="103"/>
+        <TopLine Value="139"/>
+        <CursorPos X="10" Y="144"/>
+        <FoldState Value=" T3lA0A812 Pj2kJ0W"/>
+        <UsageCount Value="105"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -47,8 +47,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit3"/>
         <EditorIndex Value="2"/>
+        <TopLine Value="31"/>
         <CursorPos X="28" Y="51"/>
-        <UsageCount Value="103"/>
+        <UsageCount Value="105"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -58,10 +59,10 @@
         <UnitName Value="DeckStructure"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="317"/>
-        <CursorPos X="19" Y="1106"/>
-        <FoldState Value=" T3oK0}b2 pk1oc0O016 piZmO0X3]9ejY0a2 PeiK0 T0oS0}R1"/>
-        <UsageCount Value="83"/>
+        <TopLine Value="1063"/>
+        <CursorPos X="78" Y="1079"/>
+        <FoldState Value=" T3jZ0{@2 pmaqJ0H1 pjRk40O]9k0kQ076]IIjW0H0121111 Pk0na0 T0oS0}Rj"/>
+        <UsageCount Value="85"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -71,7 +72,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="82"/>
+        <UsageCount Value="84"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
@@ -81,7 +82,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="82"/>
+        <UsageCount Value="84"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
@@ -91,7 +92,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="82"/>
+        <UsageCount Value="84"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
@@ -104,7 +105,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="15"/>
         <CursorPos X="56" Y="43"/>
-        <UsageCount Value="80"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -118,7 +119,7 @@
         <EditorIndex Value="6"/>
         <TopLine Value="84"/>
         <CursorPos X="20" Y="115"/>
-        <UsageCount Value="66"/>
+        <UsageCount Value="68"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -131,7 +132,7 @@
         <UnitName Value="Unit6"/>
         <EditorIndex Value="7"/>
         <CursorPos X="18" Y="7"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="56"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -297,95 +298,11 @@
         <EditorIndex Value="4"/>
         <TopLine Value="220"/>
         <CursorPos X="10" Y="239"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="929" Column="86" TopLine="907"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="937" Column="38" TopLine="909"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="584" Column="9" TopLine="540"/>
-      </Position>
-      <Position>
-        <Filename Value="unit5.pas"/>
-        <Caret Line="50" Column="49" TopLine="27"/>
-      </Position>
-      <Position>
-        <Filename Value="unit5.pas"/>
-        <Caret Line="49" Column="49" TopLine="26"/>
-      </Position>
-      <Position>
-        <Filename Value="unit5.pas"/>
-        <Caret Line="50" Column="49" TopLine="27"/>
-      </Position>
-      <Position>
-        <Filename Value="unit5.pas"/>
-        <Caret Line="49" Column="49" TopLine="26"/>
-      </Position>
-      <Position>
-        <Filename Value="unit5.pas"/>
-        <Caret Line="50" Column="49" TopLine="27"/>
-      </Position>
-      <Position>
-        <Filename Value="unit5.pas"/>
-        <Caret Line="84" Column="33" TopLine="30"/>
-      </Position>
-      <Position>
-        <Filename Value="unit5.pas"/>
-        <Caret Line="83" Column="33" TopLine="45"/>
-      </Position>
-      <Position>
-        <Filename Value="unit5.pas"/>
-        <Caret Line="85" Column="33" TopLine="47"/>
-      </Position>
-      <Position>
-        <Filename Value="unit5.pas"/>
-        <Caret Line="102" TopLine="81"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="974" Column="63" TopLine="955"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="929" Column="109" TopLine="916"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="375" Column="26" TopLine="348"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="358" Column="31" TopLine="321"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="379" Column="28" TopLine="369"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="376" Column="12" TopLine="357"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="451" TopLine="432"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="376" Column="12" TopLine="358"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="377" Column="10" TopLine="349"/>
-      </Position>
       <Position>
         <Filename Value="deckstructure.pas"/>
         <Caret Line="376" Column="13" TopLine="87"/>
@@ -421,6 +338,90 @@
       <Position>
         <Filename Value="deckstructure.pas"/>
         <Caret Line="694" Column="8" TopLine="316"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="598" Column="67" TopLine="581"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="170" Column="54" TopLine="140"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="136" Column="56" TopLine="121"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="810" Column="51" TopLine="787"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="808" Column="62" TopLine="789"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="580" Column="18" TopLine="561"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="546" Column="51" TopLine="48"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="55" Column="51" TopLine="36"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="111" Column="24" TopLine="93"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="132" Column="24" TopLine="113"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="150" Column="24" TopLine="131"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="253" Column="88" TopLine="152"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="304" Column="26" TopLine="285"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="57" Column="19" TopLine="27"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="157" Column="24" TopLine="149"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="686" Column="27" TopLine="320"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="116" Column="9" TopLine="95"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="158" Column="9" TopLine="139"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="157" Column="9" TopLine="138"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="1080" Column="45" TopLine="1059"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="1081" Column="54" TopLine="1057"/>
       </Position>
     </JumpHistory>
     <RunParams>
