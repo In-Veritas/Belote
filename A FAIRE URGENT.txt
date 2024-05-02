@@ -1,3 +1,5 @@
+Ordonner les procedures de deckstructure!!
+
 1- VERIFIER L'AFFICHAGE DES CARTES SUR CENTRE ET QUI GAGNE A CHAQUE MANCHE
 --> Les cartes s'affiche bien! Pas encore vérifier qui gagne
 

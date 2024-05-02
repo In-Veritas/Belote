@@ -1,0 +1,20 @@
+Init_jeu : RIEN
+Debut_manche/ CARTE JOUABLE
+Fin_tour :DEBUT JEU / FIN JEU
+Modificationmain/ RIEN
+Cartes_jouables/ MODIFICATION MAIN
+Permuter/RIEN
+Premierchoixcouleur/RIEN
+Changementcouleur/ RIEN
+Triecouleur/ PERMUTER
+Trieparcouleur/ PREMIERCHOIXCOULEUR + TRIE COULEUR
+Trieminmaxparcouleur/ PERMUTER
+Trierang/ TRI MIN MAX PAR COULEUR
+Melangertableau/ PERMUTER
+Distribution4joeur/ RIEN
+Miseajouratout/ RIEN
+1ere distrib/MELANGE TABLEAU + DISTRIBUTION 4 JOUEUR + TRIE PAR COULEUR + TRIE RANG
+2eme distrib/ DISTRIBUTION 4 JOUEUR + TRIE PAR COULEUR + TRIE RANG 
+Debut_jeu/ CARTE JOUABLE
+Choix atout/ DEUXIEME DISTRIB + DEBUT JEU 
+Fin_jeu/ PAS REGARDER OUPSY

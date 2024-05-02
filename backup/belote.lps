@@ -31,11 +31,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit2"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="146"/>
-        <CursorPos X="7" Y="127"/>
-        <FoldState Value=" T3kg0A217 Pj2jW04"/>
+        <TopLine Value="49"/>
+        <CursorPos X="26" Y="85"/>
+        <FoldState Value=" T3kg0A9 pj2jW0AB"/>
         <UsageCount Value="91"/>
         <Loaded Value="True"/>
       </Unit>
@@ -57,10 +56,11 @@
         <Filename Value="deckstructure.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DeckStructure"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="18"/>
-        <CursorPos X="19" Y="49"/>
-        <FoldState Value=" TLid0E2 PLR0 T3jg0H1 plYmC0{R2 pkRnF076 pjIjd0H3]9Gjf0P1]9Fk10F1 PiIH]y0kP02}"/>
+        <TopLine Value="748"/>
+        <CursorPos X="50" Y="1007"/>
+        <FoldState Value=" TLid0E2 PLR0 T3jg0H1 plYmC0{R2 pkMnA076 pjIjd0H3]9Gjf0P111 PkXkI]s0kP02c"/>
         <UsageCount Value="71"/>
         <Loaded Value="True"/>
       </Unit>

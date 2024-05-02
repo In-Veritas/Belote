@@ -45,39 +45,28 @@ var
 
 
 procedure init_jeu;
-procedure choix_atout;
+procedure debut_manche(joueur: integer);
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);
 procedure modificationmain (Joueur,Indice_carte_jouer:integer);
 procedure cartes_jouables(joueur:integer);
-
 procedure permuter (var X,Y:carte);
-
 function premierchoixcouleur (toutcouleur:string):integer;
 function changementcouleur (x:integer):integer;
 procedure triecouleur (I,Maximum:integer;
                       couleur:string;
                       var C:integer);
-
 procedure trieparcouleur (Maximum:integer);
 procedure trieminmaxparcouleur (I,min,max:integer);
 procedure trierang(Maximum:integer);
-
-
 function melangertableau(N:integer):tableau_deck;
 procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
                                 var IndiceCarte:integer);
+procedure miseajouratout ();
 procedure premiere_distribution (PremierJoueur:integer);
 procedure deuxieme_distribution (PremierJoueur:integer);
-procedure debut_manche(joueur: integer);
 procedure debut_jeu;
+procedure choix_atout;
 procedure fin_jeu(joueur_preneur:integer; dix_de_dern, belote:boolean);
-
-
-
-
-
-
-
 
 
 {**FAIT etat choix d'aout
@@ -124,40 +113,15 @@ implementation
 
 USES Unit2, unit4, unit5, unit6;
 
-
-
-procedure debut_manche(joueur: integer);
-var I:integer;
-begin
-  for I:=1 to 4 do
-    begin
-       if joueur=1 then
-       begin
-         cartes_jouables(joueur);
-       end         else
-       begin
-         cartes_jouables(joueur);
-         //jouer_carte_ia();
-       end;
-       joueur:=joueur+1;
-       if joueur=5 then joueur := 1;
-
-    end;
-end;
-
 procedure init_jeu;
 var
   i: integer;
 begin
 cartes_joues:=0;
 manche:=1;
+atout:='0';
 for i:=1 to 32 do
 begin
-  basedeck[i].jouable:=false;
-end;
-atout:='0'; //j'inicie atout ici
-
-
 basedeck[1].id:='7P'; //7 de Piques
 basedeck[1].atout:=False;
 basedeck[1].rang:=9; //0 = Vallet d'atout, 1 = 9 d'atout, 2 = As, 3 = Dix, 4 = Roi, 5 = Dame, 6 = Vallet, 7 = neuf, 8 = huit, 9 = sept
@@ -352,7 +316,24 @@ basedeck[31].id_image:=32;
 //******************
 
 end;
+procedure debut_manche(joueur: integer);
+var I:integer;
+begin
+  for I:=1 to 4 do
+    begin
+       if joueur=1 then
+       begin
+         cartes_jouables(joueur);
+       end         else
+       begin
+         cartes_jouables(joueur);
+         //jouer_carte_ia();
+       end;
+       joueur:=joueur+1;
+       if joueur=5 then joueur := 1;
 
+    end;
+end;
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
 var i,j: integer;
     atout_trouve: boolean;
@@ -445,6 +426,7 @@ begin
   Form2.Image16.Visible:=False;
   Form2.Image17.Visible:=False;
   Form2.Image14.Visible:=False;
+
   if manche<=8 then
   begin
      debut_jeu;
@@ -462,8 +444,6 @@ begin
   end;
 
 end;
-
-
 procedure modificationmain (Joueur,Indice_carte_jouer:integer);
 VAR
   tableau_carte:array of carte;
@@ -611,16 +591,13 @@ if length(centre) = 0 then
          if main[joueur,i].jouable      then
          begin
           Form2.jouercarte(main[joueur,i],joueur);
-          modificationmain (joueur,i);
+          modificationmain (joueur,i); //procédure qui enlève la carte jouer du joueur
           break;
          end;
 
        end;
      end;
     end;
-
-
-
 procedure permuter (var X,Y:carte); //procedure qui échange deux tèrmes
 VAR
   Z:carte;
@@ -629,8 +606,6 @@ begin
   X:=Y;
   Y:=Z;
 end;
-
-
 function premierchoixcouleur (toutcouleur:string):integer;
 begin
   if atout='0' then
@@ -642,7 +617,6 @@ begin
       premierchoixcouleur:=Pos(atout,toutcouleur);
     end;
 end;
-
 function changementcouleur (x:integer):integer;
 begin
   x:=x+1;
@@ -652,8 +626,6 @@ begin
     end;
   changementcouleur:=x;
 end;
-
-
 procedure triecouleur (I,Maximum:integer;
                       couleur:string;
                       var C:integer);
@@ -710,7 +682,6 @@ begin
         end;
     end;
 end;
-
 procedure trierang(Maximum:integer);
 VAR
   I,min,max:integer;
@@ -745,7 +716,6 @@ begin
         end;
     end;
 end;
-
 function melangertableau(N:integer):tableau_deck; //fonction qui mélange un tableau, N sert au nombre de mélange
 VAR
   T:tableau_deck;
@@ -764,7 +734,6 @@ begin
 
   melangertableau:=T;  //la fonction renvois le tableau mélanger  (a un moment deck:=melangertableau(nombre de mélange);)
 end;
-
 procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
                                 var IndiceCarte:integer);
 //Nombredecarte => le nombre de carte à distribuer
@@ -815,7 +784,6 @@ begin
     end;
 
 end;
-
 procedure miseajouratout ();
 VAR
   I,J:integer;
@@ -834,7 +802,6 @@ begin
     end;
 
 end;
-
 procedure premiere_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
 
 VAR
@@ -872,7 +839,6 @@ begin
   Form2.Enabled:=True;
 
 end;
-
 procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
 VAR
   IndiceCarte:integer;
@@ -899,7 +865,22 @@ begin
 
 
 end;
+procedure debut_jeu;
 
+var
+i: integer;
+begin
+    form2.label3.caption:='Manche: ' + inttostr(manche);
+    cartes_jouables(focus_joueur);
+    Form2.image2.Enabled:=True;
+    Form2.image3.Enabled:=True;
+    Form2.image4.Enabled:=True;
+    Form2.image5.Enabled:=True;
+    Form2.image6.Enabled:=True;
+    Form2.image7.Enabled:=True;
+    Form2.image8.Enabled:=True;
+    Form2.image9.Enabled:=True;
+end;
 procedure choix_atout;
 var
   pris:boolean;
@@ -999,27 +980,9 @@ begin
          showmessage('Personne n''a pris, début d''une nouvelle partie');
          Form2.Image10Click(Form2.Image10);
        end;
-
    end;
+
 end;
-
-procedure debut_jeu;
-
-var
-i: integer;
-begin
-    form2.label3.caption:='Manche: ' + inttostr(manche);
-    cartes_jouables(focus_joueur);
-    Form2.image2.Enabled:=True;
-    Form2.image3.Enabled:=True;
-    Form2.image4.Enabled:=True;
-    Form2.image5.Enabled:=True;
-    Form2.image6.Enabled:=True;
-    Form2.image7.Enabled:=True;
-    Form2.image8.Enabled:=True;
-    Form2.image9.Enabled:=True;
-end;
-
 procedure fin_jeu(joueur_preneur:integer; dix_de_dern, belote:boolean);
 var
 plie_a_compter: tableau_plie;
