@@ -44,6 +44,8 @@ var
   manche:integer;
 
 
+
+
 procedure init_jeu;
 procedure debut_manche(joueur: integer);
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);
@@ -112,6 +114,7 @@ Ouvre le form3 et compte le plie de lequipe qui a pris
 implementation
 
 USES Unit2, unit4, unit5, unit6;
+
 
 procedure init_jeu;
 var
@@ -504,7 +507,7 @@ if length(centre) = 0 then
 
          for i:=0 to High(main[joueur])do
          begin
-           if (plus_fort.rang > main[joueur,i].rang) AND (main[joueur,i].atout) then
+           if (plus_fort.rang < main[joueur,i].rang) AND (main[joueur,i].atout) then
            begin
            main[joueur,i].jouable:=True;
            jouable_trouve:= True;
