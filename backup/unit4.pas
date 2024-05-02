@@ -13,12 +13,13 @@ type
   { TForm4 }
 
   TForm4 = class(TForm)
-    Button1: TButton;
-    Button2: TButton;
+    Image4: TImage;
     Image1: TImage;
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    Panel1: TPanel;
+    Panel2: TPanel;
     procedure FormShow(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
+    procedure Panel2Click(Sender: TObject);
   private
 
   public
@@ -41,16 +42,17 @@ begin
   Form4.Image1.Picture:=Form2.Image18.Picture;
 end;
 
-procedure TForm4.Button1Click(Sender: TObject);
+procedure TForm4.Panel1Click(Sender: TObject);
 begin
   atout:=copy(deck[21].id,2,1);
   Form4.Close;
 end;
 
-procedure TForm4.Button2Click(Sender: TObject);
+procedure TForm4.Panel2Click(Sender: TObject);
 begin
-  Form4.Close;
+   Form4.Close;
 end;
+
 
 end.
 

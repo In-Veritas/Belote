@@ -16,6 +16,7 @@ type
     ImageList1: TImageList;
     Label1: TLabel;
     Label2: TLabel;
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Image1Click(Sender: TObject);
     procedure Label1Click(Sender: TObject);
@@ -39,6 +40,11 @@ implementation
 procedure TForm6.FormShow(Sender: TObject);
 begin
 
+end;
+
+procedure TForm6.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  Application.terminate;
 end;
 
 procedure TForm6.Image1Click(Sender: TObject);

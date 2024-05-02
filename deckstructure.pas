@@ -1007,6 +1007,7 @@ end;
 procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
 VAR
   IndiceCarte:integer;
+  nom_joueur:string;
 begin
 
   IndiceCarte:=22;
@@ -1027,7 +1028,20 @@ begin
   Form2.ImageList1.GetBitmap(main[1,5].id_image,Form2.Image7.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,6].id_image,Form2.Image8.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(main[1,7].id_image,Form2.Image9.Picture.Bitmap);
-  Form2.Label8.caption:='Preneur: '+inttostr(preneur);
+   if preneur=1 then
+  begin
+  nom_joueur:= 'Jacques';
+  end else if preneur=2 then
+  begin
+    nom_joueur:= 'Giovanni';
+  end else if preneur=3 then
+  begin
+    nom_joueur:= 'Paul';
+  end else if preneur=4 then
+  begin
+    nom_joueur:= 'Martiniel';
+  end;
+ Form2.Label8.caption:='Preneur: '+nom_joueur;
 
 
 end;
@@ -1081,6 +1095,20 @@ begin
            deck[21].pos:='main';
            atout:=deck[21].id[2];
            Form2.label2.caption:='Atout: '+atout;
+           if atout='K' then
+           begin
+           Form2.ImageList2.GetBitmap(0,Form2.Image23.Picture.Bitmap);
+           end else if atout = 'C' then
+           begin
+           Form2.ImageList2.GetBitmap(1,Form2.Image23.Picture.Bitmap);
+           end else if atout = 'P' then
+           begin
+           Form2.ImageList2.GetBitmap(2,Form2.Image23.Picture.Bitmap);
+           end else if atout = 'T' then
+           begin
+           Form2.ImageList2.GetBitmap(3,Form2.Image23.Picture.Bitmap);
+           end;
+
            preneur:=joueurquiprend;
 
            deuxieme_distribution(joueurquiprend);
@@ -1169,62 +1197,84 @@ procedure fin_jeu(joueur_preneur:integer; dix_de_dern, belote:boolean);
 var
 plie_a_compter: tableau_plie;
 i, count, points: integer;
+nom_joueur:string;
 
 
 begin
+    if joueur_preneur=1 then
+  begin
+  nom_joueur:= 'Jacques';
+  end else if joueur_preneur=2 then
+  begin
+    nom_joueur:= 'Giovanni';
+  end else if joueur_preneur=3 then
+  begin
+    nom_joueur:= 'Paul';
+  end else if joueur_preneur=4 then
+  begin
+    nom_joueur:= 'Martiniel';
+  end;
   count:=0;
-  if joueur_preneur < 3 then
+  if (joueur_preneur = 3) OR (joueur_preneur=1)then
   begin
     plie_a_compter:=plie1;
   end else
   begin
     plie_a_compter:=plie2;
   end;
+  if length(plie_a_compter)=0 then
+  begin
+    count:=0;
+    Form6.label1.caption:='Points: '+ inttostr(count);
+    Form6.label2.caption:=nom_joueur + 'et son partenaire sont Capo! Trop Triste!';
+  end else
+  begin
   //travailler plus sur le cas ou length(plie a compter)=0
   for i:=0 to length(plie_a_compter) do
-  begin
-       if plie_a_compter[i].rang=0 then
-       begin
-         points:=20;
-       end else if plie_a_compter[i].rang=1 then
-       begin
-           points:=14;
-       end else if plie_a_compter[i].rang=2 then
-       begin
-             points:=11;
-            end else if plie_a_compter[i].rang=3 then
-       begin
-                points:=10;
-                 end else if plie_a_compter[i].rang=4 then
-       begin
-                   points:=4;
-                      end else if plie_a_compter[i].rang=5 then
-       begin
-                       points:=3
-                           end else if plie_a_compter[i].rang=6 then
-       begin
-                          points:=2;
-       end else
-       begin
-         points:=0;
-       end;
+    begin
+         if plie_a_compter[i].rang=0 then
+         begin
+           points:=20;
+         end else if plie_a_compter[i].rang=1 then
+         begin
+             points:=14;
+         end else if plie_a_compter[i].rang=2 then
+         begin
+               points:=11;
+              end else if plie_a_compter[i].rang=3 then
+         begin
+                  points:=10;
+                   end else if plie_a_compter[i].rang=4 then
+         begin
+                     points:=4;
+                        end else if plie_a_compter[i].rang=5 then
+         begin
+                         points:=3
+                             end else if plie_a_compter[i].rang=6 then
+         begin
+                            points:=2;
+         end else
+         begin
+           points:=0;
+         end;
 
 
-       count:=count+points;
-       Form6.label1.caption:='Points: '+ inttostr(count);
+         count:=count+points;
+         Form6.label1.caption:='Points: '+ inttostr(count);
 
+    end;
   end;
   if dix_de_dern then count:=count+10;
   if belote then count:=count+20;
   if count >  81 then
   begin
     Form6.ImageList1.GetBitmap(1,Form6.Image1.Picture.Bitmap);
-    Form6.label2.caption:='Vous avez gagné la partie!';
+    Form6.label2.caption:=nom_joueur + ' et son partenaire ont gagné la partie!';
   end
   else
   begin
     Form6.ImageList1.GetBitmap(0,Form6.Image1.Picture.Bitmap);
-    Form6.label2.caption:='Vous etes dedans!';
+    Form6.label2.caption:=nom_joueur + ' et son partenaire sont dedans!';
   end;
 end;
 

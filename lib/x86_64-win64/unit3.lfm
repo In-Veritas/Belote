@@ -1,11 +1,12 @@
 object Form3: TForm3
-  Left = 985
-  Height = 497
-  Top = 300
-  Width = 500
+  Left = 1024
+  Height = 994
+  Top = 223
+  Width = 1000
   Caption = 'Belote'
-  ClientHeight = 497
-  ClientWidth = 500
+  ClientHeight = 994
+  ClientWidth = 1000
+  DesignTimePPI = 192
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
     1A0A0000000D49484452000001000000010008060000005C72A86600002C4549
@@ -365,12 +366,12 @@ object Form3: TForm3
     19E49E01B2C7BF541299FD3399F36FA91C98DBFBF73E494AF82B22EF90BDF961
     49AEFF0F50C6BDC4947591D40000000049454E44AE426082
   }
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '2.2.4.0'
   object Image1: TImage
     Left = 0
-    Height = 500
+    Height = 1000
     Top = 0
-    Width = 500
+    Width = 1000
     Picture.Data = {
       1754506F727461626C654E6574776F726B47726170686963B2DB000089504E47
       0D0A1A0A0000000D49484452000001F4000001F40806000000CBD6DF8A000000
@@ -2134,27 +2135,27 @@ object Form3: TForm3
     }
   end
   object Image2: TImage
-    Left = 80
-    Height = 176
-    Top = 144
-    Width = 114
+    Left = 160
+    Height = 352
+    Top = 288
+    Width = 228
   end
   object Image3: TImage
-    Left = 312
-    Height = 176
-    Top = 144
-    Width = 114
+    Left = 624
+    Height = 352
+    Top = 288
+    Width = 228
   end
   object Label1: TLabel
-    Left = 208
-    Height = 30
-    Top = 328
-    Width = 68
+    Left = 416
+    Height = 57
+    Top = 656
+    Width = 136
     Caption = 'Points: '
     Color = clWhite
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -21
+    Font.Height = -42
     Font.Name = 'Segoe UI Symbol'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
