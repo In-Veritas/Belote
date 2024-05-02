@@ -43,6 +43,7 @@ var
   cartes_joues:integer;
   manche:integer;
   playcap:integer;
+  joueurquiabelote:integer;
 
 
 
@@ -578,9 +579,19 @@ procedure modificationmain (Joueur,Indice_carte_jouer:integer);
 VAR
   tableau_carte:array of carte;
   I,C,nombre_de_carte:integer;
+  chaine:string;
 
 begin
   C:=0;
+  chaine:=inttostr(Joueur);
+
+  for I:=0 to High(main[Joueur]) do
+   begin
+     chaine:=chaine+' '+main[Joueur,i].id
+   end;
+
+  showmessage(chaine);
+
   nombre_de_carte:=length(main[joueur])-1;
   for I:=Indice_carte_jouer+1 to High(main[Joueur]) do
     begin
@@ -597,6 +608,15 @@ begin
   insert(tableau_carte,main[Joueur],Indice_carte_jouer-1);
 
   SetLength(main[Joueur],nombre_de_carte);
+
+  chaine:=inttostr(Joueur);
+
+  for I:=0 to High(main[Joueur]) do
+   begin
+     chaine:=chaine+' '+main[Joueur,i].id
+   end;
+
+  showmessage(chaine);
 
 end;
 
@@ -675,6 +695,8 @@ var
 i,j: integer;
 plus_fort: carte;
 jouable_trouve:boolean;
+anoncebelote:string;
+
 begin
 jouable_trouve:= false;
 if playcap=4 then exit;
@@ -802,12 +824,18 @@ if cartes_joues = 0 then
     if joueur<>1 then
      begin
        //ici mettre procédure qui choisi la meilleur carte à jouer pour J artificiel
-
        for i:=0 to High(main[joueur]) do
        begin
          if main[joueur,i].jouable      then
          begin
           Form2.jouercarte(main[joueur,i],joueur);
+
+          if (joueur=joueurquiabelote) and (main[joueur,i].atout=true) and ( (main[joueur,i].id[1]='R') OR (main[joueur,i].id[1]='D') ) then
+            begin
+              anoncebelote:='Belote du joueur '+inttostr(i);
+              showmessage(anoncebelote);
+            end;
+
           modificationmain (joueur,i); //procédure qui enlève la carte jouer du joueur
           break;
          end;
@@ -972,7 +1000,7 @@ VAR
   IndiceCarte:integer;
 begin
   etat:='choix';
-
+  joueurquiabelote:=0;
   SetLength(main, 5, 0);  //j'alloue le tableau main
   preneur:=0;
   atout:='0';
@@ -1006,7 +1034,7 @@ end;
 
 procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
 VAR
-  IndiceCarte:integer;
+  IndiceCarte,i,j,belote:integer;
 begin
 
   IndiceCarte:=22;
@@ -1042,6 +1070,23 @@ begin
   end;
  Form2.Label8.caption:='Preneur: '+nom_joueur;
 
+
+  for i:=1 to 4 do
+    begin
+      belote:=0;
+      for j:=0 to 7 do
+        begin
+          if (main[i,j].atout=true) and ( (main[i,j].id[1]='R') or (main[i,j].id[1]='D') ) then
+            begin
+              belote:=belote+1;
+            end;
+
+          if belote=2 then
+            begin
+              joueurquiabelote:=i;
+            end;
+        end;
+    end;
 
 end;
 
@@ -1386,8 +1431,23 @@ begin
     showmessage('Fin du jeu');
     form6.show;
     form2.hide;
-    fin_jeu(preneur, dern, false);
+    if ( (joueur_gagnant=1) OR (joueur_gagnant=3) ) AND  ( (joueurquiabelote=1) OR (joueurquiabelote=3) ) then
+      begin
+        fin_jeu(preneur, dern, true);
+      end
+                                     else
+      begin
+        if ( (joueur_gagnant=2) OR (joueur_gagnant=4) ) AND  ( (joueurquiabelote=2) OR (joueurquiabelote=4) ) then
+          begin
+            fin_jeu(preneur, dern, true);
+          end
+                                         else
+          begin
+           fin_jeu(preneur, dern, false);
+          end;
+      end;
   end;
+
 
 end;
 

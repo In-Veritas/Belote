@@ -4,8 +4,9 @@ object Form2: TForm2
   Top = 136
   Width = 1280
   Caption = 'Belote'
-  ClientHeight = 702
-  ClientWidth = 1280
+  ClientHeight = 1365
+  ClientWidth = 2560
+  DesignTimePPI = 192
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
     1A0A0000000D49484452000001000000010008060000005C72A86600002C4549
@@ -369,12 +370,12 @@ object Form2: TForm2
   OnClose = FormClose
   OnShow = FormShow
   ShowInTaskBar = stAlways
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '2.2.4.0'
   object Image1: TImage
     Left = 0
-    Height = 720
+    Height = 1440
     Top = 0
-    Width = 1280
+    Width = 2560
     Picture.Data = {
       1754506F727461626C654E6574776F726B4772617068696320530C0089504E47
       0D0A1A0A0000000D4948445200000500000002D00806000000CF7DDD56000000
@@ -25621,74 +25622,74 @@ object Form2: TForm2
     }
   end
   object Image2: TImage
-    Left = 104
-    Height = 176
-    Top = 528
-    Width = 114
+    Left = 208
+    Height = 352
+    Top = 1056
+    Width = 228
     Enabled = False
     OnClick = Image2Click
   end
   object Image3: TImage
-    Left = 240
-    Height = 176
-    Top = 528
-    Width = 114
+    Left = 480
+    Height = 352
+    Top = 1056
+    Width = 228
     Enabled = False
     OnClick = Image3Click
   end
   object Image4: TImage
-    Left = 376
-    Height = 176
-    Top = 528
-    Width = 114
+    Left = 752
+    Height = 352
+    Top = 1056
+    Width = 228
     Enabled = False
     OnClick = Image4Click
   end
   object Image5: TImage
-    Left = 512
-    Height = 176
-    Top = 528
-    Width = 114
+    Left = 1024
+    Height = 352
+    Top = 1056
+    Width = 228
     Enabled = False
     OnClick = Image5Click
   end
   object Image6: TImage
-    Left = 648
-    Height = 176
-    Top = 528
-    Width = 114
+    Left = 1296
+    Height = 352
+    Top = 1056
+    Width = 228
     Enabled = False
     OnClick = Image6Click
   end
   object Image7: TImage
-    Left = 784
-    Height = 176
-    Top = 528
-    Width = 114
+    Left = 1568
+    Height = 352
+    Top = 1056
+    Width = 228
     Enabled = False
     OnClick = Image7Click
   end
   object Image8: TImage
-    Left = 920
-    Height = 176
-    Top = 528
-    Width = 114
+    Left = 1840
+    Height = 352
+    Top = 1056
+    Width = 228
     Enabled = False
     OnClick = Image8Click
   end
   object Image9: TImage
-    Left = 1056
-    Height = 176
-    Top = 528
-    Width = 114
+    Left = 2112
+    Height = 352
+    Top = 1056
+    Width = 228
     Enabled = False
     OnClick = Image9Click
   end
   object Image10: TImage
-    Left = 288
-    Height = 350
-    Top = 160
-    Width = 700
+    Left = 576
+    Height = 700
+    Top = 320
+    Width = 1400
     OnClick = Image10Click
     Picture.Data = {
       1754506F727461626C654E6574776F726B477261706869639D97010089504E47
@@ -28956,10 +28957,10 @@ object Form2: TForm2
     }
   end
   object Image11: TImage
-    Left = 96
-    Height = 100
-    Top = 264
-    Width = 100
+    Left = 192
+    Height = 200
+    Top = 528
+    Width = 200
     Picture.Data = {
       1754506F727461626C654E6574776F726B477261706869639A50000089504E47
       0D0A1A0A0000000D494844520000006400000064080600000070E29554000000
@@ -29610,10 +29611,10 @@ object Form2: TForm2
     }
   end
   object Image12: TImage
-    Left = 1088
-    Height = 100
-    Top = 264
-    Width = 100
+    Left = 2176
+    Height = 200
+    Top = 528
+    Width = 200
     Picture.Data = {
       1754506F727461626C654E6574776F726B47726170686963385A000089504E47
       0D0A1A0A0000000D494844520000006400000064080600000070E29554000000
@@ -30341,10 +30342,10 @@ object Form2: TForm2
     }
   end
   object Image13: TImage
-    Left = 584
-    Height = 100
-    Top = 24
-    Width = 100
+    Left = 1168
+    Height = 200
+    Top = 48
+    Width = 200
     Picture.Data = {
       1754506F727461626C654E6574776F726B477261706869635972000089504E47
       0D0A1A0A0000000D494844520000006400000064080600000070E29554000000
@@ -31265,65 +31266,65 @@ object Form2: TForm2
     }
   end
   object Image14: TImage
-    Left = 600
-    Height = 88
-    Top = 376
-    Width = 57
+    Left = 1200
+    Height = 176
+    Top = 752
+    Width = 114
     Proportional = True
   end
   object Image15: TImage
-    Left = 600
-    Height = 88
-    Top = 200
-    Width = 57
+    Left = 1200
+    Height = 176
+    Top = 400
+    Width = 114
     Proportional = True
   end
   object Image16: TImage
-    Left = 512
-    Height = 88
-    Top = 280
-    Width = 57
+    Left = 1024
+    Height = 176
+    Top = 560
+    Width = 114
     Proportional = True
   end
   object Image17: TImage
-    Left = 688
-    Height = 88
-    Top = 280
-    Width = 57
+    Left = 1376
+    Height = 176
+    Top = 560
+    Width = 114
     Proportional = True
   end
   object Image18: TImage
-    Left = 600
-    Height = 88
-    Top = 288
-    Width = 57
+    Left = 1200
+    Height = 176
+    Top = 576
+    Width = 114
     Proportional = True
   end
   object Image19: TImage
-    Left = 832
-    Height = 88
-    Top = 168
-    Width = 57
+    Left = 1664
+    Height = 176
+    Top = 336
+    Width = 114
     Proportional = True
   end
   object Image20: TImage
-    Left = 376
-    Height = 88
-    Top = 408
-    Width = 57
+    Left = 752
+    Height = 176
+    Top = 816
+    Width = 114
     Proportional = True
   end
   object Image21: TImage
-    Left = 8
-    Height = 90
-    Top = 616
-    Width = 90
+    Left = 16
+    Height = 180
+    Top = 1232
+    Width = 180
   end
   object Image22: TImage
-    Left = 1176
-    Height = 90
-    Top = 616
-    Width = 90
+    Left = 2352
+    Height = 180
+    Top = 1232
+    Width = 180
   end
   object Label2: TLabel
     Left = 1136
@@ -31333,7 +31334,7 @@ object Form2: TForm2
     Caption = 'Atout:'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -24
+    Font.Height = -48
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
@@ -31349,7 +31350,7 @@ object Form2: TForm2
     Caption = 'Manche:   '
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -24
+    Font.Height = -48
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
@@ -31358,14 +31359,14 @@ object Form2: TForm2
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 104
-    Height = 21
-    Top = 368
-    Width = 80
+    Left = 208
+    Height = 43
+    Top = 736
+    Width = 151
     Caption = 'Giovanni'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -19
+    Font.Height = -38
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
@@ -31373,14 +31374,14 @@ object Form2: TForm2
     ParentFont = False
   end
   object Label5: TLabel
-    Left = 616
-    Height = 21
-    Top = 128
-    Width = 38
+    Left = 1232
+    Height = 43
+    Top = 256
+    Width = 76
     Caption = 'Paul'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -19
+    Font.Height = -38
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
@@ -31388,14 +31389,14 @@ object Form2: TForm2
     ParentFont = False
   end
   object Label6: TLabel
-    Left = 1098
-    Height = 21
-    Top = 368
-    Width = 81
+    Left = 2196
+    Height = 43
+    Top = 736
+    Width = 144
     Caption = 'Martiniel'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -19
+    Font.Height = -38
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
@@ -31403,13 +31404,13 @@ object Form2: TForm2
     ParentFont = False
   end
   object Label7: TLabel
-    Left = 517
+    Left = 1034
     Height = 1
-    Top = 467
+    Top = 934
     Width = 1
     Font.CharSet = ANSI_CHARSET
     Font.Color = clLime
-    Font.Height = -24
+    Font.Height = -48
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
@@ -31418,14 +31419,14 @@ object Form2: TForm2
     ParentFont = False
   end
   object Label8: TLabel
-    Left = 800
-    Height = 29
-    Top = 116
-    Width = 105
+    Left = 1600
+    Height = 56
+    Top = 232
+    Width = 199
     Caption = 'Preneur:'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -24
+    Font.Height = -48
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
@@ -31442,7 +31443,7 @@ object Form2: TForm2
   object ImageList1: TImageList
     Height = 176
     Width = 114
-    Left = 52
+    Left = 104
     Bitmap = {
       4C7A2100000072000000B0000000B75307000000000078DAECBD87571569BA2E
       FE1FDC7BA6DBAC6D4E6D26E72C12443080620233282A2228184031A2606A1115
@@ -46454,7 +46455,7 @@ object Form2: TForm2
     }
   end
   object MainMenu1: TMainMenu
-    Left = 8
+    Left = 16
     object MenuItem1: TMenuItem
       Caption = 'Règles du jeu'
       OnClick = MenuItem1Click
@@ -46463,7 +46464,7 @@ object Form2: TForm2
   object Timer1: TTimer
     Enabled = False
     OnStartTimer = Timer1StartTimer
-    Left = 96
+    Left = 192
   end
   object ImageList2: TImageList
     Height = 50

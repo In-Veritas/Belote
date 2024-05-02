@@ -181,6 +181,11 @@ begin
       cartejouer:=main[1,1];
       jouercarte(cartejouer,1);
       Image3.visible:=False;
+      if (joueurquiabelote=1) and (main[1,1].atout=true) and ( (main[1,1].id[1]='R') OR (main[1,1].id[1]='D') ) then
+        begin
+          showmessage('Belote!');
+        end;
+
       main[1,1].jouable:=false;
       main[1,1].rang:=10;
       main[1,1].atout:=false;
@@ -210,6 +215,11 @@ begin
       cartejouer:=main[1,2];
       jouercarte(cartejouer,1);
       Image4.visible:= False;
+      if (joueurquiabelote=1) and (main[1,2].atout=true) and ( (main[1,2].id[1]='R') OR (main[1,2].id[1]='D') ) then
+        begin
+          showmessage('Belote!');
+        end;
+
       main[1,2].jouable:=false;
       main[1,2].rang:=10;
       main[1,2].atout:=false;
@@ -229,6 +239,11 @@ begin
       cartejouer:=main[1,3];
       jouercarte(cartejouer,1);
       Image5.visible:= False;
+      if (joueurquiabelote=1) and (main[1,3].atout=true) and ( (main[1,3].id[1]='R') OR (main[1,3].id[1]='D') ) then
+        begin
+          showmessage('Belote!');
+        end;
+
       main[1,3].jouable:=false;
       main[1,3].rang:=10;
       main[1,3].atout:=false;
@@ -246,6 +261,12 @@ begin
       cartejouer:=main[1,4];
       jouercarte(cartejouer,1);
       Image6.visible:= False;
+
+      if (joueurquiabelote=1) and (main[1,4].atout=true) and ( (main[1,4].id[1]='R') OR (main[1,4].id[1]='D') ) then
+        begin
+          showmessage('Belote!');
+        end;
+
       main[1,4].jouable:=false;
       main[1,4].rang:=10;
       main[1,4].atout:=false;
@@ -263,6 +284,11 @@ begin
       cartejouer:=main[1,5];
       jouercarte(cartejouer,1);
       Image7.visible:= False;
+      if (joueurquiabelote=1) and (main[1,5].atout=true) and ( (main[1,5].id[1]='R') OR (main[1,5].id[1]='D') ) then
+        begin
+          showmessage('Belote!');
+        end;
+
       main[1,5].jouable:=false;
       main[1,5].rang:=10;
       main[1,5].atout:=false;
@@ -280,6 +306,11 @@ begin
       cartejouer:=main[1,6];
       jouercarte(cartejouer,1);
       Image8.visible:= False;
+      if (joueurquiabelote=1) and (main[1,6].atout=true) and ( (main[1,6].id[1]='R') OR (main[1,6].id[1]='D') ) then
+        begin
+          showmessage('Belote!');
+        end;
+
       main[1,6].jouable:=false;
       main[1,6].rang:=10;
       main[1,6].atout:=false;
@@ -297,6 +328,10 @@ begin
       cartejouer:=main[1,7];
       jouercarte(cartejouer,1);
       Image9.visible:= False;
+      if (joueurquiabelote=1) and (main[1,7].atout=true) and ( (main[1,7].id[1]='R') OR (main[1,7].id[1]='D') ) then
+        begin
+          showmessage('Belote!');
+        end;
       main[1,7].jouable:=false;
       main[1,7].rang:=10;
       main[1,7].atout:=false;
@@ -355,6 +390,16 @@ begin
       cartejouer:=main[1,0];
       jouercarte(cartejouer,1);
       Image2.visible:= False;
+      if (joueurquiabelote=1) and (main[1,0].atout=true) and ( (main[1,0].id[1]='R') OR (main[1,0].id[1]='D') ) then
+        begin
+          showmessage('Belote!');
+        end;
+      main[1,0].jouable:=false;
+      main[1,0].rang:=10;
+      main[1,0].atout:=false;
+      main[1,0].id:='00';
+      main[1,0].id_image:=0;
+
     end;
 end;
 
