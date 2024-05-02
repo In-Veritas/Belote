@@ -1,13 +1,11 @@
 Ordonner les procedures de deckstructure!!
-4- INTELLIGENCE ARTIFICIEL POUR PRENDRE OU PAS
-5- DECOUVRIR LE SLEEP 
-7- SAUVEGARDER/CHARGER
-8- AFFICHES LES REGLES DANS LE MENUs
-9- RECOMMENCER PAR LE MENU              
-10- travailler plus sur le cas ou length(plie a compter)=0  
-12- Faire un IF 4x pour afficher le nom/image de l'atout comme il faut
-13- AMELIORER L'IA
-14- VERIFICAR INTERVALOS DAS MUSICAS
-15- on peut pas prendre deux à piques
-16- verifier le comptage des points et le scenario ou t'es capo
-
+1- INTELLIGENCE ARTIFICIEL POUR PRENDRE OU PAS
+2- VERIFIER LA BELOTE!
+2- AFFICHES LES REGLES DANS LE MENUs
+3- RECOMMENCER PAR LE MENU              
+4- travailler plus sur le cas ou length(plie a compter)=0  
+5- Faire un IF 4x pour afficher le nom/image de l'atout comme il faut
+6- AMELIORER L'IA
+7- on peut p1as prendre deux à piques
+8- verifier le comptage des points et le scenario ou t'es capo
+9- Affricher qui a pris

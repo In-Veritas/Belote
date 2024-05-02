@@ -45,7 +45,11 @@ var
 
 
 
-
+procedure evaluation_point_main (joueur:integer;
+                                var P,C,T,K:boolean;
+                                var max:string);
+procedure prendre_IA (joueur,numeroduchoix:integer;
+                     var pris:boolean);
 procedure init_jeu;
 procedure debut_manche(joueur: integer);
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);
@@ -115,6 +119,205 @@ implementation
 
 USES Unit2, unit4, unit5, unit6;
 
+procedure evaluation_point_main (joueur:integer;
+                                var P,C,T,K:boolean;
+                                var max:string);
+VAR
+  CompteurP,CompteurC,CompteurT,CompteurK,maximum,J:integer;
+
+begin
+  CompteurP:=0;
+  CompteurC:=0;
+  CompteurT:=0;
+  CompteurK:=0;
+
+  for J:=0 to 4 do
+    begin
+
+      if main[joueur,J].id[1]='V' then  //si vallet poids très important
+       begin
+        if main[joueur,J].id[2]='C' then
+          begin
+            CompteurC:=CompteurC+10;
+          end;
+        if main[joueur,J].id[2]='P' then
+          begin
+            CompteurP:=CompteurP+10;
+          end;
+        if main[joueur,J].id[2]='T' then
+          begin
+            CompteurT:=CompteurT+10;
+          end;
+        if main[joueur,J].id[2]='K' then
+          begin
+            CompteurK:=CompteurK+10;
+          end;
+       end;
+
+      if main[joueur,J].id[1]='9' then  //si 9 poids important
+       begin
+        if main[joueur,J].id[2]='C' then
+          begin
+            CompteurC:=CompteurC+8;
+          end;
+        if main[joueur,J].id[2]='P' then
+          begin
+            CompteurP:=CompteurP+8;
+          end;
+        if main[joueur,J].id[2]='T' then
+          begin
+            CompteurT:=CompteurT+8;
+          end;
+        if main[joueur,J].id[2]='K' then
+          begin
+            CompteurK:=CompteurK+8;
+          end;
+       end;
+
+      if main[joueur,J].id[1]='A' then   //si as point important
+       begin
+        if main[joueur,J].id[2]='C' then
+          begin
+            CompteurC:=CompteurC+6;
+          end;
+        if main[joueur,J].id[2]='P' then
+          begin
+            CompteurP:=CompteurP+6;
+          end;
+        if main[joueur,J].id[2]='T' then
+          begin
+            CompteurT:=CompteurT+6;
+          end;
+        if main[joueur,J].id[2]='K' then
+          begin
+            CompteurK:=CompteurK+6;
+          end;
+       end;
+
+      if main[joueur,J].id[1]='X' then  //si 10 point important
+       begin
+        if main[joueur,J].id[2]='C' then
+          begin
+            CompteurC:=CompteurC+5;
+          end;
+        if main[joueur,J].id[2]='P' then
+          begin
+            CompteurP:=CompteurP+5;
+          end;
+        if main[joueur,J].id[2]='T' then
+          begin
+            CompteurT:=CompteurT+5;
+          end;
+        if main[joueur,J].id[2]='K' then
+          begin
+            CompteurK:=CompteurK+5;
+          end;
+       end;
+    end;
+
+  //si il a un point supérieur à 15 il prend!
+  if CompteurK>15 then
+    begin
+      K:=true;
+    end;
+
+  if CompteurC>15 then
+    begin
+      C:=true;
+    end;
+
+  if CompteurT>15 then
+    begin
+      T:=true;
+    end;
+
+  if CompteurP>15 then
+    begin
+      P:=true;
+    end;
+
+  //prendre le meilleur score
+  maximum:=CompteurP;
+  if P=true then
+    begin
+      max:='P'
+    end;
+
+  if maximum < CompteurK then
+    begin
+      maximum:=CompteurK;
+      if K=true then
+        begin
+          max:='K';
+        end;
+    end;
+  if maximum < CompteurT then
+    begin
+      maximum:=CompteurT;
+      if T=true then
+        begin
+          max:='T';
+        end;
+    end;
+  if maximum < CompteurC then
+    begin
+      maximum:=CompteurC;
+      if C=true then
+        begin
+          max:='C';
+        end;
+    end;
+
+end;
+
+procedure prendre_IA (joueur,numeroduchoix:integer;
+                     var pris:boolean);
+VAR
+  P,C,T,K:boolean;
+  max,couleur:string;
+begin
+  //selon internet, faut compter le nb de point qu'on a, c'est cool donc!
+  P:=false;
+  C:=false;
+  T:=false;
+  K:=false;
+  max:='';
+  couleur:=deck[21].id[2];
+  evaluation_point_main(joueur,P,C,T,K,max);
+
+  if numeroduchoix=1 then
+    begin
+      if (couleur='C') and (C=true) then
+        begin
+          pris:=true;
+          atout:='C';
+        end;
+      if (couleur='K') and (K=true) then
+        begin
+          pris:=true;
+          atout:='K';
+        end;
+      if (couleur='P') and (P=true) then
+        begin
+          pris:=true;
+          atout:='P';
+        end;
+      if (couleur='T') and (T=true) then
+        begin
+          pris:=true;
+          atout:='T';
+        end;
+    end;
+
+  if numeroduchoix=2 then
+    begin
+      if max<>'' then
+        begin
+          pris:=true;
+          atout:=max;
+        end;
+    end;
+end;
 
 procedure init_jeu;
 var
@@ -405,7 +608,7 @@ begin
   focus_joueur:=joueur_gagnant;
   Delete(centre,1,4);
 
-  if joueur_gagnant=0 or joueur_gagnant=1 then
+  if (joueur_gagnant=0) or (joueur_gagnant=1) then
   begin
      Showmessage('Vous avez gagné la manche!');
   end;
@@ -435,6 +638,7 @@ begin
   Form2.Image16.Visible:=False;
   Form2.Image17.Visible:=False;
   Form2.Image14.Visible:=False;
+  focus_joueur:=joueur_gagnant;
 
   if manche<=8 then
   begin
@@ -530,6 +734,7 @@ if length(centre) = 0 then
          begin
              for i:=0 to High(main[joueur]) do
               begin
+                showmessage('Pas d atout, jouez n importe quel carte');
                 main[joueur,i].jouable:= True;
                 jouable_trouve:= True;
               end;
@@ -910,7 +1115,7 @@ begin
 
                           else
         begin
-          //Choix de la IA
+         prendre_IA (joueurquiprend,1,pris); //choix IA
         end;
       if pris then
       begin
@@ -921,7 +1126,6 @@ begin
                  deck[j].atout:=True;
                  if deck[j].rang=6 then deck[i].rang:=0;
                  if deck[j].rang=7 then deck[i].rang:=1;
-                 showmessage(deck[j].id + '  ' + inttostr(deck[j].rang)+ '  '+booltostr(deck[j].atout)+' DECK ')  ;
                end;
              end;
            for j:=1 to 4 do
@@ -933,7 +1137,6 @@ begin
                         main[j,k].atout:=True;
                         if main[j,k].rang=6 then main[j,k].rang:=0;
                         if main[j,k].rang=7 then main[j,k].rang:=1;
-                        showmessage(main[j,k].id + '  ' + inttostr(main[j,k].rang)+ '  '+booltostr(main[j,k].atout)+' MAIN ')  ;
                         end;
                    end;
              end;
@@ -970,7 +1173,7 @@ begin
 
                           else
         begin
-          //Choix de la IA 2
+          prendre_IA (joueurquiprend,2,pris); //Choix de la IA 2
         end;
       if pris then
       begin
@@ -981,7 +1184,6 @@ begin
                  deck[j].atout:=True;
                  if deck[j].rang=6 then deck[j].rang:=0;
                  if deck[j].rang=7 then deck[j].rang:=1;
-                 showmessage(deck[j].id + '  ' + inttostr(deck[j].rang)+ '  '+booltostr(deck[j].atout)+' DECK ')  ;
                end;
              end;
            for j:=1 to 4 do
@@ -993,7 +1195,6 @@ begin
                           main[j,k].atout:=True;
                           if main[j,k].rang=6 then main[j,k].rang:=0;
                           if main[j,k].rang=7 then main[j,k].rang:=1;
-                          showmessage(main[j,k].id + '  ' + inttostr(main[j,k].rang)+ '  '+booltostr(main[j,k].atout)+' MAIN ')  ;
                         end;
                    end;
              end;

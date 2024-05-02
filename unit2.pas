@@ -111,7 +111,9 @@ begin
         fin_tour(centre,focus_joueur);
       end                 else
       begin
+        showmessage('player->giovanni');
         cartes_jouables(2);
+
       end;
 
     end;
@@ -131,7 +133,9 @@ begin
         cartes_joues:=0;
       end                 else
       begin
+        showmessage('martiniel->player');
         cartes_jouables(1);
+
       end;
     end;
 
@@ -147,6 +151,7 @@ begin
         cartes_joues:=0;
       end                 else
       begin
+        showmessage('paul ->martiniel');
         cartes_jouables(4);
       end;
     end;
@@ -162,7 +167,9 @@ begin
          cartes_joues:=0;
        end                 else
       begin
+        showmessage('giovanni->paul');
         cartes_jouables(3);
+
       end;
     end;
 end;
@@ -273,7 +280,10 @@ begin
 end;
 
 procedure TForm2.FormShow(Sender: TObject);
+var
+nom_joueur: string;
 begin
+  randomize;
   Form2.ImageList1.GetBitmap(0,Form2.Image2.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(0,Form2.Image3.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(0,Form2.Image4.Picture.Bitmap);
@@ -281,7 +291,22 @@ begin
   Form2.ImageList1.GetBitmap(0,Form2.Image6.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(0,Form2.Image18.Picture.Bitmap);
 
-  focus_joueur:=1;
+  focus_joueur:=random(4)+1;
+  if focus_joueur=1 then
+  begin
+    nom_joueur:= 'Toi!';
+  end else if focus_joueur=2 then
+  begin
+    nom_joueur:= 'Giovanni';
+  end else if focus_joueur=3 then
+  begin
+    nom_joueur:= 'Paul';
+  end else if focus_joueur=4 then
+  begin
+    nom_joueur:= 'Martiniel';
+  end;
+
+  showmessage(nom_joueur + ' Commence!');
   etat:='choix';
   Form2.Hint:='Cliquez sur le tapis pour commencer';
   Form2.Showhint:=True;

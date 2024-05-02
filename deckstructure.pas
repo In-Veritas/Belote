@@ -638,6 +638,7 @@ begin
   Form2.Image16.Visible:=False;
   Form2.Image17.Visible:=False;
   Form2.Image14.Visible:=False;
+  focus_joueur:=joueur_gagnant;
 
   if manche<=8 then
   begin
@@ -1124,7 +1125,6 @@ begin
                  deck[j].atout:=True;
                  if deck[j].rang=6 then deck[i].rang:=0;
                  if deck[j].rang=7 then deck[i].rang:=1;
-                 showmessage(deck[j].id + '  ' + inttostr(deck[j].rang)+ '  '+booltostr(deck[j].atout)+' DECK ')  ;
                end;
              end;
            for j:=1 to 4 do
@@ -1136,7 +1136,6 @@ begin
                         main[j,k].atout:=True;
                         if main[j,k].rang=6 then main[j,k].rang:=0;
                         if main[j,k].rang=7 then main[j,k].rang:=1;
-                        showmessage(main[j,k].id + '  ' + inttostr(main[j,k].rang)+ '  '+booltostr(main[j,k].atout)+' MAIN ')  ;
                         end;
                    end;
              end;
@@ -1184,7 +1183,6 @@ begin
                  deck[j].atout:=True;
                  if deck[j].rang=6 then deck[j].rang:=0;
                  if deck[j].rang=7 then deck[j].rang:=1;
-                 showmessage(deck[j].id + '  ' + inttostr(deck[j].rang)+ '  '+booltostr(deck[j].atout)+' DECK ')  ;
                end;
              end;
            for j:=1 to 4 do
@@ -1196,7 +1194,6 @@ begin
                           main[j,k].atout:=True;
                           if main[j,k].rang=6 then main[j,k].rang:=0;
                           if main[j,k].rang=7 then main[j,k].rang:=1;
-                          showmessage(main[j,k].id + '  ' + inttostr(main[j,k].rang)+ '  '+booltostr(main[j,k].atout)+' MAIN ')  ;
                         end;
                    end;
              end;
