@@ -76,47 +76,6 @@ procedure choix_atout;
 procedure fin_tour(centre_fintour : tableau_centre);
 procedure fin_jeu(joueur_preneur:integer; dix_de_dern, belote:boolean);
 
-
-{**FAIT etat choix d'aout
-
-verifie focus joueur
-variable pris: boolean
-cartes de main visibles mais pas clickables
-boucle 1-4
-  joeurquiprend va etre focusjoueur
-  if elif pour chaque cas de joueur
-  si joueurquiprend depasse 4 il CHUTE a 1
-  si pris break
-si not pris
-   boucle 1-4
-         changer les possibilitês de choix
-         joeurquiprend va etre focusjoueur
-        if elif pour chaque cas de joueur}
-
-{**FAIT etat debut
-
-        verifie focus joueur
-        faire boucle 1-8
-        	boucle 1-4
-        		joeurquijoue va etre focusjoueur
-        		if elif pour chaque cas de joueur
-        		si joueurquijoue depasse 4 il CHUTE a 1
-        	il appelle fintour
-                rajouter 10 de dern
-        change letat du jeu pour fin    }
-{etat fin
-Ouvre le form3 et compte le plie de lequipe qui a pris
-      obs. belote, points de l²aout
-      on verifie les cas >81 <81 =162
-      on affiche qui a gagne
-      on demande au joueur humain si il veut continuer
-      si oui
-         On reinitialize tout (c chian)
-      sinon
-      APPLICATION TERMINATE!!!!!!!!!!!!!!!!!!!
-
-}
-
 implementation
 
 USES Unit2, unit4, unit5, unit6;
@@ -590,8 +549,6 @@ begin
      chaine:=chaine+' '+main[Joueur,i].id
    end;
 
-  showmessage(chaine);
-
   nombre_de_carte:=length(main[joueur])-1;
   for I:=Indice_carte_jouer+1 to High(main[Joueur]) do
     begin
@@ -615,8 +572,6 @@ begin
    begin
      chaine:=chaine+' '+main[Joueur,i].id
    end;
-
-  showmessage(chaine);
 
 end;
 

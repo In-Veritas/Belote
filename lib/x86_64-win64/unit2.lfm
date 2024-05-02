@@ -1,10 +1,10 @@
 object Form2: TForm2
   Left = 511
-  Height = 702
+  Height = 720
   Top = 136
   Width = 1280
   Caption = 'Belote'
-  ClientHeight = 702
+  ClientHeight = 720
   ClientWidth = 1280
   Icon.Data = {
     942C000000000100010000000000010020007E2C00001600000089504E470D0A
@@ -31342,9 +31342,9 @@ object Form2: TForm2
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 304
+    Left = 152
     Height = 29
-    Top = 120
+    Top = 60
     Width = 124
     Caption = 'Manche:   '
     Font.CharSet = ANSI_CHARSET
@@ -31434,9 +31434,9 @@ object Form2: TForm2
     ParentFont = False
   end
   object Image23: TImage
-    Left = 1208
+    Left = 1216
     Height = 50
-    Top = 16
+    Top = 12
     Width = 50
   end
   object ImageList1: TImageList
@@ -46468,8 +46468,8 @@ object Form2: TForm2
   object ImageList2: TImageList
     Height = 50
     Width = 50
-    Left = 137
-    Top = 19
+    Left = 69
+    Top = 10
     Bitmap = {
       4C7A0400000032000000320000007E0C00000000000078DAED9D0B704DD71AC7
       AB46ABAD5729F51EEA51CF0EAAEDD454A734894A2424F14A3C426E0841C849EA

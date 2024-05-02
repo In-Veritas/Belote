@@ -179,7 +179,6 @@ begin
   if main[1,1].jouable=true then
     begin
       cartejouer:=main[1,1];
-      jouercarte(cartejouer,1);
       Image3.visible:=False;
       if (joueurquiabelote=1) and (main[1,1].atout=true) and ( (main[1,1].id[1]='R') OR (main[1,1].id[1]='D') ) then
         begin
@@ -191,6 +190,8 @@ begin
       main[1,1].atout:=false;
       main[1,1].id:='00';
       main[1,1].id_image:=0;
+
+      jouercarte(cartejouer,1);
     end;
 end;
 
@@ -213,7 +214,6 @@ begin
   if main[1,2].jouable=true then
     begin
       cartejouer:=main[1,2];
-      jouercarte(cartejouer,1);
       Image4.visible:= False;
       if (joueurquiabelote=1) and (main[1,2].atout=true) and ( (main[1,2].id[1]='R') OR (main[1,2].id[1]='D') ) then
         begin
@@ -225,6 +225,8 @@ begin
       main[1,2].atout:=false;
       main[1,2].id:='00';
       main[1,2].id_image:=0;
+
+      jouercarte(cartejouer,1);
     end;
 
 
@@ -237,7 +239,6 @@ begin
   if main[1,3].jouable=true then
     begin
       cartejouer:=main[1,3];
-      jouercarte(cartejouer,1);
       Image5.visible:= False;
       if (joueurquiabelote=1) and (main[1,3].atout=true) and ( (main[1,3].id[1]='R') OR (main[1,3].id[1]='D') ) then
         begin
@@ -249,6 +250,8 @@ begin
       main[1,3].atout:=false;
       main[1,3].id:='00';
       main[1,3].id_image:=0;
+
+      jouercarte(cartejouer,1);
     end;
 end;
 
@@ -259,7 +262,6 @@ begin
   if main[1,4].jouable=true then
     begin
       cartejouer:=main[1,4];
-      jouercarte(cartejouer,1);
       Image6.visible:= False;
 
       if (joueurquiabelote=1) and (main[1,4].atout=true) and ( (main[1,4].id[1]='R') OR (main[1,4].id[1]='D') ) then
@@ -272,6 +274,8 @@ begin
       main[1,4].atout:=false;
       main[1,4].id:='00';
       main[1,4].id_image:=0;
+
+      jouercarte(cartejouer,1);
     end;
 end;
 
@@ -282,7 +286,6 @@ begin
   if main[1,5].jouable=true then
     begin
       cartejouer:=main[1,5];
-      jouercarte(cartejouer,1);
       Image7.visible:= False;
       if (joueurquiabelote=1) and (main[1,5].atout=true) and ( (main[1,5].id[1]='R') OR (main[1,5].id[1]='D') ) then
         begin
@@ -294,6 +297,8 @@ begin
       main[1,5].atout:=false;
       main[1,5].id:='00';
       main[1,5].id_image:=0;
+
+      jouercarte(cartejouer,1);
     end;
 end;
 
@@ -304,7 +309,6 @@ begin
   if main[1,6].jouable=true then
     begin
       cartejouer:=main[1,6];
-      jouercarte(cartejouer,1);
       Image8.visible:= False;
       if (joueurquiabelote=1) and (main[1,6].atout=true) and ( (main[1,6].id[1]='R') OR (main[1,6].id[1]='D') ) then
         begin
@@ -316,6 +320,8 @@ begin
       main[1,6].atout:=false;
       main[1,6].id:='00';
       main[1,6].id_image:=0;
+
+      jouercarte(cartejouer,1);
     end;
 end;
 
@@ -326,7 +332,7 @@ begin
   if main[1,7].jouable=true then
     begin
       cartejouer:=main[1,7];
-      jouercarte(cartejouer,1);
+
       Image9.visible:= False;
       if (joueurquiabelote=1) and (main[1,7].atout=true) and ( (main[1,7].id[1]='R') OR (main[1,7].id[1]='D') ) then
         begin
@@ -337,6 +343,8 @@ begin
       main[1,7].atout:=false;
       main[1,7].id:='00';
       main[1,7].id_image:=0;
+
+      jouercarte(cartejouer,1);
     end;
 end;
 
@@ -388,7 +396,7 @@ begin
   if main[1,0].jouable=true then
     begin
       cartejouer:=main[1,0];
-      jouercarte(cartejouer,1);
+
       Image2.visible:= False;
       if (joueurquiabelote=1) and (main[1,0].atout=true) and ( (main[1,0].id[1]='R') OR (main[1,0].id[1]='D') ) then
         begin
@@ -400,6 +408,7 @@ begin
       main[1,0].id:='00';
       main[1,0].id_image:=0;
 
+      jouercarte(cartejouer,1);
     end;
 end;
 
