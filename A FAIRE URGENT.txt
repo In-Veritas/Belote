@@ -1,30 +1,13 @@
 Ordonner les procedures de deckstructure!!
-
-1- VERIFIER L'AFFICHAGE DES CARTES SUR CENTRE ET QUI GAGNE A CHAQUE MANCHE
---> Les cartes s'affiche bien! Pas encore vérifier qui gagne
-
-Problème trouver:
-- même si on met un atout il le voit pas comme atout 
-
-2- ENLEVER LES CARTES JOUÉS DE LA MAIN DES JOUEURS ARTIFICIELS
---> FAIT!!!!!!!!
-
-3- REDISTRIBUER LES CARTES QUAND PERSONNE NE PREND
---> FAIT
-
 4- INTELLIGENCE ARTIFICIEL POUR PRENDRE OU PAS
-
 5- DECOUVRIR LE SLEEP 
-
-6- NE PAS LAISSER LE JOUEUR PRENDRE l'ATOUT DE BASE À "DEUX"
---> Fait!!
-
 7- SAUVEGARDER/CHARGER
 8- AFFICHES LES REGLES DANS LE MENUs
 9- RECOMMENCER PAR LE MENU              
 10- travailler plus sur le cas ou length(plie a compter)=0  
-11- DEMANDER A IJI COMMENT CHANGER LA RESOLUTION D'IMAGELIST POUR LE FORM6]
 12- Faire un IF 4x pour afficher le nom/image de l'atout comme il faut
 13- AMELIORER L'IA
-w
+14- VERIFICAR INTERVALOS DAS MUSICAS
+15- on peut pas prendre deux à piques
+16- verifier le comptage des points et le scenario ou t'es capo
 

@@ -19,6 +19,7 @@ type
     Panel3: TPanel;
     Panel4: TPanel;
     procedure FormShow(Sender: TObject);
+
     procedure Panel1Click(Sender: TObject);
     procedure Panel2Click(Sender: TObject);
     procedure Panel3Click(Sender: TObject);
@@ -57,7 +58,10 @@ VAR
   couleur:string;
 begin
   couleur:=deck[21].id[2];
-
+  Form5.Panel1.Enabled:=true;
+  Form5.Panel2.Enabled:=true;
+  Form5.Panel3.Enabled:=true;
+  Form5.Panel4.Enabled:=true;
   if couleur='C' then
     begin
       Form5.Panel1.Enabled:=true;
@@ -97,6 +101,8 @@ begin
   Form5.showhint:=true;
 
 end;
+
+
 
 procedure TForm5.Panel2Click(Sender: TObject);
 begin

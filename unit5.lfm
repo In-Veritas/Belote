@@ -4257,36 +4257,35 @@ object Form5: TForm5
       900000000049454E44AE426082
     }
   end
-  object Panel1: TPanel
-    Left = 168
-    Height = 106
-    Top = 32
-    Width = 104
-    TabOrder = 0
-    OnClick = Panel1Click
-  end
   object Panel2: TPanel
     Left = 168
     Height = 106
     Top = 160
     Width = 104
-    TabOrder = 1
+    TabOrder = 0
     OnClick = Panel2Click
   end
   object Panel3: TPanel
-    Left = 24
+    Left = 32
     Height = 106
     Top = 32
     Width = 104
-    TabOrder = 2
+    TabOrder = 1
     OnClick = Panel3Click
   end
   object Panel4: TPanel
-    Left = 24
+    Left = 32
     Height = 106
     Top = 160
     Width = 104
-    TabOrder = 3
+    TabOrder = 2
     OnClick = Panel4Click
+  end
+  object Panel1: TPanel
+    Left = 168
+    Height = 107
+    Top = 32
+    Width = 108
+    TabOrder = 3
   end
 end

@@ -352,34 +352,37 @@ begin
 
   for i:=1 to 4 do
     begin
-      if centre_fintour[i].atout=true then    //passe jamais ici?????
-        begin
-           atout_trouve:=true;
-           joueur_gagnant:=i;
-           plus_fort:=centre_fintour[i];
-           for j:=i to 4 do
-             begin
-                   if (centre_fintour[i].atout=true) AND (centre_fintour[i].rang < plus_fort.rang) then
-                     begin
-                      joueur_gagnant:=j;
-                      plus_fort:=centre_fintour[i];
-                     end;
-             end;
-        end
+    if centre_fintour[i].atout then
+      begin
+         atout_trouve:=true;
+         joueur_gagnant:=i;
+         plus_fort:=centre_fintour[i];
+      end;
     end;
-  //Si il n'y a pas d'atout
-
-  if atout_trouve=false then
+   if atout_trouve then
+   begin
+     for i:=1 to 4 do
+     begin
+           if (centre_fintour[i].atout=true) AND (centre_fintour[i].rang < plus_fort.rang) then
+             begin
+              joueur_gagnant:=i;
+              plus_fort:=centre_fintour[i];
+             end;
+     end;
+   end else
     begin
        plus_fort:=centre_fintour[focus_joueur];
        for i:=1 to 4 do
          begin
            if (centre_fintour[i].rang < plus_fort.rang)AND(centre_fintour[i].id[2]=plus_fort.id[2])then
-             joueur_gagnant:=i;
+             begin
+              joueur_gagnant:=i;
+              plus_fort:=centre_fintour[i];
+             end;
          end;
     end;
   //On envoie les cartes à la pile de l'équipe gagnante:
-  if joueur_gagnant > 2 then
+  if (joueur_gagnant = 2) or(joueur_gagnant = 4) then
     begin
        for i:=1 to 4 do
          begin
@@ -399,8 +402,7 @@ begin
   focus_joueur:=joueur_gagnant;
   Delete(centre,1,4);
 
-  showmessage(inttostr(joueur_gagnant));
-  if joueur_gagnant=0 then
+  if (joueur_gagnant=0) or (joueur_gagnant=1) then
   begin
      Showmessage('Vous avez gagné la manche!');
   end;
@@ -448,6 +450,7 @@ begin
   end;
 
 end;
+
 procedure modificationmain (Joueur,Indice_carte_jouer:integer);
 VAR
   tableau_carte:array of carte;
@@ -473,8 +476,7 @@ begin
   SetLength(main[Joueur],nombre_de_carte);
 
 end;
-//Vérifie quelles cartes dans la main sont jouables, et donne un array dynamique de booleans pour dire quels sont jouables
-procedure cartes_jouables(joueur:integer);
+procedure cartes_jouables(joueur:integer); //Vérifie quelles cartes dans la main sont jouables, et donne un array dynamique de booleans pour dire quels sont jouables
 var
 i,j: integer;
 plus_fort: carte;
@@ -916,7 +918,7 @@ begin
                  deck[j].atout:=True;
                  if deck[j].rang=6 then deck[i].rang:=0;
                  if deck[j].rang=7 then deck[i].rang:=1;
-                 showmessage(deck[j].id + 'DECK aaa ' + booltostr(deck[i].atout));
+                 showmessage(deck[j].id + '  ' + inttostr(deck[j].rang)+ '  '+booltostr(deck[j].atout)+' DECK ')  ;
                end;
              end;
            for j:=1 to 4 do
@@ -927,8 +929,8 @@ begin
                         begin
                         main[j,k].atout:=True;
                         if main[j,k].rang=6 then main[j,k].rang:=0;
-                        if main[j,k].rang=7 then main[j,k].rang:=7;
-                        showmessage(main[j,k].id + 'MAIN aaa ' + booltostr(deck[i].atout));
+                        if main[j,k].rang=7 then main[j,k].rang:=1;
+                        showmessage(main[j,k].id + '  ' + inttostr(main[j,k].rang)+ '  '+booltostr(main[j,k].atout)+' MAIN ')  ;
                         end;
                    end;
              end;
@@ -971,11 +973,26 @@ begin
       begin
            for j:=1 to 32 do
              begin
-               if deck[i].id[2]=atout then
+               if deck[j].id[2]=atout then
                begin
-                 deck[i].atout:=True;
-                 showmessage(deck[i].id + 'DECK aaa ' + booltostr(deck[i].atout));
+                 deck[j].atout:=True;
+                 if deck[j].rang=6 then deck[j].rang:=0;
+                 if deck[j].rang=7 then deck[j].rang:=1;
+                 showmessage(deck[j].id + '  ' + inttostr(deck[j].rang)+ '  '+booltostr(deck[j].atout)+' DECK ')  ;
                end;
+             end;
+           for j:=1 to 4 do
+             begin
+               for k:=0 to length(main[j])do
+                   begin
+                        if main[j,k].id[2]=atout then
+                        begin
+                          main[j,k].atout:=True;
+                          if main[j,k].rang=6 then main[j,k].rang:=0;
+                          if main[j,k].rang=7 then main[j,k].rang:=1;
+                          showmessage(main[j,k].id + '  ' + inttostr(main[j,k].rang)+ '  '+booltostr(main[j,k].atout)+' MAIN ')  ;
+                        end;
+                   end;
              end;
            deck[21].pos:='main';
            preneur:=I;
@@ -1066,9 +1083,6 @@ begin
     Form6.label2.caption:='Vous etes dedans!';
   end;
 end;
-
-//Initialization du basedeck
-
 
 
 end.
