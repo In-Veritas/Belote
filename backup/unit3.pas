@@ -38,7 +38,7 @@ DISTRIBUITION INITIALE
   Du moment oú le form2 est activé:
   Un array 1..32 de cartes est crée avec les cartes de deckStructure mélagés de façon aleatoire
      FAIT**Faire fonction qui prends l'array de de Init_Cartes, et qui retourne un array mélangé. Placer cette fonction dans l'unité deckStructure
-     FAIT**C'est l'array mélangé qu'on va travailler avec, sa position est 'deck'
+     FAIT**C'est l'array mélangé qu'on va travailler avec, swwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwa position est 'deck'
   On fera la distruibuition initial (3-3-3-3, 2-2-2-2), on prennant les cartes du deck melangé par ordre, et on montrera la carté à prendre
      FAIT**Procedure de distribuition qui change la position des cartes de 'deck' pour 'main'
      FAIT**Tri de la main a la fin(plus élegant)

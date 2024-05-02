@@ -316,6 +316,9 @@ basedeck[31].id_image:=32;
 //******************
 
 end;
+
+end;
+
 procedure debut_manche(joueur: integer);
 var I:integer;
 begin
@@ -396,8 +399,8 @@ begin
   focus_joueur:=joueur_gagnant;
   Delete(centre,1,4);
 
-
-  if joueur_gagnant=1 then
+  showmessage(inttostr(joueur_gagnant));
+  if joueur_gagnant=0 then
   begin
      Showmessage('Vous avez gagné la manche!');
   end;
@@ -415,10 +418,11 @@ begin
   if joueur_gagnant=4 then
   begin
     Showmessage('Martiniel a gagné la manche');
+    end;
+  if joueur_gagnant=5 then
+  begin
+    showmessage('fodeu');
   end;
-
-
-  form2.timer1.Enabled:=True;
 
   manche:=manche+1;
   cartes_joues:=0;
@@ -483,47 +487,49 @@ if length(centre) = 0 then
       begin
         main[joueur,i].jouable:= True;
       end;
-  end
-                      else
+  end else
+  begin
+    if centre[focus_joueur].atout=True then
+      begin
+         plus_fort:=centre[focus_joueur];
 
-  if centre[focus_joueur].atout=True then
-    begin
-       plus_fort:=centre[focus_joueur];
+         for i:=1 to length(centre) do
+           begin
+             if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then
+               begin
+                 plus_fort:=centre[i];
+               end;
+           end;
 
-       for i:=1 to length(centre) do //a quoi ça sert??????
+
+         for i:=0 to High(main[joueur])do
          begin
-           if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then
-             begin
-               plus_fort:=centre[i];
-             end;
+           if (plus_fort.rang < main[joueur,i].rang) AND (main[joueur,i].atout) then
+           begin
+           main[joueur,i].jouable:=True;
+           jouable_trouve:= True;
+           end;
          end;
-
-
-       for i:=0 to High(main[joueur])do
-       begin
-         if plus_fort.rang > main[joueur,i].rang then main[joueur,i].jouable:=True;
-         jouable_trouve:= True;
-       end;
-       if not(jouable_trouve) then
-       begin
-          for i:=0 to High(main[joueur])do
-          begin
-            if main[joueur,i].atout then
+         if not(jouable_trouve) then
+         begin
+            for i:=0 to High(main[joueur])do
             begin
-              jouable_trouve:= True;
-              main[joueur,i].jouable:=true;
+              if main[joueur,i].atout then
+              begin
+                jouable_trouve:= True;
+                main[joueur,i].jouable:=true;
+              end;
             end;
-          end;
-       end;
-       if not(jouable_trouve) then
-       begin
-           for i:=0 to High(main[joueur]) do
-            begin
-              main[joueur,i].jouable:= True;
-              jouable_trouve:= True;
-            end;
-       end;
-    end else
+         end;
+         if not(jouable_trouve) then
+         begin
+             for i:=0 to High(main[joueur]) do
+              begin
+                main[joueur,i].jouable:= True;
+                jouable_trouve:= True;
+              end;
+         end;
+      end else
     begin
       for i:=0 to High(main[joueur]) do
       begin
@@ -582,10 +588,10 @@ if length(centre) = 0 then
         end;
 
 
-
+    end;
     if joueur<>1 then
      begin
-       //ici mettre procédure qui choisir la meilleur carte à jouer pour J artificiel
+       //ici mettre procédure qui choisi la meilleur carte à jouer pour J artificiel
        for i:=0 to High(main[joueur]) do
        begin
          if main[joueur,i].jouable      then
@@ -885,7 +891,7 @@ procedure choix_atout;
 var
   pris:boolean;
   joueurquiprend:integer;
-  I,J:integer;
+  I,J,K:integer;
 begin
   pris:=false;
   joueurquiprend:=focus_joueur;
@@ -905,12 +911,26 @@ begin
       begin
            for j:=1 to 32 do
              begin
-               if deck[i].id[2]=deck[21].id[2] then
+               if deck[j].id[2]=deck[21].id[2] then
                begin
-                 deck[i].atout:=True;
-                 if deck[i].rang=6 then deck[i].rang:=0;
-                 if deck[i].rang=7 then deck[i].rang:=1;
+                 deck[j].atout:=True;
+                 if deck[j].rang=6 then deck[i].rang:=0;
+                 if deck[j].rang=7 then deck[i].rang:=1;
+                 showmessage(deck[j].id + 'DECK aaa ' + booltostr(deck[i].atout));
                end;
+             end;
+           for j:=1 to 4 do
+             begin
+               for k:=0 to length(main[j])do
+                   begin
+                        if main[j,k].id[2]=deck[21].id[2] then
+                        begin
+                        main[j,k].atout:=True;
+                        if main[j,k].rang=6 then main[j,k].rang:=0;
+                        if main[j,k].rang=7 then main[j,k].rang:=7;
+                        showmessage(main[j,k].id + 'MAIN aaa ' + booltostr(deck[i].atout));
+                        end;
+                   end;
              end;
            deck[21].pos:='main';
            atout:=deck[21].id[2];
@@ -954,6 +974,7 @@ begin
                if deck[i].id[2]=atout then
                begin
                  deck[i].atout:=True;
+                 showmessage(deck[i].id + 'DECK aaa ' + booltostr(deck[i].atout));
                end;
              end;
            deck[21].pos:='main';

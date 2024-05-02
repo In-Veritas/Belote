@@ -17,6 +17,8 @@ type
     Label1: TLabel;
     Label2: TLabel;
     procedure FormShow(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure Label1Click(Sender: TObject);
   private
 
   public
@@ -35,6 +37,16 @@ implementation
 
 
 procedure TForm6.FormShow(Sender: TObject);
+begin
+
+end;
+
+procedure TForm6.Image1Click(Sender: TObject);
+begin
+
+end;
+
+procedure TForm6.Label1Click(Sender: TObject);
 begin
 
 end;

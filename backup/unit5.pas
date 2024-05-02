@@ -54,7 +54,7 @@ end;
 
 procedure TForm5.FormShow(Sender: TObject);
 VAR
-  couleur=string;
+  couleur:string;
 begin
   couleur:=deck[21].id[2];
 
