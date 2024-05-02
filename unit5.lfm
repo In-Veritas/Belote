@@ -1,17 +1,19 @@
 object Form5: TForm5
-  Left = 1189
-  Height = 300
-  Top = 461
-  Width = 300
+  Left = 2082
+  Height = 600
+  Top = 433
+  Width = 600
   Caption = 'Choisissez un atout'
-  ClientHeight = 300
-  ClientWidth = 300
-  LCLVersion = '3.2.0.0'
+  ClientHeight = 600
+  ClientWidth = 600
+  DesignTimePPI = 192
+  OnShow = FormShow
+  LCLVersion = '2.2.4.0'
   object Image1: TImage
     Left = 0
-    Height = 300
+    Height = 600
     Top = 0
-    Width = 300
+    Width = 600
     Picture.Data = {
       1754506F727461626C654E6574776F726B4772617068696311E5010089504E47
       0D0A1A0A0000000D494844520000012C0000012C0806000000797D8E75000000
@@ -3898,31 +3900,35 @@ object Form5: TForm5
     }
   end
   object Panel1: TPanel
-    Left = 168
-    Height = 106
-    Top = 32
-    Width = 104
+    Left = 336
+    Height = 212
+    Top = 64
+    Width = 208
     TabOrder = 0
+    OnClick = Panel1Click
   end
   object Panel2: TPanel
-    Left = 168
-    Height = 106
-    Top = 160
-    Width = 104
+    Left = 336
+    Height = 212
+    Top = 320
+    Width = 208
     TabOrder = 1
+    OnClick = Panel2Click
   end
   object Panel3: TPanel
-    Left = 24
-    Height = 106
-    Top = 32
-    Width = 104
+    Left = 48
+    Height = 212
+    Top = 64
+    Width = 208
     TabOrder = 2
+    OnClick = Panel3Click
   end
   object Panel4: TPanel
-    Left = 24
-    Height = 106
-    Top = 160
-    Width = 104
+    Left = 48
+    Height = 212
+    Top = 320
+    Width = 208
     TabOrder = 3
+    OnClick = Panel4Click
   end
 end

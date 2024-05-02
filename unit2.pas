@@ -104,8 +104,10 @@ begin
       image8.Enabled:=False;
       image9.Enabled:=False;
       cartes_joues:=cartes_joues+1;
+
       if cartes_joues=4 then
       begin
+        cartes_joues:=0;
         fin_tour(centre,focus_joueur);
       end                 else
       begin
@@ -122,6 +124,7 @@ begin
       Form2.Image17.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image17.Picture.Bitmap);
       cartes_joues:=cartes_joues+1;
+
       if cartes_joues=4 then
       begin
         fin_tour(centre,focus_joueur);
@@ -131,6 +134,7 @@ begin
         cartes_jouables(1);
       end;
     end;
+
 
   if joueur=3 then
     begin

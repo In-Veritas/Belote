@@ -47,7 +47,9 @@ var
 procedure init_jeu;
 procedure choix_atout;
 procedure fin_tour(centre_fintour : tableau_centre; focus_joueur: integer);
+procedure modificationmain (Joueur,Indice_carte_jouer:integer);
 procedure cartes_jouables(joueur:integer);
+
 procedure permuter (var X,Y:carte);
 
 function premierchoixcouleur (toutcouleur:string):integer;
@@ -363,22 +365,26 @@ begin
   atout_trouve:=false;
   dern:=false;
   //En cas d'atout
+
   for i:=1 to 4 do
     begin
-      if centre_fintour[i].atout=true then
+      if centre_fintour[i].atout=true then    //passe jamais ici?????
         begin
-
            atout_trouve:=true;
            joueur_gagnant:=i;
-
+           plus_fort:=centre_fintour[i];
            for j:=i to 4 do
              begin
-                   if (centre_fintour[i].atout=true)AND(centre_fintour[i].rang < plus_fort.rang) then
-                      joueur_gagnant:=j
+                   if (centre_fintour[i].atout=true) AND (centre_fintour[i].rang < plus_fort.rang) then
+                     begin
+                      joueur_gagnant:=j;
+                      plus_fort:=centre_fintour[i];
+                     end;
              end;
         end
     end;
   //Si il n'y a pas d'atout
+
   if atout_trouve=false then
     begin
        plus_fort:=centre_fintour[focus_joueur];
@@ -404,22 +410,34 @@ begin
               Form2.ImageList1.GetBitmap(0,Form2.Image20.Picture.Bitmap);
          end;
     end;
+
+
   focus_joueur:=joueur_gagnant;
   Delete(centre,1,4);
+
+
   if joueur_gagnant=1 then
   begin
      Showmessage('Vous avez gagné la manche!');
-  end else if joueur_gagnant=2 then
+  end;
+
+  if joueur_gagnant=2 then
   begin
      Showmessage('Giovanni a remporté la manche');
-  end else if joueur_gagnant=3 then
+  end;
+
+  if joueur_gagnant=3 then
   begin
      Showmessage('Paul a gagné la manche');
-  end else
+  end;
+
+  if joueur_gagnant=4 then
   begin
     Showmessage('Martiniel a gagné la manche');
   end;
-    form2.timer1.Enabled:=True;
+
+
+  form2.timer1.Enabled:=True;
 
   manche:=manche+1;
   cartes_joues:=0;
@@ -445,6 +463,37 @@ begin
 
 end;
 
+
+procedure modificationmain (Joueur,Indice_carte_jouer:integer);
+VAR
+  tableau_carte:array of carte;
+  I,C,nombre_de_carte:integer;
+
+begin
+  C:=0;
+  nombre_de_carte:=length(main[joueur])-1;
+  for I:=Indice_carte_jouer+1 to High(main[Joueur]) do
+    begin
+      C:=C+1;
+    end;
+  SetLength(tableau_carte,C);
+  C:=0;
+  for I:=Indice_carte_jouer+1 to High(main[Joueur]) do
+    begin
+      tableau_carte[C]:=main[Joueur,I];
+      C:=C+1;
+    end;
+
+  insert(tableau_carte,main[Joueur],Indice_carte_jouer-1);
+
+  SetLength(main[Joueur],nombre_de_carte);
+
+  showmessage(inttostr(joueur));
+  for I:=0 to High(main[joueur]) do
+    begin
+      showmessage(main[joueur,I].id);
+    end;
+end;
 //Vérifie quelles cartes dans la main sont jouables, et donne un array dynamique de booleans pour dire quels sont jouables
 procedure cartes_jouables(joueur:integer);
 var
@@ -456,25 +505,33 @@ jouable_trouve:= false;
 if length(centre) = 0 then
   begin
     for i:=0 to High(main[joueur]) do // J'ai mis HIGH car elle renvoie la borne suppérieur du tableau (plus logique et plus simple dans ce cas là!
-    begin
-      main[joueur,i].jouable:= True;
-    end;
+      begin
+        main[joueur,i].jouable:= True;
+      end;
   end
-  else if centre[focus_joueur].atout=True then
+                      else
+
+  if centre[focus_joueur].atout=True then
     begin
        plus_fort:=centre[focus_joueur];
-       for i:=i to length(centre) do
-       begin
-          if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then plus_fort:=centre[i];
-       end;
-       for i:=1 to length(main[joueur])do
+
+       for i:=1 to length(centre) do //a quoi ça sert??????
+         begin
+           if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then
+             begin
+               plus_fort:=centre[i];
+             end;
+         end;
+
+
+       for i:=0 to High(main[joueur])do
        begin
          if plus_fort.rang > main[joueur,i].rang then main[joueur,i].jouable:=True;
          jouable_trouve:= True;
        end;
        if not(jouable_trouve) then
        begin
-          for i:=1 to length(main[joueur])do
+          for i:=0 to High(main[joueur])do
           begin
             if main[joueur,i].atout then
             begin
@@ -485,7 +542,7 @@ if length(centre) = 0 then
        end;
        if not(jouable_trouve) then
        begin
-           for i:=1 to length(main[joueur]) do
+           for i:=0 to High(main[joueur]) do
             begin
               main[joueur,i].jouable:= True;
               jouable_trouve:= True;
@@ -493,7 +550,7 @@ if length(centre) = 0 then
        end;
     end else
     begin
-      for i:=1 to length(main[joueur]) do
+      for i:=0 to High(main[joueur]) do
       begin
         if main[joueur,i].id[2] = centre[focus_joueur].id[2] then
           begin
@@ -503,7 +560,7 @@ if length(centre) = 0 then
       end;
       if not(jouable_trouve) then
         begin
-          for i:=1 to length(main[joueur])do
+          for i:=0 to High(main[joueur])do
           begin
             if main[joueur,i].atout then
             begin
@@ -516,7 +573,7 @@ if length(centre) = 0 then
               begin
                 if (centre[j].atout)AND(centre[j].rang < plus_fort.rang) then plus_fort:=centre[j];
               end;
-              for j:=1 to length(main[joueur]) do
+              for j:=0 to High(main[joueur]) do
               begin
                 if main[joueur,j].rang < plus_fort.rang then
                 begin
@@ -526,7 +583,7 @@ if length(centre) = 0 then
               end;
               if not(jouable_trouve)then
               begin
-              for j:=1 to length(main[joueur]) do
+              for j:=0 to High(main[joueur]) do
                   begin
                     if main[joueur,j].atout then
                     begin
@@ -541,26 +598,32 @@ if length(centre) = 0 then
           end;
         if not(jouable_trouve) then
          begin
-             for i:=1 to length(main[joueur]) do
+             for i:=0 to High(main[joueur]) do
               begin
                 main[joueur,i].jouable:= True;
                 jouable_trouve:= True
               end;
          end;
         end;
+
+
+
     if joueur<>1 then
      begin
-       for i:=0 to length(main[joueur]) do
+       //ici mettre procédure qui choisir la meilleur carte à jouer pour J artificiel
+       for i:=0 to High(main[joueur]) do
        begin
          if main[joueur,i].jouable      then
          begin
           Form2.jouercarte(main[joueur,i],joueur);
+          modificationmain (joueur,i);
           break;
          end;
 
        end;
      end;
     end;
+
 
 
 procedure permuter (var X,Y:carte); //procedure qui échange deux tèrmes
@@ -933,7 +996,15 @@ begin
           joueurquiprend:=1;
         end;
      end;
-     //FAIRE LE CAS OU PERSONNE PRENDS ET LES CARTES SONT REDISTRIBUÉS
+
+     if pris=false then  //FAIRE LE CAS OU PERSONNE PRENDS ET LES CARTES SONT REDISTRIBUÉS
+       begin
+         Form2.Hide;
+         Form2.Show;
+         showmessage('Personne n''a pris, début d''une nouvelle partie');
+         Form2.Image10Click(Form2.Image10);
+       end;
+
    end;
 end;
 
