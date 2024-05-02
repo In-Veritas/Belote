@@ -1,7 +1,7 @@
 object Form2: TForm2
-  Left = 589
+  Left = 781
   Height = 702
-  Top = 172
+  Top = 213
   Width = 1280
   Caption = 'Belote'
   ClientHeight = 702
@@ -31338,6 +31338,7 @@ object Form2: TForm2
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     Font.Style = [fsBold]
+    ParentColor = False
     ParentFont = False
   end
   object Label3: TLabel
@@ -31353,6 +31354,7 @@ object Form2: TForm2
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     Font.Style = [fsBold]
+    ParentColor = False
     ParentFont = False
   end
   object Label4: TLabel
@@ -31367,6 +31369,7 @@ object Form2: TForm2
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
+    ParentColor = False
     ParentFont = False
   end
   object Label5: TLabel
@@ -31381,6 +31384,7 @@ object Form2: TForm2
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
+    ParentColor = False
     ParentFont = False
   end
   object Label6: TLabel
@@ -31395,6 +31399,7 @@ object Form2: TForm2
     Font.Name = 'Rockwell'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
+    ParentColor = False
     ParentFont = False
   end
   object Label7: TLabel
@@ -31409,6 +31414,7 @@ object Form2: TForm2
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     Font.Style = [fsBold]
+    ParentColor = False
     ParentFont = False
   end
   object Label8: TLabel
@@ -31424,6 +31430,7 @@ object Form2: TForm2
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     Font.Style = [fsBold]
+    ParentColor = False
     ParentFont = False
   end
   object ImageList1: TImageList

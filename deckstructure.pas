@@ -42,6 +42,7 @@ var
   etat:string;
   cartes_joues:integer;
   manche:integer;
+  playcap:integer;
 
 
 
@@ -676,7 +677,7 @@ plus_fort: carte;
 jouable_trouve:boolean;
 begin
 jouable_trouve:= false;
-
+if playcap=4 then exit;
 if cartes_joues = 0 then
   begin
     for i:=0 to High(main[joueur])-1 do
@@ -690,7 +691,7 @@ if cartes_joues = 0 then
       begin
          plus_fort:=centre[focus_joueur];
 
-         for i:=1 to length(centre) do
+         for i:=1 to 4 do
            begin
              if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then
                begin
@@ -1306,6 +1307,7 @@ begin
 
   manche:=manche+1;
   cartes_joues:=0;
+  playcap:=0;
   Form2.Image15.Visible:=False;
   Form2.Image16.Visible:=False;
   Form2.Image17.Visible:=False;

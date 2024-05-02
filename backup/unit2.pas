@@ -91,7 +91,6 @@ begin
   setlength(centre,5);
   centre[joueur]:=cartejouer;
 
-
   if joueur=1 then
     begin
       Form2.Image14.Visible:=True;
@@ -105,74 +104,71 @@ begin
       image8.Enabled:=False;
       image9.Enabled:=False;
       cartes_joues:=cartes_joues+1;
+      showmessage(inttostr(cartes_joues));
 
       if cartes_joues=4 then
        begin
-        cartes_joues:=0;
         fin_tour(centre);
-        showmessage('passage à 0!!');
 
        end
                          else
        begin
-        showmessage('player->giovanni'+inttostr(joueur)+' ' + inttostr(cartes_joues));
-        focus_joueur:=2;
+        playcap:=playcap+1;
         cartes_jouables(2);
        end;
 
-    end;
+    end else
+
 
   if joueur=4 then
     begin
       Form2.Image17.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image17.Picture.Bitmap);
       cartes_joues:=cartes_joues+1;
+      showmessage(inttostr(cartes_joues));
 
       if cartes_joues=4 then
       begin
         fin_tour(centre);
-        cartes_joues:=0;
-        showmessage('passage à 0!!');
+
+
       end                 else
       begin
-        showmessage('martiniel->player'+inttostr(joueur)+' ' + inttostr(cartes_joues));
-        focus_joueur:=1;
+        playcap:=playcap+1;
         cartes_jouables(1);
       end;
-    end;
+    end else
 
   if joueur=3 then
     begin
       Form2.Image15.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image15.Picture.Bitmap);
       cartes_joues:=cartes_joues+1;
+      showmessage(inttostr(cartes_joues));
+
       if cartes_joues=4 then
        begin
         fin_tour(centre);
-        cartes_joues:=0;
-        showmessage('passage à 0!!');
        end                 else
       begin
-        showmessage('paul ->martiniel'+inttostr(joueur)+' ' + inttostr(cartes_joues));
-        focus_joueur:=4;
+        playcap:=playcap+1;
         cartes_jouables(4);
       end;
-    end;
+    end else
 
   if joueur=2 then
     begin
       Form2.Image16.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image16.Picture.Bitmap);
       cartes_joues:=cartes_joues+1;
+      showmessage(inttostr(cartes_joues));
+
        if cartes_joues=4 then
        begin
          fin_tour(centre);
-         cartes_joues:=0;
-         showmessage('passage à 0!!');
        end                 else
       begin
-        showmessage('giovanni->paul'+inttostr(joueur)+ ' ' + inttostr(cartes_joues));
-        focus_joueur:=3;
+        playcap:=playcap+1;
         cartes_jouables(3);
       end;
     end;
@@ -323,6 +319,7 @@ var
 nom_joueur: string;
 begin
   randomize;
+  playcap:=0;
   Form2.ImageList1.GetBitmap(0,Form2.Image2.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(0,Form2.Image3.Picture.Bitmap);
   Form2.ImageList1.GetBitmap(0,Form2.Image4.Picture.Bitmap);

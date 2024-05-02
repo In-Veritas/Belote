@@ -42,6 +42,7 @@ var
   etat:string;
   cartes_joues:integer;
   manche:integer;
+  playcap:integer;
 
 
 
@@ -690,7 +691,7 @@ if cartes_joues = 0 then
       begin
          plus_fort:=centre[focus_joueur];
 
-         for i:=1 to length(centre) do
+         for i:=1 to 4 do
            begin
              if (centre[i].rang < plus_fort.rang)AND(centre[i].atout = True) then
                begin
@@ -792,7 +793,7 @@ if cartes_joues = 0 then
      begin
        //ici mettre procédure qui choisi la meilleur carte à jouer pour J artificiel
 
-       {for i:=0 to High(main[joueur]) do
+       for i:=0 to High(main[joueur]) do
        begin
          if main[joueur,i].jouable      then
          begin
@@ -800,15 +801,7 @@ if cartes_joues = 0 then
           modificationmain (joueur,i); //procédure qui enlève la carte jouer du joueur
           break;
          end;
-       end; }
-       i:=0;
-       while main[joueur,i].jouable=false do
-         begin
-           i:=i+1;
-         end;
-       Form2.jouercarte(main[joueur,i],joueur);
-       modificationmain (joueur,i); //procédure qui enlève la carte jouer du joueur
-       break;
+       end;
      end;
     end;
 
@@ -1314,6 +1307,7 @@ begin
 
   manche:=manche+1;
   cartes_joues:=0;
+  playcap:=0;
   Form2.Image15.Visible:=False;
   Form2.Image16.Visible:=False;
   Form2.Image17.Visible:=False;

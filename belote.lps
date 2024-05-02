@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="29"/>
-        <UsageCount Value="109"/>
+        <UsageCount Value="111"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -21,7 +21,7 @@
         <UnitName Value="Unit1"/>
         <TopLine Value="75"/>
         <CursorPos X="35" Y="51"/>
-        <UsageCount Value="109"/>
+        <UsageCount Value="111"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -31,13 +31,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit2"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="98"/>
-        <CursorPos X="38" Y="113"/>
-        <FoldState Value=" T3lA0F6 pj1jU0F4 Pi5iP0Q"/>
-        <ComponentState Value="1"/>
-        <UsageCount Value="109"/>
+        <TopLine Value="87"/>
+        <CursorPos X="32" Y="111"/>
+        <FoldState Value=" T3l60F6 pj1jU0F112 PGiQ0v"/>
+        <UsageCount Value="111"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -48,9 +46,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit3"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <CursorPos X="28" Y="51"/>
-        <UsageCount Value="109"/>
+        <UsageCount Value="111"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -58,11 +56,12 @@
         <Filename Value="deckstructure.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DeckStructure"/>
-        <EditorIndex Value="6"/>
-        <TopLine Value="774"/>
-        <CursorPos X="6" Y="681"/>
-        <FoldState Value=" T3jZ0{}2 pmdqa074 pj5jM0H015]B2mb0X013 plL]Bz1 PjPiK0 T0k54rg"/>
-        <UsageCount Value="89"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="337"/>
+        <CursorPos X="24" Y="680"/>
+        <FoldState Value=" T3ja0{}2 pmdqa074 pj5jM0H015]B2mb0X3 piZjX0{o1 PiIk40 T0k64rt"/>
+        <UsageCount Value="91"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -72,7 +71,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="88"/>
+        <UsageCount Value="90"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
@@ -82,7 +81,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="88"/>
+        <UsageCount Value="90"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
@@ -92,7 +91,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="88"/>
+        <UsageCount Value="90"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
@@ -102,10 +101,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit4"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="26"/>
         <CursorPos X="56" Y="43"/>
-        <UsageCount Value="86"/>
+        <UsageCount Value="88"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -116,9 +115,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit5"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <CursorPos X="20" Y="115"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="74"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -129,10 +128,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit6"/>
-        <EditorIndex Value="5"/>
-        <TopLine Value="25"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="17"/>
         <CursorPos X="18" Y="7"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -299,24 +298,16 @@
         <CursorPos X="10" Y="239"/>
         <UsageCount Value="14"/>
       </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\lcl\include\picture.inc"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="854"/>
+        <CursorPos Y="899"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="598" Column="67" TopLine="581"/>
-      </Position>
-      <Position>
-        <Filename Value="unit2.pas"/>
-        <Caret Line="170" Column="54" TopLine="140"/>
-      </Position>
-      <Position>
-        <Filename Value="unit2.pas"/>
-        <Caret Line="136" Column="56" TopLine="121"/>
-      </Position>
-      <Position>
-        <Filename Value="deckstructure.pas"/>
-        <Caret Line="810" Column="51" TopLine="787"/>
-      </Position>
       <Position>
         <Filename Value="deckstructure.pas"/>
         <Caret Line="808" Column="62" TopLine="789"/>
@@ -390,10 +381,6 @@
         <Caret Line="190" TopLine="126"/>
       </Position>
       <Position>
-        <Filename Value="unit2.pas"/>
-        <Caret Line="137" Column="26" TopLine="147"/>
-      </Position>
-      <Position>
         <Filename Value="deckstructure.pas"/>
         <Caret Line="786" Column="13" TopLine="712"/>
       </Position>
@@ -420,6 +407,26 @@
       <Position>
         <Filename Value="deckstructure.pas"/>
         <Caret Line="811" Column="8" TopLine="782"/>
+      </Position>
+      <Position>
+        <Filename Value="deckstructure.pas"/>
+        <Caret Line="672" TopLine="996"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="150" Column="26" TopLine="118"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="91" Column="21" TopLine="68"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="110" Column="28" TopLine="91"/>
+      </Position>
+      <Position>
+        <Filename Value="unit2.pas"/>
+        <Caret Line="111" Column="32" TopLine="87"/>
       </Position>
     </JumpHistory>
     <RunParams>
