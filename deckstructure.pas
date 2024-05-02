@@ -767,8 +767,11 @@ if cartes_joues = 0 then
             begin
               for j:=1 to length(centre) do
               begin
-                if centre[j].atout then plus_fort:=centre[j];
+                if centre[j].atout then
+                begin
+                plus_fort:=centre[j];
                 break;
+                end;
               end;
               for j:=1 to length(centre) do
               begin
@@ -793,23 +796,30 @@ if cartes_joues = 0 then
                     end;
                     end;
               end;
-              break;
-              end;
             end;
           end;
-        if not(jouable_trouve) then
-         begin
-             for i:=0 to High(main[joueur]) do
-              begin
-                main[joueur,i].jouable:= True;
-                jouable_trouve:= True
-              end;
+          if not(jouable_trouve) then
+           begin
+               for i:=0 to High(main[joueur]) do
+                begin
+                  main[joueur,i].jouable:= True;
+                  jouable_trouve:= True
+                end;
          end;
         end;
 
 
     end;
+    END;
 
+
+    if manche=7 then
+    begin
+         for i:=0 to High(main[joueur]) do
+          begin
+            main[joueur,i].jouable:= True;
+          end;
+    end;
 
     if joueur<>1 then
      begin
