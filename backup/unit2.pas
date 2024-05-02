@@ -106,7 +106,7 @@ begin
       cartes_joues:=cartes_joues+1;
       showmessage(inttostr(cartes_joues));
 
-      if cartes_joues=4 then
+      if (cartes_joues=4) OR (playcap = 4) then
        begin
         fin_tour(centre);
 
@@ -127,7 +127,7 @@ begin
       cartes_joues:=cartes_joues+1;
       showmessage(inttostr(cartes_joues));
 
-      if cartes_joues=4 then
+      if (cartes_joues=4) OR (playcap = 4) then
       begin
         fin_tour(centre);
 
@@ -146,7 +146,7 @@ begin
       cartes_joues:=cartes_joues+1;
       showmessage(inttostr(cartes_joues));
 
-      if cartes_joues=4 then
+      if (cartes_joues=4) OR (playcap = 4) then
        begin
         fin_tour(centre);
        end                 else
@@ -163,7 +163,7 @@ begin
       cartes_joues:=cartes_joues+1;
       showmessage(inttostr(cartes_joues));
 
-       if cartes_joues=4 then
+       if (cartes_joues=4) OR (playcap = 4) then
        begin
          fin_tour(centre);
        end                 else
