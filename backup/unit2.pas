@@ -91,6 +91,7 @@ begin
   setlength(centre,5);
   centre[joueur]:=cartejouer;
 
+
   if joueur=1 then
     begin
       Form2.Image14.Visible:=True;
@@ -106,21 +107,20 @@ begin
       cartes_joues:=cartes_joues+1;
 
       if cartes_joues=4 then
-      begin
+       begin
         cartes_joues:=0;
         fin_tour(centre);
-      end                 else
-      begin
+        showmessage('passage à 0!!');
+
+       end
+                         else
+       begin
         showmessage('player->giovanni'+inttostr(joueur)+' ' + inttostr(cartes_joues));
         focus_joueur:=2;
         cartes_jouables(2);
+       end;
 
-      end;
-
-    end else
-
-
-
+    end;
 
   if joueur=4 then
     begin
@@ -132,48 +132,48 @@ begin
       begin
         fin_tour(centre);
         cartes_joues:=0;
+        showmessage('passage à 0!!');
       end                 else
       begin
         showmessage('martiniel->player'+inttostr(joueur)+' ' + inttostr(cartes_joues));
         focus_joueur:=1;
         cartes_jouables(1);
-
       end;
-    end else
-
+    end;
 
   if joueur=3 then
     begin
-      Form2.Image16.Visible:=True;
+      Form2.Image15.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image15.Picture.Bitmap);
       cartes_joues:=cartes_joues+1;
-       if cartes_joues=4 then
-      begin
+      if cartes_joues=4 then
+       begin
         fin_tour(centre);
         cartes_joues:=0;
-      end                 else
+        showmessage('passage à 0!!');
+       end                 else
       begin
         showmessage('paul ->martiniel'+inttostr(joueur)+' ' + inttostr(cartes_joues));
         focus_joueur:=4;
         cartes_jouables(4);
       end;
-    end else
+    end;
 
   if joueur=2 then
     begin
-      Form2.Image15.Visible:=True;
+      Form2.Image16.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image16.Picture.Bitmap);
       cartes_joues:=cartes_joues+1;
        if cartes_joues=4 then
        begin
          fin_tour(centre);
          cartes_joues:=0;
+         showmessage('passage à 0!!');
        end                 else
       begin
         showmessage('giovanni->paul'+inttostr(joueur)+ ' ' + inttostr(cartes_joues));
         focus_joueur:=3;
         cartes_jouables(3);
-
       end;
     end;
 end;
@@ -188,7 +188,12 @@ begin
     begin
       cartejouer:=main[1,1];
       jouercarte(cartejouer,1);
-      Image3.visible:= False;
+      Image3.visible:=False;
+      main[1,1].jouable:=false;
+      main[1,1].rang:=10;
+      main[1,1].atout:=false;
+      main[1,1].id:='00';
+      main[1,1].id_image:=0;
     end;
 end;
 
@@ -213,6 +218,11 @@ begin
       cartejouer:=main[1,2];
       jouercarte(cartejouer,1);
       Image4.visible:= False;
+      main[1,2].jouable:=false;
+      main[1,2].rang:=10;
+      main[1,2].atout:=false;
+      main[1,2].id:='00';
+      main[1,2].id_image:=0;
     end;
 
 
@@ -227,6 +237,11 @@ begin
       cartejouer:=main[1,3];
       jouercarte(cartejouer,1);
       Image5.visible:= False;
+      main[1,3].jouable:=false;
+      main[1,3].rang:=10;
+      main[1,3].atout:=false;
+      main[1,3].id:='00';
+      main[1,3].id_image:=0;
     end;
 end;
 
@@ -239,6 +254,11 @@ begin
       cartejouer:=main[1,4];
       jouercarte(cartejouer,1);
       Image6.visible:= False;
+      main[1,4].jouable:=false;
+      main[1,4].rang:=10;
+      main[1,4].atout:=false;
+      main[1,4].id:='00';
+      main[1,4].id_image:=0;
     end;
 end;
 
@@ -251,6 +271,11 @@ begin
       cartejouer:=main[1,5];
       jouercarte(cartejouer,1);
       Image7.visible:= False;
+      main[1,5].jouable:=false;
+      main[1,5].rang:=10;
+      main[1,5].atout:=false;
+      main[1,5].id:='00';
+      main[1,5].id_image:=0;
     end;
 end;
 
@@ -263,6 +288,11 @@ begin
       cartejouer:=main[1,6];
       jouercarte(cartejouer,1);
       Image8.visible:= False;
+      main[1,6].jouable:=false;
+      main[1,6].rang:=10;
+      main[1,6].atout:=false;
+      main[1,6].id:='00';
+      main[1,6].id_image:=0;
     end;
 end;
 
@@ -275,6 +305,11 @@ begin
       cartejouer:=main[1,7];
       jouercarte(cartejouer,1);
       Image9.visible:= False;
+      main[1,7].jouable:=false;
+      main[1,7].rang:=10;
+      main[1,7].atout:=false;
+      main[1,7].id:='00';
+      main[1,7].id_image:=0;
     end;
 end;
 
@@ -296,6 +331,7 @@ begin
   Form2.ImageList1.GetBitmap(0,Form2.Image18.Picture.Bitmap);
 
   focus_joueur:=random(4)+1;
+
   if focus_joueur=1 then
   begin
     nom_joueur:= 'Toi!';

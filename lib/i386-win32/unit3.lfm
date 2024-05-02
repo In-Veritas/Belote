@@ -1,7 +1,7 @@
 object Form3: TForm3
-  Left = 1689
+  Left = 1024
   Height = 994
-  Top = 212
+  Top = 223
   Width = 1000
   Caption = 'Belote'
   ClientHeight = 994

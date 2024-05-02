@@ -51,27 +51,27 @@ procedure evaluation_point_main (joueur:integer;
 procedure prendre_IA (joueur,numeroduchoix:integer;
                      var pris:boolean);
 procedure init_jeu;
-procedure debut_manche(joueur: integer);
-procedure fin_tour(centre_fintour : tableau_centre);
-procedure modificationmain (Joueur,Indice_carte_jouer:integer);
-procedure cartes_jouables(joueur:integer);
 procedure permuter (var X,Y:carte);
 function premierchoixcouleur (toutcouleur:string):integer;
 function changementcouleur (x:integer):integer;
-procedure triecouleur (I,Maximum:integer;
-                      couleur:string;
-                      var C:integer);
-procedure trieparcouleur (Maximum:integer);
-procedure trieminmaxparcouleur (I,min,max:integer);
-procedure trierang(Maximum:integer);
-function melangertableau(N:integer):tableau_deck;
+procedure modificationmain (Joueur,Indice_carte_jouer:integer);
 procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
                                 var IndiceCarte:integer);
 procedure miseajouratout ();
+procedure cartes_jouables(joueur:integer);
+procedure triecouleur (I,Maximum:integer;
+                      couleur:string;
+                      var C:integer);
+procedure trieminmaxparcouleur (I,min,max:integer);
+function melangertableau(N:integer):tableau_deck;
+procedure debut_manche(joueur: integer);
+procedure trieparcouleur (Maximum:integer);
+procedure trierang(Maximum:integer);
+procedure debut_jeu;
 procedure premiere_distribution (PremierJoueur:integer);
 procedure deuxieme_distribution (PremierJoueur:integer);
-procedure debut_jeu;
 procedure choix_atout;
+procedure fin_tour(centre_fintour : tableau_centre);
 procedure fin_jeu(joueur_preneur:integer; dix_de_dern, belote:boolean);
 
 
@@ -133,110 +133,123 @@ begin
 
   for J:=0 to 4 do
     begin
-
       if main[joueur,J].id[1]='V' then  //si vallet poids très important
        begin
-        if main[joueur,J].id[2]='C' then
-          begin
-            CompteurC:=CompteurC+10;
-          end;
-        if main[joueur,J].id[2]='P' then
-          begin
-            CompteurP:=CompteurP+10;
-          end;
-        if main[joueur,J].id[2]='T' then
-          begin
-            CompteurT:=CompteurT+10;
-          end;
-        if main[joueur,J].id[2]='K' then
-          begin
-            CompteurK:=CompteurK+10;
-          end;
+
+         if main[joueur,J].id[2]='C' then CompteurC:=CompteurC+10;
+
+         if main[joueur,J].id[2]='P' then CompteurP:=CompteurP+10;
+
+         if main[joueur,J].id[2]='T' then CompteurT:=CompteurT+10;
+
+         if main[joueur,J].id[2]='K' then CompteurK:=CompteurK+10;
+
        end;
 
       if main[joueur,J].id[1]='9' then  //si 9 poids important
        begin
-        if main[joueur,J].id[2]='C' then
-          begin
-            CompteurC:=CompteurC+8;
-          end;
-        if main[joueur,J].id[2]='P' then
-          begin
-            CompteurP:=CompteurP+8;
-          end;
-        if main[joueur,J].id[2]='T' then
-          begin
-            CompteurT:=CompteurT+8;
-          end;
-        if main[joueur,J].id[2]='K' then
-          begin
-            CompteurK:=CompteurK+8;
-          end;
+
+        if main[joueur,J].id[2]='C' then CompteurC:=CompteurC+8;
+
+        if main[joueur,J].id[2]='P' then CompteurP:=CompteurP+8;
+
+        if main[joueur,J].id[2]='T' then CompteurT:=CompteurT+8;
+
+        if main[joueur,J].id[2]='K' then CompteurK:=CompteurK+8;
+
        end;
 
-      if main[joueur,J].id[1]='A' then   //si as point important
+      if main[joueur,J].id[1]='A' then   //si AS point important
        begin
-        if main[joueur,J].id[2]='C' then
-          begin
-            CompteurC:=CompteurC+6;
-          end;
-        if main[joueur,J].id[2]='P' then
-          begin
-            CompteurP:=CompteurP+6;
-          end;
-        if main[joueur,J].id[2]='T' then
-          begin
-            CompteurT:=CompteurT+6;
-          end;
-        if main[joueur,J].id[2]='K' then
-          begin
-            CompteurK:=CompteurK+6;
-          end;
+
+        if main[joueur,J].id[2]='C' then CompteurC:=CompteurC+6;
+
+        if main[joueur,J].id[2]='P' then CompteurP:=CompteurP+6;
+
+        if main[joueur,J].id[2]='T' then CompteurT:=CompteurT+6;
+
+        if main[joueur,J].id[2]='K' then CompteurK:=CompteurK+6;
+
        end;
 
       if main[joueur,J].id[1]='X' then  //si 10 point important
        begin
-        if main[joueur,J].id[2]='C' then
-          begin
-            CompteurC:=CompteurC+5;
-          end;
-        if main[joueur,J].id[2]='P' then
-          begin
-            CompteurP:=CompteurP+5;
-          end;
-        if main[joueur,J].id[2]='T' then
-          begin
-            CompteurT:=CompteurT+5;
-          end;
-        if main[joueur,J].id[2]='K' then
-          begin
-            CompteurK:=CompteurK+5;
-          end;
+
+        if main[joueur,J].id[2]='C' then CompteurC:=CompteurC+5;
+
+        if main[joueur,J].id[2]='P' then CompteurP:=CompteurP+5;
+
+        if main[joueur,J].id[2]='T' then CompteurT:=CompteurT+5;
+
+        if main[joueur,J].id[2]='K' then CompteurK:=CompteurK+5;
+
        end;
+
     end;
 
-  //si il a un point supérieur à 15 il prend!
-  if CompteurK>15 then
-    begin
-      K:=true;
-    end;
+  //prise en compte de la carte du centre
+  if deck[21].id[1]='V' then  //si vallet poids très important
+       begin
 
-  if CompteurC>15 then
-    begin
-      C:=true;
-    end;
+         if deck[21].id[2]='C' then CompteurC:=CompteurC+10;
 
-  if CompteurT>15 then
-    begin
-      T:=true;
-    end;
+         if deck[21].id[2]='P' then CompteurP:=CompteurP+10;
 
-  if CompteurP>15 then
-    begin
-      P:=true;
-    end;
+         if deck[21].id[2]='T' then CompteurT:=CompteurT+10;
 
-  //prendre le meilleur score
+         if deck[21].id[2]='K' then CompteurK:=CompteurK+10;
+
+       end;
+
+      if deck[21].id[1]='9' then  //si 9 poids important
+       begin
+
+        if deck[21].id[2]='C' then CompteurC:=CompteurC+8;
+
+        if deck[21].id[2]='P' then CompteurP:=CompteurP+8;
+
+        if deck[21].id[2]='T' then CompteurT:=CompteurT+8;
+
+        if deck[21].id[2]='K' then CompteurK:=CompteurK+8;
+
+       end;
+
+      if deck[21].id[1]='A' then   //si AS point important
+       begin
+
+        if deck[21].id[2]='C' then CompteurC:=CompteurC+6;
+
+        if deck[21].id[2]='P' then CompteurP:=CompteurP+6;
+
+        if deck[21].id[2]='T' then CompteurT:=CompteurT+6;
+
+        if deck[21].id[2]='K' then CompteurK:=CompteurK+6;
+
+       end;
+
+      if deck[21].id[1]='X' then  //si 10 point important
+       begin
+
+        if deck[21].id[2]='C' then CompteurC:=CompteurC+5;
+
+        if deck[21].id[2]='P' then CompteurP:=CompteurP+5;
+
+        if deck[21].id[2]='T' then CompteurT:=CompteurT+5;
+
+        if deck[21].id[2]='K' then CompteurK:=CompteurK+5;
+
+       end;
+
+  //si il a un point supérieur à 15 il veut prendre!!
+  if CompteurK>15 then K:=true;
+
+  if CompteurC>15 then C:=true;
+
+  if CompteurT>15 then T:=true;
+
+  if CompteurP>15 then P:=true;
+
+  //prendre le meilleur score pour le 2ème choix d'atout
   maximum:=CompteurP;
   if P=true then
     begin
@@ -259,6 +272,7 @@ begin
           max:='T';
         end;
     end;
+
   if maximum < CompteurC then
     begin
       maximum:=CompteurC;
@@ -287,22 +301,22 @@ begin
 
   if numeroduchoix=1 then
     begin
-      if (couleur='C') and (C=true) then
+      if (couleur='C') and (C=true) and (max='C') then
         begin
           pris:=true;
           atout:='C';
         end;
-      if (couleur='K') and (K=true) then
+      if (couleur='K') and (K=true) and (max='K') then
         begin
           pris:=true;
           atout:='K';
         end;
-      if (couleur='P') and (P=true) then
+      if (couleur='P') and (P=true) and (max='P') then
         begin
           pris:=true;
           atout:='P';
         end;
-      if (couleur='T') and (T=true) then
+      if (couleur='T') and (T=true) and (max='T') then
         begin
           pris:=true;
           atout:='T';
@@ -323,11 +337,16 @@ procedure init_jeu;
 var
   i: integer;
 begin
+for i:=1 to 32 do
+ begin
+  basedeck[i].jouable:=False;
+ end;
+
 cartes_joues:=0;
 manche:=1;
 atout:='0';
-for i:=1 to 32 do
-begin
+
+//******************
 basedeck[1].id:='7P'; //7 de Piques
 basedeck[1].atout:=False;
 basedeck[1].rang:=9; //0 = Vallet d'atout, 1 = 9 d'atout, 2 = As, 3 = Dix, 4 = Roi, 5 = Dame, 6 = Vallet, 7 = neuf, 8 = huit, 9 = sept
@@ -523,139 +542,35 @@ basedeck[31].id_image:=32;
 
 end;
 
+procedure permuter (var X,Y:carte); //procedure qui échange deux tèrmes
+VAR
+  Z:carte;
+begin
+  Z:=X;
+  X:=Y;
+  Y:=Z;
 end;
 
-procedure debut_manche(joueur: integer);
-var I:integer;
+function premierchoixcouleur (toutcouleur:string):integer;
 begin
-  for I:=1 to 4 do
+  if atout='0' then
     begin
-       if joueur=1 then
-       begin
-         cartes_jouables(joueur);
-       end         else
-       begin
-         cartes_jouables(joueur);
-         //jouer_carte_ia();
-       end;
-       joueur:=joueur+1;
-       if joueur=5 then joueur := 1;
-
+      premierchoixcouleur:=1;
+    end
+               else
+    begin
+      premierchoixcouleur:=Pos(atout,toutcouleur);
     end;
 end;
-procedure fin_tour(centre_fintour : tableau_centre);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
-var i,j: integer;
-    atout_trouve: boolean;
-    plus_fort: carte;
-    demande: char;
-    joueur_gagnant: integer;
-    dern:boolean;
-    nom_joueur: string;
+
+function changementcouleur (x:integer):integer;
 begin
-  atout_trouve:=false;
-  dern:=false;
-  //En cas d'atout
-
-  for i:=1 to 4 do
+  x:=x+1;
+  if x>4 then
     begin
-    if centre_fintour[i].atout then
-      begin
-         atout_trouve:=true;
-         joueur_gagnant:=i;
-         plus_fort:=centre_fintour[i];
-      end;
+      x:=1;
     end;
-   if atout_trouve then
-   begin
-     for i:=1 to 4 do
-     begin
-           if (centre_fintour[i].atout=true) AND (centre_fintour[i].rang < plus_fort.rang) then
-             begin
-              joueur_gagnant:=i;
-              plus_fort:=centre_fintour[i];
-             end;
-     end;
-   end else
-    begin
-       plus_fort:=centre_fintour[focus_joueur];
-       for i:=1 to 4 do
-         begin
-           if (centre_fintour[i].rang < plus_fort.rang)AND(centre_fintour[i].id[2]=plus_fort.id[2])then
-             begin
-              joueur_gagnant:=i;
-              plus_fort:=centre_fintour[i];
-             end;
-         end;
-    end;
-  //On envoie les cartes à la pile de l'équipe gagnante:
-  if (joueur_gagnant = 2) or(joueur_gagnant = 4) then
-    begin
-       for i:=1 to 4 do
-         begin
-              Insert(centre_fintour[i], plie2,length(plie2));
-              Form2.ImageList1.GetBitmap(0,Form2.Image19.Picture.Bitmap);
-         end;
-    end else
-    begin
-         for i:=1 to 4 do
-         begin
-              Insert(centre_fintour[i], plie1,length(plie1));
-              Form2.ImageList1.GetBitmap(0,Form2.Image20.Picture.Bitmap);
-         end;
-    end;
-
-
-  focus_joueur:=joueur_gagnant;
-  Delete(centre,1,4);
-
-  if (joueur_gagnant=0) or (joueur_gagnant=1) then
-  begin
-     Showmessage('Vous avez gagné la manche!');
-  end;
-
-  if joueur_gagnant=2 then
-  begin
-     Showmessage('Giovanni a remporté la manche');
-  end;
-
-  if joueur_gagnant=3 then
-  begin
-     Showmessage('Paul a gagné la manche');
-  end;
-
-  if joueur_gagnant=4 then
-  begin
-    Showmessage('Martiniel a gagné la manche');
-    end;
-  if joueur_gagnant=5 then
-  begin
-    showmessage('fodeu');
-  end;
-
-  manche:=manche+1;
-  cartes_joues:=0;
-  Form2.Image15.Visible:=False;
-  Form2.Image16.Visible:=False;
-  Form2.Image17.Visible:=False;
-  Form2.Image14.Visible:=False;
-  focus_joueur:=joueur_gagnant;
-
-  if manche<=8 then
-  begin
-     debut_jeu;
-  end
-  else
-  begin
-    if joueur_gagnant=preneur then
-    begin
-       dern:=true;
-    end;
-    showmessage('Fin du jeu');
-    form6.show;
-    form2.hide;
-    fin_jeu(preneur, dern, false);
-  end;
-
+  changementcouleur:=x;
 end;
 
 procedure modificationmain (Joueur,Indice_carte_jouer:integer);
@@ -683,6 +598,77 @@ begin
   SetLength(main[Joueur],nombre_de_carte);
 
 end;
+
+procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
+                                var IndiceCarte:integer);
+//Nombredecarte => le nombre de carte à distribuer
+//PremierJoueur => le premier joueur à recevoir les cartes (de 1 à 4)
+//IndiceCarte => à quelle carte on en est dans la "pioche"
+
+
+VAR
+  I,J:integer;
+  Chaine: string;
+  distribue: array of carte;
+begin
+  for I:=1 to 4 do //distribue aux 4 joueurs
+    begin
+      setlength(distribue,nombredecarte); //on donne les dimensions du tableau alternatif
+      If preneur<>PremierJoueur then  //si ce joueur n'est pas preneur
+        begin
+          for J:=1 to Nombredecarte do     //on distribue les carte normalement
+            begin
+              distribue[J-1]:= deck[IndiceCarte];  //J-1 car distibue commance à l'indice 0
+              Chaine:='Joueur'+inttostr(PremierJoueur);
+              deck[IndiceCarte].pos:=Chaine;            //on change l'état
+              distribue[J-1].pos:=Chaine;
+              IndiceCarte:=IndiceCarte+1;  //on augmente l'indice de la carte
+            end;
+        end
+                               else   //SINON
+        begin
+          distribue[0]:=deck[21];    //la première carte qu'on lui donne c'est la 21ème toujours
+          for J:=2 to Nombredecarte do         //on lui donne une carte de moins et on suit lamême logique
+            begin
+              distribue[J-1]:= deck[IndiceCarte];
+              Chaine:='Joueur'+inttostr(PremierJoueur);
+              deck[IndiceCarte].pos:=Chaine;
+              distribue[J-1].pos:=Chaine;
+              IndiceCarte:=IndiceCarte+1;
+            end;
+        end;
+      insert(distribue,main[PremierJoueur],0);   //on 'insert' les carte distribuer dans la mains du joueur
+
+      PremierJoueur:=PremierJoueur+1; //On change de joueur
+
+      If (PremierJoueur>4) then    //on vérifie qu'il dépasse pas 4
+        begin
+          PremierJoueur:=1;
+        end;
+
+    end;
+
+end;
+
+procedure miseajouratout ();
+VAR
+  I,J:integer;
+  couleurcarte:string;
+begin
+  for I:=1 to 4 do
+    begin
+      for J:=1 to 8 do
+        begin
+          couleurcarte:=copy(main[I,J].pos,2,1);
+          if couleurcarte=atout then
+            begin
+              main[I,J].atout:=true;
+            end;
+        end;
+    end;
+
+end;
+
 procedure cartes_jouables(joueur:integer); //Vérifie quelles cartes dans la main sont jouables, et donne un array dynamique de booleans pour dire quels sont jouables
 var
 i,j: integer;
@@ -690,12 +676,14 @@ plus_fort: carte;
 jouable_trouve:boolean;
 begin
 jouable_trouve:= false;
-if length(centre) = 0 then
+
+if cartes_joues = 0 then
   begin
-    for i:=0 to High(main[joueur]) do // J'ai mis HIGH car elle renvoie la borne suppérieur du tableau (plus logique et plus simple dans ce cas là!
+    for i:=0 to High(main[joueur])-1 do
       begin
         main[joueur,i].jouable:= True;
       end;
+
   end else
   begin
     if centre[focus_joueur].atout=True then
@@ -798,9 +786,12 @@ if length(centre) = 0 then
 
 
     end;
+
+
     if joueur<>1 then
      begin
        //ici mettre procédure qui choisi la meilleur carte à jouer pour J artificiel
+
        for i:=0 to High(main[joueur]) do
        begin
          if main[joueur,i].jouable      then
@@ -809,38 +800,10 @@ if length(centre) = 0 then
           modificationmain (joueur,i); //procédure qui enlève la carte jouer du joueur
           break;
          end;
-
        end;
      end;
     end;
-procedure permuter (var X,Y:carte); //procedure qui échange deux tèrmes
-VAR
-  Z:carte;
-begin
-  Z:=X;
-  X:=Y;
-  Y:=Z;
-end;
-function premierchoixcouleur (toutcouleur:string):integer;
-begin
-  if atout='0' then
-    begin
-      premierchoixcouleur:=1;
-    end
-               else
-    begin
-      premierchoixcouleur:=Pos(atout,toutcouleur);
-    end;
-end;
-function changementcouleur (x:integer):integer;
-begin
-  x:=x+1;
-  if x>4 then
-    begin
-      x:=1;
-    end;
-  changementcouleur:=x;
-end;
+
 procedure triecouleur (I,Maximum:integer;
                       couleur:string;
                       var C:integer);
@@ -860,6 +823,63 @@ begin
         end;
     end;
 end;
+
+procedure trieminmaxparcouleur (I,min,max:integer);
+VAR
+  J1,J2:integer;
+
+begin
+  For J1:=min to max-1 do
+    begin
+      for J2:=J1+1 to max do
+        begin
+          if (main[I,J1].rang>main[I,J2].rang) then
+            begin
+              permuter(main[I,J1],main[I,J2]);
+            end;
+        end;
+    end;
+end;
+
+function melangertableau(N:integer):tableau_deck; //fonction qui mélange un tableau, N sert au nombre de mélange
+VAR
+  T:tableau_deck;
+  I,X,Y:integer;
+
+begin
+  randomize;
+  T:=deck;
+  for I:=1 to N do //dépend du nombre de mélange
+    begin
+      X:=random(31)+1;
+      Y:=random(31)+1;
+
+      permuter(T[X],T[Y]);
+    end;
+
+  melangertableau:=T;  //la fonction renvois le tableau mélanger  (a un moment deck:=melangertableau(nombre de mélange);)
+end;
+
+procedure debut_manche(joueur: integer);
+var I:integer;
+begin
+  for I:=1 to 4 do
+    begin
+       if joueur=1 then
+       begin
+         cartes_jouables(joueur);
+       end         else
+       begin
+         cartes_jouables(joueur);
+         //jouer_carte_ia();
+       end;
+
+       joueur:=joueur+1;
+       if joueur=5 then joueur := 1;
+
+    end;
+end;
+
 procedure trieparcouleur(Maximum:integer);
 VAR
   toutcouleur:string;
@@ -881,22 +901,7 @@ begin
         end;
     end;
 end;
-procedure trieminmaxparcouleur (I,min,max:integer);
-VAR
-  J1,J2:integer;
 
-begin
-  For J1:=min to max-1 do
-    begin
-      for J2:=J1+1 to max do
-        begin
-          if (main[I,J1].rang>main[I,J2].rang) then
-            begin
-              permuter(main[I,J1],main[I,J2]);
-            end;
-        end;
-    end;
-end;
 procedure trierang(Maximum:integer);
 VAR
   I,min,max:integer;
@@ -931,92 +936,25 @@ begin
         end;
     end;
 end;
-function melangertableau(N:integer):tableau_deck; //fonction qui mélange un tableau, N sert au nombre de mélange
-VAR
-  T:tableau_deck;
-  I,X,Y:integer;
 
+procedure debut_jeu;
+
+var
+i: integer;
 begin
-  randomize;
-  T:=deck;
-  for I:=1 to N do //dépend du nombre de mélange
-    begin
-      X:=random(31)+1;
-      Y:=random(31)+1;
+    form2.label3.caption:='Manche: ' + inttostr(manche);
+    cartes_jouables(focus_joueur);
 
-      permuter(T[X],T[Y]); 
-    end;
-
-  melangertableau:=T;  //la fonction renvois le tableau mélanger  (a un moment deck:=melangertableau(nombre de mélange);)
+    Form2.image2.Enabled:=True;
+    Form2.image3.Enabled:=True;
+    Form2.image4.Enabled:=True;
+    Form2.image5.Enabled:=True;
+    Form2.image6.Enabled:=True;
+    Form2.image7.Enabled:=True;
+    Form2.image8.Enabled:=True;
+    Form2.image9.Enabled:=True;
 end;
-procedure distribution_4joueurs(Nombredecarte,PremierJoueur:integer;
-                                var IndiceCarte:integer);
-//Nombredecarte => le nombre de carte à distribuer
-//PremierJoueur => le premier joueur à recevoir les cartes (de 1 à 4)
-//IndiceCarte => à quelle carte on en est dans la "pioche"
 
-
-VAR
-  I,J:integer;
-  Chaine: string;
-  distribue: array of carte;
-begin
-  for I:=1 to 4 do //distribue aux 4 joueurs
-    begin
-      setlength(distribue,nombredecarte); //on donne les dimensions du tableau alternatif
-      If preneur<>PremierJoueur then  //si ce joueur n'est pas preneur
-        begin
-          for J:=1 to Nombredecarte do     //on distribue les carte normalement
-            begin
-              distribue[J-1]:= deck[IndiceCarte];  //J-1 car distibue commance à l'indice 0
-              Chaine:='Joueur'+inttostr(PremierJoueur);
-              deck[IndiceCarte].pos:=Chaine;            //on change l'état
-              distribue[J-1].pos:=Chaine;
-              IndiceCarte:=IndiceCarte+1;  //on augmente l'indice de la carte
-            end;
-        end
-                               else   //SINON
-        begin
-          distribue[0]:=deck[21];    //la première carte qu'on lui donne c'est la 21ème toujours
-          for J:=2 to Nombredecarte do         //on lui donne une carte de moins et on suit lamême logique
-            begin
-              distribue[J-1]:= deck[IndiceCarte];
-              Chaine:='Joueur'+inttostr(PremierJoueur);
-              deck[IndiceCarte].pos:=Chaine;
-              distribue[J-1].pos:=Chaine;
-              IndiceCarte:=IndiceCarte+1;
-            end;
-        end;
-      insert(distribue,main[PremierJoueur],0);   //on 'insert' les carte distribuer dans la mains du joueur
-
-      PremierJoueur:=PremierJoueur+1; //On change de joueur
-
-      If (PremierJoueur>4) then    //on vérifie qu'il dépasse pas 4
-        begin
-          PremierJoueur:=1;
-        end;
-
-    end;
-
-end;
-procedure miseajouratout ();
-VAR
-  I,J:integer;
-  couleurcarte:string;
-begin
-  for I:=1 to 4 do
-    begin
-      for J:=1 to 8 do
-        begin
-          couleurcarte:=copy(main[I,J].pos,2,1);
-          if couleurcarte=atout then
-            begin
-              main[I,J].atout:=true;
-            end;
-        end;
-    end;
-
-end;
 procedure premiere_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
 
 VAR
@@ -1054,6 +992,7 @@ begin
   Form2.Enabled:=True;
 
 end;
+
 procedure deuxieme_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
 VAR
   IndiceCarte:integer;
@@ -1081,22 +1020,7 @@ begin
 
 
 end;
-procedure debut_jeu;
 
-var
-i: integer;
-begin
-    form2.label3.caption:='Manche: ' + inttostr(manche);
-    cartes_jouables(focus_joueur);
-    Form2.image2.Enabled:=True;
-    Form2.image3.Enabled:=True;
-    Form2.image4.Enabled:=True;
-    Form2.image5.Enabled:=True;
-    Form2.image6.Enabled:=True;
-    Form2.image7.Enabled:=True;
-    Form2.image8.Enabled:=True;
-    Form2.image9.Enabled:=True;
-end;
 procedure choix_atout;
 var
   pris:boolean;
@@ -1105,13 +1029,13 @@ var
 begin
   pris:=false;
   joueurquiprend:=focus_joueur;
+
   for I:=1 to 4 do
     begin
       if joueurquiprend=1 then
         begin
           form4.showmodal;
           if atout<>'0' then pris:=true;
-          preneur:=1;
         end
 
                           else
@@ -1141,10 +1065,13 @@ begin
                         end;
                    end;
              end;
+
+
            deck[21].pos:='main';
            atout:=deck[21].id[2];
            Form2.label2.caption:='Atout: '+atout;
-           preneur:=I;
+           preneur:=joueurquiprend;
+
            deuxieme_distribution(joueurquiprend);
            Form2.Image18.Visible:=False;
            etat:='debut';
@@ -1200,7 +1127,7 @@ begin
                    end;
              end;
            deck[21].pos:='main';
-           preneur:=I;
+           preneur:=joueurquiprend;
            deuxieme_distribution(joueurquiprend);
            Form2.Image18.Visible:=False;
            etat:='debut';
@@ -1209,7 +1136,7 @@ begin
       end;
 
 
-      joueurquiprend:=joueurquiprend+1;
+     joueurquiprend:=joueurquiprend+1;
       if joueurquiprend=5 then
         begin
           joueurquiprend:=1;
@@ -1226,6 +1153,7 @@ begin
    end;
 
 end;
+
 procedure fin_jeu(joueur_preneur:integer; dix_de_dern, belote:boolean);
 var
 plie_a_compter: tableau_plie;
@@ -1288,6 +1216,120 @@ begin
     Form6.label2.caption:='Vous etes dedans!';
   end;
 end;
+
+procedure fin_tour(centre_fintour : tableau_centre);//Procedure qui est appellé a la fin du tour pour calculer qui a gagné
+var i,j: integer;
+    atout_trouve: boolean;
+    plus_fort: carte;
+    demande: char;
+    joueur_gagnant: integer;
+    dern:boolean;
+    nom_joueur: string;
+begin
+  atout_trouve:=false;
+  dern:=false;
+  //En cas d'atout
+
+  for i:=1 to 4 do
+    begin
+    if centre_fintour[i].atout then
+      begin
+         atout_trouve:=true;
+         joueur_gagnant:=i;
+         plus_fort:=centre_fintour[i];
+      end;
+    end;
+   if atout_trouve then
+   begin
+     for i:=1 to 4 do
+     begin
+           if (centre_fintour[i].atout=true) AND (centre_fintour[i].rang < plus_fort.rang) then
+             begin
+              joueur_gagnant:=i;
+              plus_fort:=centre_fintour[i];
+             end;
+     end;
+   end else
+    begin
+       plus_fort:=centre_fintour[focus_joueur];
+       for i:=1 to 4 do
+         begin
+           if (centre_fintour[i].rang < plus_fort.rang)AND(centre_fintour[i].id[2]=plus_fort.id[2])then
+             begin
+              joueur_gagnant:=i;
+              plus_fort:=centre_fintour[i];
+             end;
+         end;
+    end;
+  //On envoie les cartes à la pile de l'équipe gagnante:
+  if (joueur_gagnant = 2) or(joueur_gagnant = 4) then
+    begin
+       for i:=1 to 4 do
+         begin
+              Insert(centre_fintour[i], plie2,length(plie2));
+              Form2.ImageList1.GetBitmap(0,Form2.Image19.Picture.Bitmap);
+         end;
+    end else
+    begin
+         for i:=1 to 4 do
+         begin
+              Insert(centre_fintour[i], plie1,length(plie1));
+              Form2.ImageList1.GetBitmap(0,Form2.Image20.Picture.Bitmap);
+         end;
+    end;
+
+  Delete(centre,1,4);
+
+  if (joueur_gagnant=0) or (joueur_gagnant=1) then
+  begin
+     Showmessage('Vous avez gagné la manche!');
+  end;
+
+  if joueur_gagnant=2 then
+  begin
+     Showmessage('Giovanni a remporté la manche');
+  end;
+
+  if joueur_gagnant=3 then
+  begin
+     Showmessage('Paul a gagné la manche');
+  end;
+
+  if joueur_gagnant=4 then
+  begin
+    Showmessage('Martiniel a gagné la manche');
+    end;
+  if joueur_gagnant=5 then
+  begin
+    showmessage('fodeu');
+  end;
+
+  manche:=manche+1;
+  cartes_joues:=0;
+  Form2.Image15.Visible:=False;
+  Form2.Image16.Visible:=False;
+  Form2.Image17.Visible:=False;
+  Form2.Image14.Visible:=False;
+  focus_joueur:=joueur_gagnant;
+
+  if manche<=8 then
+  begin
+     debut_jeu;
+  end
+  else
+  begin
+    if joueur_gagnant=preneur then
+    begin
+       dern:=true;
+    end;
+    showmessage('Fin du jeu');
+    form6.show;
+    form2.hide;
+    fin_jeu(preneur, dern, false);
+  end;
+
+end;
+
 
 
 end.
