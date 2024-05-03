@@ -34,7 +34,6 @@
         <EditorIndex Value="1"/>
         <TopLine Value="168"/>
         <CursorPos X="22" Y="334"/>
-        <FoldState Value=" T3l60F6 pj1jU0F112 PGiQ0v"/>
         <UsageCount Value="112"/>
         <Loaded Value="True"/>
       </Unit>
@@ -55,11 +54,9 @@
         <Filename Value="deckstructure.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DeckStructure"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="781"/>
+        <TopLine Value="1225"/>
         <CursorPos Y="801"/>
-        <FoldState Value=" T3ja0{}2 pmdqa074 pj5jM0H015]B2n40X211 plBmb0z1 PjQiK0 T0k64r!"/>
         <UsageCount Value="92"/>
         <Loaded Value="True"/>
       </Unit>
@@ -298,8 +295,9 @@
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\lcl\include\picture.inc"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="854"/>
+        <TopLine Value="55"/>
         <CursorPos Y="899"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
