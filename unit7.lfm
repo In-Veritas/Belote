@@ -1,11 +1,12 @@
 object Form7: TForm7
   Left = 509
-  Height = 480
+  Height = 1035
   Top = 186
-  Width = 490
+  Width = 1220
   Caption = 'Règles:'
-  ClientHeight = 480
-  ClientWidth = 490
+  ClientHeight = 0
+  ClientWidth = 0
+  DesignTimePPI = 192
   Icon.Data = {
     BEA200000000010001006464000001002000A8A2000016000000280000006400
     0000C80000000100200000000000409C00006400000064000000000000000000
@@ -1311,12 +1312,12 @@ object Form7: TForm7
     0000000000000000000000000000000000000000000000000000000000000000
     0000
   }
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '2.2.4.0'
   object Image1: TImage
     Left = 0
-    Height = 517
+    Height = 1034
     Top = 0
-    Width = 646
+    Width = 1292
     Picture.Data = {
       1754506F727461626C654E6574776F726B47726170686963B2DB000089504E47
       0D0A1A0A0000000D49484452000001F4000001F40806000000CBD6DF8A000000
@@ -3080,10 +3081,10 @@ object Form7: TForm7
     }
   end
   object Memo1: TMemo
-    Left = 8
-    Height = 448
-    Top = 16
-    Width = 472
+    Left = 0
+    Height = 896
+    Top = 0
+    Width = 944
     Lines.Strings = (
       'Belote'
       ''
@@ -3098,6 +3099,7 @@ object Form7: TForm7
       'Objectif : L''objectif est de remplir le contrat annoncé lors de l''annonce de l''atout. Si l''équipe qui a annoncé le contrat remporte suffisamment de points, elle marque des points en fonction du contrat rempli. Sinon, l''équipe adverse marque les points du contrat.'
     )
     ReadOnly = True
+    ScrollBars = ssAutoBoth
     TabOrder = 0
   end
 end

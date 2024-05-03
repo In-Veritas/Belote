@@ -639,6 +639,26 @@ begin
           if couleurcarte=atout then
             begin
               main[I,J].atout:=true;
+              if main[I,J].id[1]='V' then
+                begin
+                  main[I,J].rang:=0;
+                end;
+              if main[I,J].id[1]='9' then
+                begin
+                  main[I,J].rang:=1;
+                end;
+            end
+                                else
+            begin
+              main[I,J].atout:=false;
+              if main[I,J].id[1]='V' then
+                begin
+                  main[I,J].rang:=6;
+                end;
+              if main[I,J].id[1]='9' then
+                begin
+                  main[I,J].rang:=7;
+                end;
             end;
         end;
     end;
@@ -865,7 +885,6 @@ begin
        end         else
        begin
          cartes_jouables(joueur);
-         //jouer_carte_ia();
        end;
 
        joueur:=joueur+1;
@@ -937,7 +956,6 @@ var
 i: integer;
 begin
     form2.label3.caption:='Manche: ' + inttostr(manche);
-    cartes_jouables(focus_joueur);
 
     Form2.image2.Enabled:=True;
     Form2.image3.Enabled:=True;
@@ -947,6 +965,8 @@ begin
     Form2.image7.Enabled:=True;
     Form2.image8.Enabled:=True;
     Form2.image9.Enabled:=True;
+
+    debut_manche(focus_joueur);
 end;
 
 procedure premiere_distribution (PremierJoueur:integer);//en variable globale peut être, si ou on a besoin de rien pour cette procedure
@@ -996,10 +1016,9 @@ begin
   IndiceCarte:=22;
   distribution_4joueurs(3,PremierJoueur,IndiceCarte);
 
-  {miseajouratout();
-  trierang(); }
 
-  //affiche les cartes du joueurs 1
+  miseajouratout ();
+
   trieparcouleur(7);
   trierang(7);
 
@@ -1025,6 +1044,7 @@ begin
     nom_joueur:= 'Martiniel';
   end;
  Form2.Label8.caption:='Preneur: '+nom_joueur;
+
 
 
   for i:=1 to 4 do
@@ -1069,28 +1089,6 @@ begin
         end;
       if pris then
       begin
-           for j:=1 to 32 do
-             begin
-               if deck[j].id[2]=deck[21].id[2] then
-               begin
-                 deck[j].atout:=True;
-                 if deck[j].rang=6 then deck[i].rang:=0;
-                 if deck[j].rang=7 then deck[i].rang:=1;
-               end;
-             end;
-           for j:=1 to 4 do
-             begin
-               for k:=0 to length(main[j])do
-                   begin
-                        if main[j,k].id[2]=deck[21].id[2] then
-                        begin
-                        main[j,k].atout:=True;
-                        if main[j,k].rang=6 then main[j,k].rang:=0;
-                        if main[j,k].rang=7 then main[j,k].rang:=1;
-                        end;
-                   end;
-             end;
-
 
            deck[21].pos:='main';
            atout:=deck[21].id[2];
@@ -1110,11 +1108,11 @@ begin
            end;
 
            preneur:=joueurquiprend;
-
-           deuxieme_distribution(joueurquiprend);
            Form2.Image18.Visible:=False;
            etat:='debut';
            debut_jeu;
+
+           deuxieme_distribution(joueurquiprend);
            break;
 
       end;
@@ -1144,32 +1142,11 @@ begin
         end;
       if pris then
       begin
-           for j:=1 to 32 do
-             begin
-               if deck[j].id[2]=atout then
-               begin
-                 deck[j].atout:=True;
-                 if deck[j].rang=6 then deck[j].rang:=0;
-                 if deck[j].rang=7 then deck[j].rang:=1;
-               end;
-             end;
-           for j:=1 to 4 do
-             begin
-               for k:=0 to length(main[j])do
-                   begin
-                        if main[j,k].id[2]=atout then
-                        begin
-                          main[j,k].atout:=True;
-                          if main[j,k].rang=6 then main[j,k].rang:=0;
-                          if main[j,k].rang=7 then main[j,k].rang:=1;
-                        end;
-                   end;
-             end;
            deck[21].pos:='main';
            preneur:=joueurquiprend;
-           deuxieme_distribution(joueurquiprend);
            Form2.Image18.Visible:=False;
            etat:='debut';
+           deuxieme_distribution(joueurquiprend);
            debut_jeu;
            break;
       end;
@@ -1184,9 +1161,9 @@ begin
 
      if pris=false then  //FAIRE LE CAS OU PERSONNE PRENDS ET LES CARTES SONT REDISTRIBUÉS
        begin
+         showmessage('Personne n''a pris, début d''une nouvelle partie');
          Form2.Hide;
          Form2.Show;
-         showmessage('Personne n''a pris, début d''une nouvelle partie');
          Form2.Image10Click(Form2.Image10);
        end;
    end;
