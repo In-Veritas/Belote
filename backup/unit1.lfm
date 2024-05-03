@@ -32852,6 +32852,7 @@ object Form1: TForm1
     Top = 8
   end
   object Timer1: TTimer
+    Enabled = False
     Interval = 168000
     OnTimer = Timer1Timer
     OnStartTimer = Timer1StartTimer

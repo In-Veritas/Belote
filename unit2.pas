@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Menus,
-  StdCtrls, deckstructure;
+  StdCtrls,unit7, deckstructure;
 
 type
 
@@ -29,6 +29,7 @@ type
     Image20: TImage;
     Image21: TImage;
     Image22: TImage;
+    Image23: TImage;
     Image3: TImage;
     Image4: TImage;
     Image5: TImage;
@@ -37,6 +38,7 @@ type
     Image8: TImage;
     Image9: TImage;
     ImageList1: TImageList;
+    ImageList2: TImageList;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -46,9 +48,6 @@ type
     Label8: TLabel;
     MainMenu1: TMainMenu;
     MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
     Timer1: TTimer;
     procedure Image10Click(Sender: TObject);
     procedure Image3Click(Sender: TObject);
@@ -63,6 +62,7 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Image2Click(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
     procedure Timer1StartTimer(Sender: TObject);
 
 
@@ -104,7 +104,6 @@ begin
       image8.Enabled:=False;
       image9.Enabled:=False;
       cartes_joues:=cartes_joues+1;
-      showmessage(inttostr(cartes_joues));
 
       if (cartes_joues=4) OR (playcap = 4) then
        begin
@@ -125,7 +124,6 @@ begin
       Form2.Image17.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image17.Picture.Bitmap);
       cartes_joues:=cartes_joues+1;
-      showmessage(inttostr(cartes_joues));
 
       if (cartes_joues=4) OR (playcap = 4) then
       begin
@@ -144,7 +142,6 @@ begin
       Form2.Image15.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image15.Picture.Bitmap);
       cartes_joues:=cartes_joues+1;
-      showmessage(inttostr(cartes_joues));
 
       if (cartes_joues=4) OR (playcap = 4) then
        begin
@@ -161,7 +158,6 @@ begin
       Form2.Image16.Visible:=True;
       imagelist1.getbitmap(centre[joueur].id_image,Image16.Picture.Bitmap);
       cartes_joues:=cartes_joues+1;
-      showmessage(inttostr(cartes_joues));
 
        if (cartes_joues=4) OR (playcap = 4) then
        begin
@@ -386,10 +382,11 @@ begin
     nom_joueur:= 'Martiniel';
   end;
 
-  showmessage(nom_joueur + ' Commence!');
+
   etat:='choix';
   Form2.Hint:='Cliquez sur le tapis pour commencer';
   Form2.Showhint:=True;
+  showmessage(nom_joueur + ' Commence! Cliquez sur le tapis pour commencer');
 end;
 
 procedure TForm2.Image2Click(Sender: TObject);
@@ -414,6 +411,13 @@ begin
       jouercarte(cartejouer,1);
     end;
 end;
+
+procedure TForm2.MenuItem1Click(Sender: TObject);
+begin
+  Form7.showmodal;
+end;
+
+
 
 procedure TForm2.Timer1StartTimer(Sender: TObject);
 begin

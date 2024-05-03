@@ -46,7 +46,6 @@ begin
    Form1.hide;
    init_jeu;
    Form2.show;
-   Form6.show;
 end;
 
 procedure TForm1.FormActivate(Sender: TObject);
@@ -89,12 +88,10 @@ procedure TForm1.Timer1StartTimer(Sender: TObject);
 begin
    random_music;
 end;
-
 procedure TForm1.Timer1StopTimer(Sender: TObject);
 begin
   random_music;
 end;
-
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
   random_music;
